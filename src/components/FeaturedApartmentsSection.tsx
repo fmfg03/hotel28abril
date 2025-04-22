@@ -4,45 +4,32 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-const featuredApartments: ApartmentProps[] = [
-  {
-    id: "1",
-    name: "Smart Suite",
-    description: "Spacious 1-room suite with kitchenette and workspace. Ideal for business travel or long stays.",
-    price: 180,
-    capacity: 2,
-    size: 25,
-    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
-    location: "Courtyard",
-    features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Balcony"]
-  },
-  {
-    id: "2",
-    name: "Flex Suite",
-    description: "Cozy 2-room suite with kitchenette, workspace, and small dining area. Ideal for families",
-    price: 250,
-    capacity: 4,
-    size: 45,
-    image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
-    location: "Courtyard",
-    features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Washing Machine"]
-  },
-  {
-    id: "3",
-    name: "Signature Suite",
-    description: "Elegant 2-room suite, modern design, with sofa, dining area, kitchenette, workspace, and premium finishes.",
-    price: 150,
-    capacity: 4,
-    size: 60,
-    image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=800&h=600&fit=crop",
-    location: "Courtyard",
-    features: ["Wi-Fi", "Kitchenette", "Bathroom", "Air Conditioning", "TV"]
-  }
-];
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function FeaturedApartmentsSection() {
   const { t } = useLanguage();
+  const [apartments, setApartments] = useState<ApartmentProps[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchFeaturedApartments() {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("apartments")
+        .select("*")
+        .order("price", { ascending: true })
+        .limit(3);
+      if (!error && data) {
+        setApartments(data.map(apt => ({
+          ...apt,
+          id: apt.id.toString(),
+        })));
+      }
+      setLoading(false);
+    }
+    fetchFeaturedApartments();
+  }, []);
 
   return (
     <section className="section">
@@ -58,9 +45,13 @@ export default function FeaturedApartmentsSection() {
             {t.home.featuredApartments.description}
           </p>
         </div>
-        
+        {loading ? (
+          <div className="text-center py-12 animate-fade-in">
+            <h3 className="text-xl font-semibold mb-2">{t.apartments.filters.loading}</h3>
+          </div>
+        ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredApartments.map((apartment, index) => (
+          {apartments.map((apartment, index) => (
             <div key={apartment.id} className="animate-fade-in" style={{
               animationDelay: `${(index + 1) * 100}ms`
             }}>
@@ -68,7 +59,7 @@ export default function FeaturedApartmentsSection() {
             </div>
           ))}
         </div>
-        
+        )}
         <div className="text-center mt-12">
           <Button asChild className="btn-primary">
             <Link to="/apartments">

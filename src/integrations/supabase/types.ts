@@ -72,6 +72,45 @@ export type Database = {
         }
         Relationships: []
       }
+      apartments: {
+        Row: {
+          capacity: number
+          created_at: string
+          description: string
+          features: string[]
+          id: string
+          image: string
+          location: string
+          name: string
+          price: number
+          size: number
+        }
+        Insert: {
+          capacity: number
+          created_at?: string
+          description: string
+          features: string[]
+          id?: string
+          image: string
+          location: string
+          name: string
+          price: number
+          size: number
+        }
+        Update: {
+          capacity?: number
+          created_at?: string
+          description?: string
+          features?: string[]
+          id?: string
+          image?: string
+          location?: string
+          name?: string
+          price?: number
+          size?: number
+        }
+        Relationships: []
+      }
       blog_posts: {
         Row: {
           author: string
