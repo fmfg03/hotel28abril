@@ -54,7 +54,7 @@ export default function ApartmentDetail() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-lg">{t.apartments.loading || "Loading..."}</div>
+        <div className="animate-pulse text-lg">Loading...</div>
       </div>
     );
   }
@@ -63,11 +63,11 @@ export default function ApartmentDetail() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div>
-          <div className="text-2xl font-bold mb-2">{t.apartments.notFound || "Apartment not found."}</div>
+          <div className="text-2xl font-bold mb-2">Apartment not found.</div>
           <Button asChild variant="outline">
             <Link to="/apartments">
               <ArrowLeft className="mr-2 inline" />
-              {t.apartments.filters.goBack || "Back to Apartments"}
+              Back to Apartments
             </Link>
           </Button>
         </div>
@@ -83,7 +83,7 @@ export default function ApartmentDetail() {
           <Button asChild variant="outline" className="mb-8">
             <Link to="/apartments">
               <ArrowLeft className="mr-2" />
-              {t.apartments.filters.goBack || "Back to Apartments"}
+              Back to Apartments
             </Link>
           </Button>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -109,7 +109,7 @@ export default function ApartmentDetail() {
                 </div>
                 <div className="flex items-center gap-2 text-base">
                   <Bath className="h-5 w-5" />
-                  <span>{t.apartments.filters.bathroom || "Bathroom"}</span>
+                  <span>Bathroom</span>
                 </div>
                 <div className="flex items-center gap-2 text-base">
                   <span>{apartment.size} m²</span>
@@ -139,7 +139,7 @@ export default function ApartmentDetail() {
               </div>
               {/* Book Now Button */}
               <Button asChild size="lg" className="btn-primary mt-4 w-full md:w-fit">
-                <Link to="/booking">{t.apartments.filters.bookNow || "Book Now"}</Link>
+                <Link to="/booking">Book Now</Link>
               </Button>
             </div>
           </div>
