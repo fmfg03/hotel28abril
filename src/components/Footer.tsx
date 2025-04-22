@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -12,7 +11,13 @@ export default function Footer() {
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div className="animate-fade-in [animation-delay:100ms]">
-            <h4 className="text-xl font-bold mb-4">MareSereno</h4>
+            <Link to="/">
+              <img 
+                src="/lovable-uploads/7ed45484-1084-4ca3-a513-26d0abd88f30.png" 
+                alt="MareSereno Logo" 
+                className="h-12 mb-4 dark:invert"  // Invert logo for dark mode
+              />
+            </Link>
             <p className="text-muted-foreground mb-4">
               {t.footer.description}
             </p>

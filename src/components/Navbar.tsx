@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -35,6 +34,13 @@ export default function Navbar() {
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "bg-white/80 dark:bg-card/80 backdrop-blur-lg py-3 shadow-md" : "bg-transparent py-5")}>
       <nav className="container flex justify-between items-center">
         <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center">
+            <img 
+              src="/lovable-uploads/7ed45484-1084-4ca3-a513-26d0abd88f30.png" 
+              alt="MareSereno Logo" 
+              className="h-10 dark:invert"  // Invert logo for dark mode
+            />
+          </Link>
           <LanguageSelector />
         </div>
 
