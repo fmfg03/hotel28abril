@@ -25,7 +25,7 @@ const featuredApartments: ApartmentProps[] = [
     capacity: 4,
     size: 75,
     image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
-    location: "Second row",
+    location: "Courtyard",
     features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Washing Machine"]
   },
   {
@@ -36,7 +36,7 @@ const featuredApartments: ApartmentProps[] = [
     capacity: 2,
     size: 35,
     image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=800&h=600&fit=crop",
-    location: "Beachfront",
+    location: "Courtyard",
     features: ["Wi-Fi", "Kitchenette", "Bathroom", "Air Conditioning", "TV"]
   }
 ];
