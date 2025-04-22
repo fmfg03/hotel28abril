@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -38,7 +39,7 @@ export default function Navbar() {
             <img 
               src="/lovable-uploads/61435483-86ab-4639-84e1-8b1b3cdeaec1.png" 
               alt="MareSereno Logo" 
-              className="h-10 dark:invert"  // Invert logo for dark mode
+              className="h-10 text-white"  // Removed dark:invert
             />
           </Link>
           <LanguageSelector />

@@ -15,7 +15,7 @@ export default function Footer() {
               <img 
                 src="/lovable-uploads/61435483-86ab-4639-84e1-8b1b3cdeaec1.png" 
                 alt="MareSereno Logo" 
-                className="h-12 mb-4 dark:invert"  // Invert logo for dark mode
+                className="h-12 mb-4"
               />
             </Link>
             <p className="text-muted-foreground mb-4">
