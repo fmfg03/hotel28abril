@@ -12,7 +12,7 @@ const featuredApartments: ApartmentProps[] = [
     description: "Spacious 1-room suite with kitchenette and workspace. Ideal for business travel or long stays.",
     price: 180,
     capacity: 2,
-    size: 45,
+    size: 25,
     image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
     location: "Courtyard",
     features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Balcony"]
@@ -23,7 +23,7 @@ const featuredApartments: ApartmentProps[] = [
     description: "Cozy 2-room suite with kitchenette, workspace, and small dining area. Ideal for families",
     price: 250,
     capacity: 4,
-    size: 75,
+    size: 45,
     image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
     location: "Courtyard",
     features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Washing Machine"]
@@ -33,8 +33,8 @@ const featuredApartments: ApartmentProps[] = [
     name: "Signature Suite",
     description: "Elegant 2-room suite, modern design, with sofa, dining area, kitchenette, workspace, and premium finishes.",
     price: 150,
-    capacity: 2,
-    size: 35,
+    capacity: 4,
+    size: 60,
     image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=800&h=600&fit=crop",
     location: "Courtyard",
     features: ["Wi-Fi", "Kitchenette", "Bathroom", "Air Conditioning", "TV"]
