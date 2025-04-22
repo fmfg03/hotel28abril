@@ -71,18 +71,24 @@ export default function HeroSection() {
           <ChevronDown className="h-6 w-6" />
         </div>
       </div>
-      
-      {/* Bottom wave */}
-      <div className="absolute bottom-0 left-0 right-0 w-full">
+
+      {/*Bottom wave*/}
+      <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
         <svg 
-          className="w-full text-background dark:text-background"
-          viewBox="0 0 1440 170" 
-          fill="none" 
+          className="absolute bottom-0 w-full h-24 fill-white dark:fill-background"
+          preserveAspectRatio="none"
+          viewBox="0 0 1440 74"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path 
-            d="M0,128L60,117.3C120,107,240,85,360,90.7C480,96,600,128,720,133.3C840,139,960,117,1080,101.3C1200,85,1320,75,1380,69.3L1440,64L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" 
-            fill="currentColor"
+            d="M0,37.1L40,34.5C80,32,160,27,240,29.6C320,32,400,42,480,42.9C560,44,640,35,720,32.1C800,30,880,34,960,40.8C1040,47,1120,56,1200,56.6C1280,57,1360,48,1400,43.3L1440,39.1L1440,74L1400,74C1360,74,1280,74,1200,74C1120,74,1040,74,960,74C880,74,800,74,720,74C640,74,560,74,480,74C400,74,320,74,240,74C160,74,80,74,40,74L0,74Z"
+            className="animate-wave opacity-50"
+          />
+          <path 
+            d="M0,37.1L40,34.5C80,32,160,27,240,29.6C320,32,400,42,480,42.9C560,44,640,35,720,32.1C800,30,880,34,960,40.8C1040,47,1120,56,1200,56.6C1280,57,1360,48,1400,43.3L1440,39.1L1440,74L1400,74C1360,74,1280,74,1200,74C1120,74,1040,74,960,74C880,74,800,74,720,74C640,74,560,74,480,74C400,74,320,74,240,74C160,74,80,74,40,74L0,74Z"
+            className="animate-wave opacity-100 [animation-delay:-4s]"
+      
+     
           />
         </svg>
       </div>
