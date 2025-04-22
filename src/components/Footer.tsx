@@ -13,7 +13,7 @@ export default function Footer() {
           <div className="animate-fade-in [animation-delay:100ms]">
             <Link to="/">
               <img 
-                src="/lovable-uploads/7ed45484-1084-4ca3-a513-26d0abd88f30.png" 
+                src="/lovable-uploads/white-logo-horizontal.png" 
                 alt="MareSereno Logo" 
                 className="h-12 mb-4 dark:invert"  // Invert logo for dark mode
               />
