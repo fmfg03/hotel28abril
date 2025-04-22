@@ -9,33 +9,33 @@ export default function AmenitiesSection() {
   const features = [
     {
       icon: <Waves className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.beachfront.title,
-      description: t.home.amenities.features.beachfront.description
+      title: t.amenities.features.beachfront.title,
+      description: t.amenities.features.beachfront.description
     },
     {
       icon: <LifeBuoy className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.pools.title,
-      description: t.home.amenities.features.pools.description
+      title: t.amenities.features.pools.title,
+      description: t.amenities.features.pools.description
     },
     {
       icon: <Utensils className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.restaurant.title,
-      description: t.home.amenities.features.restaurant.description
+      title: t.amenities.features.restaurant.title,
+      description: t.amenities.features.restaurant.description
     },
     {
       icon: <Wifi className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.wifi.title,
-      description: t.home.amenities.features.wifi.description
+      title: t.amenities.features.wifi.title,
+      description: t.amenities.features.wifi.description
     },
     {
       icon: <Coffee className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.bar.title,
-      description: t.home.amenities.features.bar.description
+      title: t.amenities.features.bar.title,
+      description: t.amenities.features.bar.description
     },
     {
       icon: <MapPin className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.location.title,
-      description: t.home.amenities.features.location.description
+      title: t.amenities.features.location.title,
+      description: t.amenities.features.location.description
     }
   ];
 
@@ -44,13 +44,13 @@ export default function AmenitiesSection() {
       <div className="container">
         <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
           <span className="text-sm text-primary font-medium uppercase tracking-wider">
-            {t.home.amenities.subtitle}
+            {t.amenities.subtitle}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
-            {t.home.amenities.title}
+            {t.amenities.title}
           </h2>
           <p className="text-muted-foreground">
-            {t.home.amenities.description}
+            {t.amenities.description}
           </p>
         </div>
         

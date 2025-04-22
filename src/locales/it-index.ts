@@ -4,7 +4,12 @@ import hero from "./it-hero";
 import footer from "./it-footer";
 import apartments from "./it-apartments";
 import booking from "./it-booking";
-// ...Import other section files here in the future
+import home from "./it-home";
+import amenities from "./it-amenities";
+import bookingForm from "./it-booking-form";
+import apartmentDescriptions from "./it-apartment-descriptions";
+import amenitiesPage from "./it-amenities-page";
+import gallery from "./it-gallery";
 
 export const it = {
   nav,
@@ -12,7 +17,12 @@ export const it = {
   footer,
   apartments,
   booking,
-  // ...add other keys as before, import more files as refactor continues
+  home,
+  amenities,
+  bookingForm,
+  apartmentDescriptions,
+  amenitiesPage,
+  gallery
 };
 
 export default it;
