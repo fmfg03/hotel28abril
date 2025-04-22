@@ -14,6 +14,7 @@ import testimonials from "./it-testimonials";
 import contact from "./it-contact";
 import welcome from "./it-welcome";
 import featuredApartments from "./it-featured-apartments";
+import notFound from "./it-notFound";
 
 export const it = {
   nav,
@@ -30,7 +31,8 @@ export const it = {
   testimonials,
   contact,
   welcome,
-  featuredApartments
+  featuredApartments,
+  notFound
 };
 
 export default it;

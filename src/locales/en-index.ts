@@ -14,6 +14,7 @@ import testimonials from "./en-testimonials";
 import contact from "./en-contact";
 import welcome from "./en-welcome";
 import featuredApartments from "./en-featured-apartments";
+import notFound from "./en-notFound";
 
 export const en = {
   nav,
@@ -30,7 +31,8 @@ export const en = {
   testimonials,
   contact,
   welcome,
-  featuredApartments
+  featuredApartments,
+  notFound
 };
 
 export default en;
