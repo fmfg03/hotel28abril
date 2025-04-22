@@ -36,7 +36,7 @@ export default function Navbar() {
         <div className="flex items-center space-x-2">
           <Link to="/" className="flex items-center">
             <img 
-              src="/lovable-uploads/white-logo-horizontal.png" 
+              src="/lovable-uploads/61435483-86ab-4639-84e1-8b1b3cdeaec1.png" 
               alt="MareSereno Logo" 
               className="h-10 dark:invert"  // Invert logo for dark mode
             />
