@@ -31,7 +31,7 @@ export default function WelcomeSection() {
           
           <div className="relative animate-fade-in [animation-delay:300ms] object-fill">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-              <img src="/lovable-uploads/bravofromh_20-p-500.webp" alt="Hotel 28 Hero Image" className="w-full h-full object-cover" />
+              <img src="/lovable-uploads/bravofromh_20-p-800.webp" alt="Hotel 28 Hero Image" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -bottom-6 -left-6 w-2/3 rounded-2xl overflow-hidden shadow-xl">
               <img alt="Luxury apartment interior" src="/lovable-uploads/bc8fad92-15fb-441a-a4a6-5f0b98f710ea.png" className="w-full h-full object-fill" />
