@@ -34,7 +34,7 @@ export default function WelcomeSection() {
               <img src="/lovable-uploads/bravofromh_20-p-800.webp" alt="Hotel 28 Hero Image" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -bottom-6 -left-6 w-2/3 rounded-2xl overflow-hidden shadow-xl">
-              <img alt="Luxury apartment interior" src="/lovable-uploads/bc8fad92-15fb-441a-a4a6-5f0b98f710ea.png" className="w-full h-full object-fill" />
+              <img alt="Luxury apartment interior" src="/lovable-uploads/cofeebythepool.webp" className="w-full h-full object-fill" />
             </div>
             <div className="absolute -top-6 -right-6 w-1/2 rounded-2xl overflow-hidden shadow-xl">
               <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=400&h=300&fit=crop" alt="Pool view" className="w-full h-full object-cover" />
