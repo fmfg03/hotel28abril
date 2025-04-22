@@ -10,6 +10,7 @@ import AmenitiesSection from "@/components/AmenitiesSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ApartmentProps } from "@/components/ApartmentCard";
 
 // Sample apartments data
 const featuredApartments: ApartmentProps[] = [{
@@ -45,9 +46,8 @@ const featuredApartments: ApartmentProps[] = [{
 }];
 
 export default function Index() {
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
+  
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
