@@ -8,19 +8,19 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const featuredApartments: ApartmentProps[] = [
   {
     id: "1",
-    name: "Deluxe Sea View Suite",
-    description: "Luxurious suite with panoramic sea views, modern amenities, and a private balcony.",
+    name: "Smart Suite",
+    description: "Spacious 1-room suite with kitchenette and workspace. Ideal for business travel or long stays.",
     price: 180,
     capacity: 2,
     size: 45,
     image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
-    location: "Beachfront",
+    location: "Courtyard",
     features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Balcony"]
   },
   {
     id: "2",
-    name: "Premium Family Apartment",
-    description: "Spacious apartment ideal for families, with full kitchen and stunning coastal views.",
+    name: "Flex Suite",
+    description: "Cozy 2-room suite with kitchenette, workspace, and small dining area. Ideal for families",
     price: 250,
     capacity: 4,
     size: 75,
@@ -30,8 +30,8 @@ const featuredApartments: ApartmentProps[] = [
   },
   {
     id: "3",
-    name: "Executive Beach Studio",
-    description: "Elegant studio with direct beach access, modern design, and premium finishes.",
+    name: "Signature Suite",
+    description: "Elegant 2-room suite, modern design, with sofa, dining area, kitchenette, workspace, and premium finishes.",
     price: 150,
     capacity: 2,
     size: 35,
