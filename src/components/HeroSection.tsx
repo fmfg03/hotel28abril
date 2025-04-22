@@ -31,7 +31,9 @@ export default function HeroSection() {
         style={{
           backgroundImage: `url('/lovable-uploads/5f0d0f7b-3551-4ccb-8a5e-83a0f160414b.png')`,
           transform: `translateY(${backgroundY}px)`,
-          backgroundPosition: `center ${50 + scrollY * 0.05}%`
+          backgroundPosition: `center ${50 + scrollY * 0.05}%`,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat'
         }}
       />
       
