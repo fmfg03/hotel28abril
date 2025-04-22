@@ -31,13 +31,13 @@ export default function WelcomeSection() {
           
           <div className="relative animate-fade-in [animation-delay:300ms] object-fill">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-              <img src="/lovable-uploads/bravofromh_20-p-800.webp" alt="Hotel 28 Hero Image" className="w-full h-full object-cover" />
+              <img src="/lovable-uploads/bravofromh_20-p-800.webp" alt="woman reding by Hotel 28 pool" className="w-full h-full object-cover" />
             </div>
-            <div className="absolute -bottom-6 -left-1 w-1/2 rounded-2xl overflow-hidden shadow-xl">
-              <img alt="Luxury apartment interior" src="/lovable-uploads/cofeebythepool.webp" className="w-full h-full object-fill" />
+            <div className="absolute -bottom-6 -left-6 w-1/2 rounded-2xl overflow-hidden shadow-xl">
+              <img alt="cofee table by Hotel 28 sun deck" src="/lovable-uploads/cofeebythepool.webp" className="w-full h-full object-fill" />
             </div>
             <div className="absolute -top-6 -left-6 w-1/2 rounded-2xl overflow-hidden shadow-xl">
-              <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=400&h=300&fit=crop" alt="Pool view" className="w-full h-full object-cover" />
+              <img alt="breakfast at Hotel 28" src="/lovable-uploads/cofeebythepool.webp" className="w-full h-full object-fill" />
             </div>
           </div>
         </div>
