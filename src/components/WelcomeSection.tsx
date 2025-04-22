@@ -1,30 +1,32 @@
+
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+
 export default function WelcomeSection() {
-  const {
-    t
-  } = useLanguage();
-  return <section id="welcome" className="section">
+  const { t } = useLanguage();
+  
+  return (
+    <section id="welcome" className="section">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in [animation-delay:100ms]">
             <span className="text-sm text-primary font-medium uppercase tracking-wider">
-              {t.home.welcome.subtitle}
+              {t.welcome.subtitle}
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">
-              {t.home.welcome.title}
+              {t.welcome.title}
             </h2>
             <p className="text-muted-foreground mb-6">
-              {t.home.welcome.description1}
+              {t.welcome.description1}
             </p>
             <p className="text-muted-foreground mb-8">
-              {t.home.welcome.description2}
+              {t.welcome.description2}
             </p>
             <Button asChild className="btn-primary">
               <Link to="/about">
-                {t.home.welcome.learnMore} <ArrowRight className="ml-2 h-4 w-4" />
+                {t.welcome.learnMore} <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>
@@ -42,5 +44,6 @@ export default function WelcomeSection() {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 }

@@ -10,6 +10,10 @@ import bookingForm from "./en-booking-form";
 import apartmentDescriptions from "./en-apartment-descriptions";
 import amenitiesPage from "./en-amenities-page";
 import gallery from "./en-gallery";
+import testimonials from "./en-testimonials";
+import contact from "./en-contact";
+import welcome from "./en-welcome";
+import featuredApartments from "./en-featured-apartments";
 
 export const en = {
   nav,
@@ -22,7 +26,11 @@ export const en = {
   bookingForm,
   apartmentDescriptions,
   amenitiesPage,
-  gallery
+  gallery,
+  testimonials,
+  contact,
+  welcome,
+  featuredApartments
 };
 
 export default en;

@@ -37,13 +37,13 @@ export default function FeaturedApartmentsSection() {
       <div className="container">
         <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
           <span className="text-sm text-primary font-medium uppercase tracking-wider">
-            {t.home.featuredApartments.subtitle}
+            {t.featuredApartments.subtitle}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
-            {t.home.featuredApartments.title}
+            {t.featuredApartments.title}
           </h2>
           <p className="text-muted-foreground">
-            {t.home.featuredApartments.description}
+            {t.featuredApartments.description}
           </p>
         </div>
         {loading ? (
@@ -64,7 +64,7 @@ export default function FeaturedApartmentsSection() {
         <div className="text-center mt-12">
           <Button asChild className="btn-primary">
             <Link to="/apartments">
-              {t.home.featuredApartments.viewAll} <ArrowRight className="ml-2 h-4 w-4" />
+              {t.featuredApartments.viewAll} <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
