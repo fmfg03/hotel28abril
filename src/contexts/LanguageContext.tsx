@@ -1,7 +1,7 @@
 
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
-import { en } from '../locales/en';
-import { it } from '../locales/it';
+import { en } from '../locales/en-index';
+import { it } from '../locales/it-index';
 
 type Translations = typeof en;
 
