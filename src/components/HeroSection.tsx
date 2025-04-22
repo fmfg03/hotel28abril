@@ -23,9 +23,9 @@ export default function HeroSection() {
     <section className="relative h-screen overflow-hidden bg-[#0f1217]">
       {/* Background image with parallax */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-40"
+        className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/lovable-uploads/cb82c6e1-202a-40a7-8d2d-34e2ecacf389.png')`,
+          backgroundImage: `url('/lovable-uploads/09024e05-8c8e-48df-bab2-8afcad9abe69.png')`,
           transform: `translateY(${scrollY * 0.5}px)`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
