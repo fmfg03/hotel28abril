@@ -37,7 +37,7 @@ export default function WelcomeSection() {
               <img alt="cofee table by Hotel 28 sun deck" src="/lovable-uploads/cofeebythepool.webp" className="w-full h-full object-fill" />
             </div>
             <div className="absolute -top-6 -left-6 w-1/2 rounded-2xl overflow-hidden shadow-xl">
-              <img alt="breakfast at Hotel 28" src="/lovable-uploads/cofeebythepool.webp" className="w-full h-full object-fill" />
+              <img alt="foot with tatto by Hotel 28 pool" src="/lovable-uploads/feetbythepool.webp" className="w-full h-full object-fill" />
             </div>
           </div>
         </div>
