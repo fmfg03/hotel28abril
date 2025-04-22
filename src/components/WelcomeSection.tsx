@@ -1,14 +1,12 @@
-
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-
 export default function WelcomeSection() {
-  const { t } = useLanguage();
-
-  return (
-    <section id="welcome" className="section">
+  const {
+    t
+  } = useLanguage();
+  return <section id="welcome" className="section">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in [animation-delay:100ms]">
@@ -36,7 +34,7 @@ export default function WelcomeSection() {
               <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&h=600&fit=crop" alt="Seaside view" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -bottom-6 -left-6 w-2/3 rounded-2xl overflow-hidden shadow-xl">
-              <img alt="Luxury apartment interior" src="/lovable-uploads/bc8fad92-15fb-441a-a4a6-5f0b98f710ea.png" className="w-full h-full object-scale-down" />
+              <img alt="Luxury apartment interior" src="/lovable-uploads/bc8fad92-15fb-441a-a4a6-5f0b98f710ea.png" className="w-full h-full object-fill" />
             </div>
             <div className="absolute -top-6 -right-6 w-1/2 rounded-2xl overflow-hidden shadow-xl">
               <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=400&h=300&fit=crop" alt="Pool view" className="w-full h-full object-cover" />
@@ -44,6 +42,5 @@ export default function WelcomeSection() {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }
