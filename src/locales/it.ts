@@ -1,4 +1,3 @@
-
 export const it = {
   nav: {
     home: "Inicio",
@@ -126,7 +125,12 @@ export const it = {
       viewDetails: "Ver Detalles",
       features: "características",
       more: "más"
-    }
+    },
+    loading: "Cargando...",
+    notFound: "Suite no encontrada.",
+    goBack: "Volver a Suites",
+    bathroom: "Baño",
+    bookNow: "Reservar Ahora"
   },
   gallery: {
     title: "Galería de Fotos",
@@ -258,7 +262,7 @@ export const it = {
       },
       pets: {
         question: "¿Se permiten mascotas en las suites?",
-        answer: "Lamentamos que no se permiten mascotas en nuestro hotel, con excepción de animales de servicio."
+        answer: "Lamentamos que no se permitan mascotas en nuestro hotel, con excepción de animales de servicio."
       },
       breakfast: {
         question: "¿Está incluido el desayuno en la tarifa de la habitación?",

@@ -1,4 +1,3 @@
-
 export const en = {
   nav: {
     home: "Home",
@@ -126,7 +125,12 @@ export const en = {
       viewDetails: "View Details",
       features: "features",
       more: "more"
-    }
+    },
+    loading: "Loading...",
+    notFound: "Apartment not found.",
+    goBack: "Back to Apartments",
+    bathroom: "Bathroom",
+    bookNow: "Book Now"
   },
   gallery: {
     title: "Photo Gallery",
