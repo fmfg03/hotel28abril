@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -25,11 +24,9 @@ export default function Apartments() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Scroll to top when component mounts
     window.scrollTo(0, 0);
   }, []);
 
-  // Fetch apartments from Supabase on mount
   useEffect(() => {
     async function fetchApartments() {
       setLoading(true);
@@ -38,7 +35,6 @@ export default function Apartments() {
         .select("*")
         .order("price", { ascending: true });
       if (!error && data) {
-        // Client expects string id, but Supabase returns uuid as id.
         setApartments(data.map(apt => ({
           ...apt,
           id: apt.id.toString(),
@@ -49,7 +45,6 @@ export default function Apartments() {
     fetchApartments();
   }, []);
 
-  // Apply filters
   useEffect(() => {
     let result = apartments;
     if (capacityFilter !== "all") {
@@ -63,14 +58,12 @@ export default function Apartments() {
     setFilteredApartments(result);
   }, [apartments, capacityFilter, locationFilter, priceRange]);
 
-  // Get unique locations for filter
   const locations = ["all", ...Array.from(new Set(apartments.map(apt => apt.location)))];
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1 pt-20">
-        {/* Header Section */}
         <section className="relative py-20 bg-gradient-to-r from-sea-light to-white dark:from-sea-dark dark:to-background overflow-hidden">
           <div className="container relative z-10">
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
@@ -82,17 +75,14 @@ export default function Apartments() {
               </p>
             </div>
           </div>
-          {/* Decorative elements */}
           <div className="absolute bottom-0 right-0 w-1/2 h-1/2 opacity-10">
             <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-primary/50 blur-3xl" />
             <div className="absolute top-10 right-40 w-48 h-48 rounded-full bg-sea-light blur-3xl" />
           </div>
         </section>
-        {/* Filter Section */}
         <section className="py-8 border-b">
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in">
-              {/* Capacity Filter */}
               <div>
                 <label className="block text-sm font-medium mb-2">
                   {t.apartments.filters.guests}
@@ -110,7 +100,6 @@ export default function Apartments() {
                   </SelectContent>
                 </Select>
               </div>
-              {/* Location Filter */}
               <div>
                 <label className="block text-sm font-medium mb-2">
                   {t.apartments.filters.location}
@@ -127,7 +116,6 @@ export default function Apartments() {
                   </SelectContent>
                 </Select>
               </div>
-              {/* Price Range Filter */}
               <div>
                 <label className="block text-sm font-medium mb-2">
                   {t.apartments.filters.priceRange}: ${priceRange[0]} - ${priceRange[1]}
@@ -160,12 +148,11 @@ export default function Apartments() {
             </div>
           </div>
         </section>
-        {/* Apartments Grid */}
         <section className="section">
           <div className="container">
             {loading ? (
               <div className="text-center py-12 animate-fade-in">
-                <h3 className="text-xl font-semibold mb-2">{t.apartments.filters.loading}</h3>
+                <h3 className="text-xl font-semibold mb-2">{t.apartments.filters.showing}</h3>
               </div>
             ) : filteredApartments.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

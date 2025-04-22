@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function FeaturedApartmentsSection() {
   const { t } = useLanguage();
@@ -47,7 +48,7 @@ export default function FeaturedApartmentsSection() {
         </div>
         {loading ? (
           <div className="text-center py-12 animate-fade-in">
-            <h3 className="text-xl font-semibold mb-2">{t.apartments.filters.loading}</h3>
+            <h3 className="text-xl font-semibold mb-2">{t.apartments.filters.showing}</h3>
           </div>
         ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
