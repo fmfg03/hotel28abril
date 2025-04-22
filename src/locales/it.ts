@@ -1,83 +1,141 @@
+
 export const it = {
   nav: {
-    home: "Home",
-    apartments: "Appartamenti",
-    amenities: "Servizi",
-    gallery: "Galleria",
-    contact: "Contatti",
-    bookNow: "Prenota Ora"
+    home: "Inicio",
+    apartments: "Suites",
+    amenities: "Servicios",
+    gallery: "Galería",
+    contact: "Contacto",
+    bookNow: "Reservar Ahora"
   },
   hero: {
-    subtitle: "ALLOGGI DI LUSSO SUL MARE",
-    title: "Vivi la Tranquillità del Mare",
-    description: "Scopri la nostra esclusiva collezione di appartamenti di lusso e camere d'albergo sul mare, che offrono comfort impareggiabile e viste mozzafiato sul mare.",
-    bookStay: "Prenota il tuo Soggiorno",
-    exploreApartments: "Esplora gli Appartamenti",
-    scrollDown: "Scorri Giù"
+    subtitle: "HOTEL EN EL CENTRO DE CANCÚN",
+    title: "Experimenta Hotel 28 Cancún",
+    description: "Descubre nuestras exclusivas suites de dos habitaciones en el centro de Cancún, que ofrecen una comodidad inigualable, excepcional limpieza y la ubicación perfecta para explorar la ciudad.",
+    bookStay: "Reserva tu Estancia",
+    exploreApartments: "Explora Nuestras Suites",
+    scrollDown: "Desplázate Hacia Abajo"
   },
   footer: {
-    description: "Appartamenti di lusso sul mare e camere d'albergo con splendide viste sul mare, che offrono il perfetto connubio di comfort ed eleganza per la tua vacanza da sogno.",
-    quickLinks: "Link Rapidi",
-    contact: "Contatti",
-    newsletter: "Newsletter",
-    newsletterDesc: "Iscriviti alla nostra newsletter per offerte speciali e aggiornamenti.",
-    yourEmail: "Il tuo indirizzo email",
-    subscribe: "Iscriviti",
-    allRights: "Tutti i diritti riservati."
+    description: "Hotel 28 Cancún ofrece amplias suites de dos habitaciones en el corazón del centro de Cancún, perfectas para familias, viajeros de negocios y estancias prolongadas. Disfruta de una limpieza y servicio excepcionales calificados con 5.0 en Expedia.",
+    quickLinks: "Enlaces Rápidos",
+    contact: "Contacto",
+    newsletter: "Boletín",
+    newsletterDesc: "Suscríbete a nuestro boletín para ofertas especiales y actualizaciones.",
+    yourEmail: "Tu dirección de correo electrónico",
+    subscribe: "Suscribirse",
+    allRights: "Todos los derechos reservados."
   },
   bookingForm: {
-    title: "Prenota il tuo Soggiorno",
-    checkIn: "Data di Check-in",
-    checkOut: "Data di Check-out",
-    adults: "Adulti",
-    children: "Bambini",
+    title: "Reserva tu Estancia",
+    checkIn: "Fecha de Entrada",
+    checkOut: "Fecha de Salida",
+    adults: "Adultos",
+    children: "Niños",
     adult: "Adulto",
-    child: "Bambino",
-    selectDate: "Seleziona data",
-    checkAvailability: "Verifica Disponibilità",
-    bookingConfirmed: "Prenotazione Confermata!"
+    child: "Niño",
+    selectDate: "Seleccionar fecha",
+    checkAvailability: "Verificar Disponibilidad",
+    bookingConfirmed: "¡Reserva Confirmada!"
   },
   testimonials: {
-    title: "Cosa Dicono i Nostri Ospiti",
-    description: "Scopri perché i nostri ospiti continuano a tornare a MareSereno per le loro fughe al mare."
+    title: "Calificaciones de Huéspedes",
+    description: "Hotel 28 Cancún se enorgullece de mantener una calificación perfecta de 5.0 en Expedia, reflejando nuestro compromiso con un servicio y limpieza excepcionales."
   },
   notFound: {
-    title: "Pagina Non Trovata",
-    description: "Non siamo riusciti a trovare la pagina che stavi cercando. Forse hai preso una svolta sbagliata in paradiso?",
-    returnHome: "Torna alla Home"
+    title: "Página No Encontrada",
+    description: "No pudimos encontrar la página que estabas buscando. ¿Quizás tomaste un giro equivocado en Cancún?",
+    returnHome: "Volver al Inicio"
+  },
+  home: {
+    welcome: {
+      subtitle: "Bienvenido a Hotel 28 Cancún",
+      title: "Tu Refugio en el Centro de Cancún",
+      description1: "Ubicado en el corazón del centro de Cancún, Hotel 28 ofrece amplias suites de dos habitaciones diseñadas para la comodidad y conveniencia. Nuestra ubicación central proporciona fácil acceso a mercados locales, restaurantes y la terminal de autobuses ADO, haciéndolo ideal tanto para viajeros de ocio como de negocios.",
+      description2: "Cada suite cuenta con una cocineta completamente equipada, área de trabajo y WiFi de alta velocidad. Ya sea que visite por negocios, unas vacaciones familiares o una estancia prolongada, nuestros alojamientos limpios y bien equipados proporcionan todo lo que necesita para sentirse como en casa en Cancún.",
+      learnMore: "Conoce Más"
+    },
+    booking: {
+      subtitle: "Reserva tu Estancia",
+      title: "Reserva tu Suite Perfecta",
+      description: "Da el primer paso hacia tu aventura en Cancún verificando la disponibilidad y asegurando tus fechas preferidas. Nuestro sencillo proceso de reserva garantiza una experiencia sin problemas desde la reserva hasta la llegada.",
+      benefits: ["Confirmación instantánea", "Mejor tarifa garantizada", "Opciones de cancelación flexibles", "Pago seguro"]
+    },
+    featuredApartments: {
+      subtitle: "Nuestros Alojamientos",
+      title: "Suites Destacadas",
+      description: "Descubre nuestras opciones de suites más populares, cada una ofreciendo una perfecta combinación de comodidad, estilo y conveniencia en el centro de Cancún.",
+      viewAll: "Ver Todas las Suites"
+    },
+    amenities: {
+      subtitle: "Servicios del Hotel",
+      title: "Experimenta lo Mejor",
+      description: "Disfruta de nuestras instalaciones y servicios premium diseñados para hacer tu estancia excepcional.",
+      features: {
+        beachfront: {
+          title: "Ubicación Céntrica",
+          description: "Ubicación central con fácil acceso a mercados, restaurantes y transporte."
+        },
+        pools: {
+          title: "Piscina al Aire Libre",
+          description: "Relájate en nuestra refrescante piscina en el corazón del centro de Cancún."
+        },
+        restaurant: {
+          title: "Restaurante en el Hotel",
+          description: "Disfruta de deliciosa cocina local e internacional sin salir del hotel."
+        },
+        wifi: {
+          title: "Wi-Fi de Alta Velocidad",
+          description: "Mantente conectado con internet de alta velocidad gratuito en todo el hotel."
+        },
+        bar: {
+          title: "Bar del Hotel",
+          description: "Relájate con bebidas refrescantes en nuestra cómoda área de bar."
+        },
+        location: {
+          title: "Instalaciones para Negocios",
+          description: "Área de trabajo dedicada en cada suite y servicios empresariales disponibles."
+        }
+      }
+    },
+    cta: {
+      title: "¿Listo para tu Aventura en Cancún?",
+      description: "Reserva tu estancia hoy y experimenta la perfecta combinación de comodidad, conveniencia y servicio excepcional en el centro de Cancún.",
+      bookNow: "Reservar Ahora"
+    }
   },
   apartments: {
-    title: "I Nostri Appartamenti e Camere",
-    subtitle: "Scopri la nostra selezione di alloggi premium, dalle accoglienti mansarde ai lussuosi attici.",
+    title: "Nuestras Suites",
+    subtitle: "Descubre nuestra selección de suites premium de dos habitaciones, perfectas para familias, viajeros de negocios y estancias prolongadas.",
     filters: {
-      guests: "Ospiti",
-      anyGuests: "Qualsiasi numero di ospiti",
-      onePlus: "1+ ospiti",
-      twoPlus: "2+ ospiti",
-      threePlus: "3+ ospiti",
-      fourPlus: "4+ ospiti",
-      location: "Posizione",
-      allLocations: "Tutte le posizioni",
-      priceRange: "Fascia di Prezzo",
-      showing: "Visualizzando",
-      of: "di",
-      accommodations: "alloggi",
-      resetFilters: "Reimposta Filtri",
-      noMatch: "Nessun appartamento corrisponde ai tuoi filtri",
-      adjustFilters: "Prova a modificare i criteri di filtro per vedere più opzioni.",
-      viewDetails: "Visualizza Dettagli",
-      features: "caratteristiche",
-      more: "altro"
+      guests: "Huéspedes",
+      anyGuests: "Cualquier número de huéspedes",
+      onePlus: "1+ huéspedes",
+      twoPlus: "2+ huéspedes",
+      threePlus: "3+ huéspedes",
+      fourPlus: "4+ huéspedes",
+      location: "Tipo de Suite",
+      allLocations: "Todos los tipos de suite",
+      priceRange: "Rango de Precio",
+      showing: "Mostrando",
+      of: "de",
+      accommodations: "suites",
+      resetFilters: "Restablecer Filtros",
+      noMatch: "Ninguna suite coincide con tus filtros",
+      adjustFilters: "Intenta ajustar tus criterios de filtro para ver más opciones.",
+      viewDetails: "Ver Detalles",
+      features: "características",
+      more: "más"
     }
   },
   gallery: {
-    title: "Galleria Fotografica",
-    subtitle: "Esplora il nostro paradiso sul mare attraverso immagini suggestive.",
+    title: "Galería de Fotos",
+    subtitle: "Explora nuestro hotel en el centro de Cancún a través de imágenes cautivadoras.",
     filters: {
-      all: "Tutti",
-      exterior: "Esterno",
-      rooms: "Camere",
-      amenities: "Servizi"
+      all: "Todo",
+      exterior: "Exterior",
+      rooms: "Suites",
+      amenities: "Servicios"
     }
   },
   booking: {
@@ -169,229 +227,172 @@ export const it = {
     }
   },
   contact: {
-    title: "Contattaci",
-    subtitle: "Siamo qui per aiutarti a rendere il tuo soggiorno indimenticabile. Contattaci per qualsiasi domanda o richiesta speciale.",
-    getInTouch: "Mettiti in Contatto",
-    address: "Indirizzo",
-    phone: "Telefono",
-    email: "Email",
-    receptionHours: "Orari Reception",
-    checkInTime: "Check-in: Dopo le 15:00",
-    checkOutTime: "Check-out: Prima delle 11:00",
-    sendMessage: "Inviaci un Messaggio",
-    fullName: "Nome Completo",
-    phoneNumber: "Numero di Telefono",
-    subject: "Oggetto",
-    message: "Messaggio",
-    howCanWeHelp: "Come possiamo aiutarti?",
-    send: "Invia",
-    messageSent: "Messaggio Inviato!",
-    thankYou: "Grazie per averci contattato. Risponderemo al tuo messaggio il prima possibile.",
-    faq: "Domande Frequenti",
-    faqSubtitle: "Trova risposte rapide alle domande più comuni sui nostri alloggi e servizi.",
+    title: "Contáctanos",
+    subtitle: "Estamos aquí para ayudar a hacer tu estancia en Cancún inolvidable. Comunícate con nosotros para cualquier pregunta o solicitud especial.",
+    getInTouch: "Ponte en Contacto",
+    address: "Dirección",
+    phone: "Teléfono",
+    email: "Correo Electrónico",
+    receptionHours: "Horario de Recepción",
+    checkInTime: "Check-in: Después de las 15:00",
+    checkOutTime: "Check-out: Antes de las 11:00",
+    sendMessage: "Envíanos un Mensaje",
+    fullName: "Nombre Completo",
+    phoneNumber: "Número de Teléfono",
+    subject: "Asunto",
+    message: "Mensaje",
+    howCanWeHelp: "¿Cómo podemos ayudarte?",
+    send: "Enviar Mensaje",
+    messageSent: "¡Mensaje Enviado!",
+    thankYou: "Gracias por contactarnos. Responderemos a tu mensaje lo antes posible.",
+    faq: "Preguntas Frecuentes",
+    faqSubtitle: "Encuentra respuestas rápidas a preguntas comunes sobre nuestros alojamientos y servicios.",
     questions: {
       checkInOut: {
-        question: "Quali sono gli orari di check-in e check-out?",
-        answer: "Il check-in è dalle 15:00 in poi, e il check-out è fino alle 11:00. Il check-in anticipato o il check-out posticipato possono essere organizzati in base alla disponibilità."
+        question: "¿Cuáles son tus horarios de check-in y check-out?",
+        answer: "El check-in es a partir de las 15:00, y el check-out es hasta las 11:00. El check-in anticipado o el check-out tardío pueden organizarse según disponibilidad."
       },
       parking: {
-        question: "È disponibile il parcheggio presso la struttura?",
-        answer: "Sì, offriamo parcheggio gratuito per tutti gli ospiti. Il servizio di parcheggio con valletto è disponibile anche a un costo aggiuntivo."
+        question: "¿Hay estacionamiento disponible en el hotel?",
+        answer: "Sí, ofrecemos estacionamiento para todos los huéspedes. Tenga en cuenta que los espacios son limitados y están disponibles por orden de llegada."
       },
       pets: {
-        question: "Gli animali domestici sono ammessi negli appartamenti?",
-        answer: "Accogliamo gli animali domestici in appartamenti designati pet-friendly. Si prega di informarci in anticipo se si prevede di portare un animale domestico, poiché potrebbero essere applicati costi aggiuntivi."
+        question: "¿Se permiten mascotas en las suites?",
+        answer: "Lamentamos que no se permiten mascotas en nuestro hotel, con excepción de animales de servicio."
       },
       breakfast: {
-        question: "La colazione è inclusa nella tariffa della camera?",
-        answer: "La colazione è inclusa in pacchetti camera selezionati. Puoi verificare l'inclusione durante il processo di prenotazione o aggiungerla alla tua prenotazione in qualsiasi momento."
+        question: "¿Está incluido el desayuno en la tarifa de la habitación?",
+        answer: "El desayuno está disponible en nuestro restaurante del hotel por un costo adicional. Puedes agregarlo a tu reserva durante la reserva o a tu llegada."
       },
       transfers: {
-        question: "Offrite trasferimenti aeroportuali?",
-        answer: "Sì, offriamo trasferimenti aeroportuali a un costo aggiuntivo. Si prega di contattare la nostra concierge almeno 48 ore prima del tuo arrivo per organizzare il trasporto."
+        question: "¿Ofrecen traslados al aeropuerto?",
+        answer: "Podemos organizar traslados al aeropuerto por un costo adicional. Por favor, contacta a nuestra recepción al menos 48 horas antes de tu llegada para organizar el transporte."
       },
       amenities: {
-        question: "Quali servizi sono disponibili nella struttura?",
-        answer: "La nostra struttura dispone di piscine, una spa, ristoranti, un bar sulla spiaggia, un centro fitness e accesso diretto alla spiaggia. Tutti gli appartamenti includono Wi-Fi, aria condizionata e elettrodomestici moderni."
-      }
-    }
-  },
-  home: {
-    welcome: {
-      subtitle: "Benvenuti a MareSereno",
-      title: "Alloggi di Lusso sul Mare",
-      description1: "Situato sulla incontaminata costa mediterranea, MareSereno offre una squisita collezione di appartamenti di lusso e camere d'albergo. I nostri alloggi fronte mare combinano un design elegante con comfort moderni, creando l'ambientazione perfetta per una indimenticabile fuga al mare.",
-      description2: "Che tu stia cercando una fuga romantica, una vacanza in famiglia o un ritiro tranquillo, la nostra vasta gamma di alloggi si adatta a ogni preferenza ed esigenza. Ogni spazio è progettato con cura per fornire viste panoramiche sul mare e accesso diretto alla spiaggia.",
-      learnMore: "Scopri di Più"
-    },
-    booking: {
-      subtitle: "Prenota il tuo Soggiorno",
-      title: "Prenota la tua Vacanza Perfetta",
-      description: "Fai il primo passo verso la tua vacanza da sogno verificando la disponibilità e assicurandoti le date preferite. Il nostro semplice processo di prenotazione garantisce un'esperienza senza interruzioni dalla prenotazione all'arrivo.",
-      benefits: ["Conferma istantanea", "Miglior tariffa garantita", "Opzioni di cancellazione flessibili", "Pagamento sicuro"]
-    },
-    featuredApartments: {
-      subtitle: "I Nostri Alloggi",
-      title: "Appartamenti in Evidenza",
-      description: "Scopri le nostre opzioni di alloggio più popolari, ognuna che offre un perfetto equilibrio di comfort, stile e viste mozzafiato sul mare.",
-      viewAll: "Visualizza Tutti gli Appartamenti"
-    },
-    amenities: {
-      subtitle: "Servizi dell'Hotel",
-      title: "Vivi il Meglio",
-      description: "Goditi le nostre strutture e servizi premium progettati per rendere il tuo soggiorno eccezionale.",
-      features: {
-        beachfront: {
-          title: "Posizione Fronte Mare",
-          description: "Accesso diretto a spiagge incontaminate con acque cristalline."
-        },
-        pools: {
-          title: "Piscine",
-          description: "Rilassati accanto alle nostre piscine a sfioro con vista mozzafiato sul mare."
-        },
-        restaurant: {
-          title: "Ristorante Gourmet",
-          description: "Goditi squisita cucina locale e internazionale."
-        },
-        wifi: {
-          title: "Wi-Fi ad Alta Velocità",
-          description: "Rimani connesso con internet ad alta velocità gratuito."
-        },
-        bar: {
-          title: "Bar & Caffè sulla Spiaggia",
-          description: "Bevande rinfrescanti e snack serviti direttamente sulla spiaggia."
-        },
-        location: {
-          title: "Posizione Privilegiata",
-          description: "Vicino alle attrazioni locali, negozi e ristoranti."
-        }
-      }
-    },
-    cta: {
-      title: "Pronto per la tua Vacanza da Sogno?",
-      description: "Prenota il tuo soggiorno oggi e vivi il perfetto connubio di lusso, comfort e viste mozzafiato sul mare.",
-      bookNow: "Prenota Ora"
-    }
-  },
-  amenitiesPage: {
-    title: "I Nostri Servizi",
-    subtitle: "Scopri i servizi e le comodità di lusso che rendono il tuo soggiorno indimenticabile.",
-    description: "A MareSereno, ci dedichiamo a fornire un'esperienza di soggiorno completa e lussuosa. Dai nostri servizi sulla spiaggia alle strutture di benessere, ogni dettaglio è stato curato per garantire il massimo comfort e piacere.",
-    categories: {
-      wellness: {
-        title: "Benessere e Relax",
-        description: "Trattati con la nostra gamma di servizi benessere progettati per ringiovanire corpo e mente.",
-        items: [
-          {
-            title: "Spa di Lusso",
-            description: "La nostra spa offre una gamma completa di trattamenti, dalle terapie tradizionali ai trattamenti di bellezza più moderni."
-          },
-          {
-            title: "Centro Fitness",
-            description: "Mantieni la tua routine di fitness con la nostra palestra all'avanguardia con vista panoramica sul mare."
-          },
-          {
-            title: "Piscina Infinity",
-            description: "Immergiti nella nostra piscina a sfioro mentre ammiri l'orizzonte infinito del mare."
-          },
-          {
-            title: "Yoga sulla Spiaggia",
-            description: "Partecipa alle nostre sessioni di yoga mattutine sulla spiaggia per un risveglio rivitalizzante."
-          }
-        ]
-      },
-      dining: {
-        title: "Ristorazione",
-        description: "Scopri il meglio della cucina locale e internazionale nei nostri ristoranti e bar.",
-        items: [
-          {
-            title: "Ristorante Gourmet",
-            description: "Assapora piatti raffinati preparati dai nostri chef con ingredienti locali freschi."
-          },
-          {
-            title: "Bar sulla Spiaggia",
-            description: "Goditi cocktail rinfrescanti e snack leggeri con i piedi nella sabbia."
-          },
-          {
-            title: "Lounge Bar",
-            description: "Rilassati con una selezione di vini pregiati e liquori in un'atmosfera elegante."
-          },
-          {
-            title: "Servizio in Camera",
-            description: "Goditi pasti gourmet nella privacy del tuo appartamento, disponibile 24 ore su 24."
-          }
-        ]
-      },
-      services: {
-        title: "Servizi Extra",
-        description: "Approfitta dei nostri servizi aggiuntivi per un soggiorno senza problemi.",
-        items: [
-          {
-            title: "Concierge 24/7",
-            description: "Il nostro team di concierge è disponibile in qualsiasi momento per assisterti con qualsiasi richiesta."
-          },
-          {
-            title: "Trasferimenti Aeroportuali",
-            description: "Viaggia comodamente da e per l'aeroporto con il nostro servizio di trasferimento privato."
-          },
-          {
-            title: "Noleggio Auto",
-            description: "Esplora la zona con la nostra flotta di veicoli premium disponibili per il noleggio."
-          },
-          {
-            title: "Escursioni Guidate",
-            description: "Scopri le attrazioni locali con le nostre escursioni personalizzate guidate da esperti."
-          }
-        ]
-      },
-      entertainment: {
-        title: "Intrattenimento",
-        description: "Goditi una varietà di attività ricreative pensate per tutti i gusti.",
-        items: [
-          {
-            title: "Sport Acquatici",
-            description: "Prova una vasta gamma di sport acquatici, dal paddleboarding al jet skiing."
-          },
-          {
-            title: "Area Giochi per Bambini",
-            description: "I più piccoli possono divertirsi nella nostra area giochi sicura e supervisionata."
-          },
-          {
-            title: "Serate a Tema",
-            description: "Partecipa alle nostre serate a tema settimanali con musica dal vivo e intrattenimento."
-          },
-          {
-            title: "Biblioteca & Sala Giochi",
-            description: "Rilassati con un buon libro o goditi i giochi da tavolo nella nostra sala comune."
-          }
-        ]
+        question: "¿Qué servicios están disponibles en el hotel?",
+        answer: "Nuestro hotel cuenta con piscina al aire libre, restaurante y bar en el hotel, WiFi gratuito y facilidades para negocios. Todas las suites incluyen cocinetas, aire acondicionado y áreas de trabajo dedicadas."
       }
     }
   },
   apartmentDescriptions: {
     "1": {
-      name: "Suite Vista Mare Deluxe",
-      description: "Suite lussuosa con vista panoramica sul mare, comfort moderni e balcone privato."
+      name: "Suite Estándar de Dos Habitaciones",
+      description: "Cómoda suite de dos habitaciones con cocineta, área de trabajo y todos los servicios esenciales para una estancia agradable."
     },
     "2": {
-      name: "Appartamento Premium per Famiglie",
-      description: "Appartamento spazioso ideale per famiglie, con cucina completa e splendide viste costiere."
+      name: "Suite Premium de Dos Habitaciones",
+      description: "Amplia suite ideal para familias y estancias prolongadas, con cocineta completa y vistas a la ciudad."
     },
     "3": {
-      name: "Studio Esecutivo sulla Spiaggia",
-      description: "Elegante studio con accesso diretto alla spiaggia, design moderno e finiture di pregio."
+      name: "Suite Ejecutiva de Dos Habitaciones",
+      description: "Elegante suite con muebles premium, servicios mejorados y superior comodidad."
     },
     "4": {
-      name: "Suite Attico di Lusso",
-      description: "Esclusiva suite all'ultimo piano con ampia terrazza e vista panoramica sul mare."
+      name: "Suite Deluxe de Esquina",
+      description: "Exclusiva suite de esquina con espacio adicional, vistas panorámicas de la ciudad y servicios premium."
     },
     "5": {
-      name: "Camera Doppia Classica",
-      description: "Confortevole camera d'albergo con comfort moderni e vista parziale sul mare."
+      name: "Suite de Negocios",
+      description: "Diseñada para viajeros de negocios con espacio de trabajo mejorado y servicios empresariales."
     },
     "6": {
-      name: "Appartamento Vista Giardino",
-      description: "Appartamento tranquillo circondato da rigogliosi giardini, a breve distanza dalla spiaggia."
+      name: "Suite Familiar",
+      description: "Especialmente diseñada para familias con espacio adicional y características adaptadas para niños."
+    }
+  },
+  amenitiesPage: {
+    title: "Nuestros Servicios",
+    subtitle: "Descubre los servicios y comodidades que hacen tu estancia cómoda y conveniente.",
+    description: "En Hotel 28 Cancún, nos enfocamos en proporcionar servicios esenciales que mejoran tu experiencia en el centro de Cancún. Desde nuestra refrescante piscina al aire libre hasta nuestras instalaciones para negocios, cada detalle ha sido considerado para asegurar tu comodidad y conveniencia.",
+    categories: {
+      wellness: {
+        title: "Confort y Relajación",
+        description: "Servicios diseñados para ayudarte a relajarte y refrescarte durante tu estancia.",
+        items: [
+          {
+            title: "Piscina al Aire Libre",
+            description: "Refréscate en nuestra piscina al aire libre, un perfecto retiro después de un día explorando Cancún."
+          },
+          {
+            title: "Aire Acondicionado",
+            description: "Todas las suites cuentan con aire acondicionado individualmente controlado para tu óptima comodidad."
+          },
+          {
+            title: "Ropa de Cama Premium",
+            description: "Disfruta de una noche de descanso reparador con nuestros colchones de alta calidad y ropa de cama premium."
+          },
+          {
+            title: "Servicio de Limpieza",
+            description: "Nuestros estándares de limpieza calificados con 5.0 aseguran que tu suite esté siempre perfectamente mantenida."
+          }
+        ]
+      },
+      dining: {
+        title: "Gastronomía",
+        description: "Opciones de alimentación convenientes para todos nuestros huéspedes.",
+        items: [
+          {
+            title: "Restaurante",
+            description: "Nuestro restaurante en el hotel sirve deliciosa cocina local e internacional durante todo el día."
+          },
+          {
+            title: "Bar",
+            description: "Disfruta de bebidas refrescantes y aperitivos ligeros en nuestro cómodo bar del hotel."
+          },
+          {
+            title: "Cocinetas en Suite",
+            description: "Prepara tus propias comidas con nuestras cocinetas completamente equipadas en cada suite."
+          },
+          {
+            title: "Restaurantes Locales",
+            description: "Descubre numerosas opciones gastronómicas a poca distancia a pie del hotel."
+          }
+        ]
+      },
+      services: {
+        title: "Servicios para Huéspedes",
+        description: "Aprovecha nuestros servicios adicionales para una estancia sin problemas.",
+        items: [
+          {
+            title: "Recepción 24/7",
+            description: "Nuestro equipo de recepción está disponible en cualquier momento para asistirte con cualquier solicitud."
+          },
+          {
+            title: "Traslados al Aeropuerto",
+            description: "Viaja cómodamente hacia y desde el aeropuerto con nuestro servicio de traslado (costo adicional)."
+          },
+          {
+            title: "Servicio de Lavandería",
+            description: "Servicios de lavandería convenientes están disponibles para los huéspedes que se alojan con nosotros."
+          },
+          {
+            title: "Asistencia para Tours",
+            description: "Permítenos ayudarte a descubrir lo mejor de Cancún con nuestra asistencia en reserva de tours."
+          }
+        ]
+      },
+      entertainment: {
+        title: "Negocios y Conectividad",
+        description: "Mantente conectado y productivo durante tu estancia.",
+        items: [
+          {
+            title: "WiFi de Alta Velocidad",
+            description: "Acceso a internet de alta velocidad gratuito en todo el hotel."
+          },
+          {
+            title: "Instalaciones para Negocios",
+            description: "Cada suite incluye un área de trabajo dedicada para tu conveniencia."
+          },
+          {
+            title: "Smart TVs",
+            description: "Todas las suites cuentan con smart TVs con capacidades de streaming."
+          },
+          {
+            title: "Ubicación Central",
+            description: "Fácil acceso a negocios, tiendas y atracciones del centro."
+          }
+        ]
+      }
     }
   }
 };

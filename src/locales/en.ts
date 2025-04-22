@@ -1,22 +1,23 @@
+
 export const en = {
   nav: {
     home: "Home",
-    apartments: "Apartments",
+    apartments: "Suites",
     amenities: "Amenities",
     gallery: "Gallery",
     contact: "Contact",
     bookNow: "Book Now"
   },
   hero: {
-    subtitle: "BEACHFRONT LUXURY ACCOMMODATION",
-    title: "Experience Seaside Tranquility",
-    description: "Discover our exclusive collection of luxury beachfront apartments and hotel rooms, offering unparalleled comfort and breathtaking sea views.",
+    subtitle: "DOWNTOWN CANCÚN HOTEL",
+    title: "Experience Hotel 28 Cancún",
+    description: "Discover our exclusive two-bedroom suites in downtown Cancún, offering unparalleled comfort, exceptional cleanliness, and the perfect location for exploring the city.",
     bookStay: "Book Your Stay",
-    exploreApartments: "Explore Apartments",
+    exploreApartments: "Explore Our Suites",
     scrollDown: "Scroll Down"
   },
   footer: {
-    description: "Luxurious beachfront apartments and hotel rooms with stunning sea views, offering the perfect blend of comfort and elegance for your dream vacation.",
+    description: "Hotel 28 Cancún offers spacious two-bedroom suites in the heart of downtown Cancún, perfect for families, business travelers and long stays. Enjoy exceptional cleanliness and service rated 5.0 on Expedia.",
     quickLinks: "Quick Links",
     contact: "Contact",
     newsletter: "Newsletter",
@@ -38,33 +39,33 @@ export const en = {
     bookingConfirmed: "Booking Confirmed!"
   },
   testimonials: {
-    title: "What Our Guests Say",
-    description: "Discover why our guests keep coming back to MareSereno for their seaside getaways."
+    title: "Guest Ratings",
+    description: "Hotel 28 Cancún is proud to maintain a perfect 5.0 rating on Expedia, reflecting our commitment to exceptional service and cleanliness."
   },
   notFound: {
     title: "Page Not Found",
-    description: "We couldn't find the page you were looking for. Perhaps you took a wrong turn in paradise?",
+    description: "We couldn't find the page you were looking for. Perhaps you took a wrong turn in Cancún?",
     returnHome: "Return Home"
   },
   home: {
     welcome: {
-      subtitle: "Welcome to MareSereno",
-      title: "Luxury Seaside Accommodations",
-      description1: "Nestled on the pristine Mediterranean coastline, MareSereno offers an exquisite collection of luxury apartments and hotel rooms. Our beachfront accommodations combine elegant design with modern comfort, creating the perfect setting for an unforgettable seaside getaway.",
-      description2: "Whether you're seeking a romantic escape, a family vacation, or a peaceful retreat, our diverse range of accommodations caters to every preference and need. Each space is thoughtfully designed to provide panoramic sea views and direct beach access.",
+      subtitle: "Welcome to Hotel 28 Cancún",
+      title: "Your Downtown Cancún Retreat",
+      description1: "Located in the heart of downtown Cancún, Hotel 28 offers spacious two-bedroom suites designed for comfort and convenience. Our central location provides easy access to local markets, restaurants, and the ADO bus terminal, making it ideal for both leisure and business travelers.",
+      description2: "Each suite features a fully equipped kitchenette, workspace, and high-speed WiFi. Whether you're visiting for business, a family vacation, or an extended stay, our clean, well-appointed accommodations provide everything you need to feel at home in Cancún.",
       learnMore: "Learn More"
     },
     booking: {
       subtitle: "Book Your Stay",
-      title: "Reserve Your Perfect Getaway",
-      description: "Take the first step towards your dream vacation by checking availability and securing your preferred dates. Our simple booking process ensures a seamless experience from reservation to arrival.",
+      title: "Reserve Your Perfect Suite",
+      description: "Take the first step towards your Cancún adventure by checking availability and securing your preferred dates. Our simple booking process ensures a seamless experience from reservation to arrival.",
       benefits: ["Instant confirmation", "Best rate guarantee", "Flexible cancellation options", "Secure payment"]
     },
     featuredApartments: {
       subtitle: "Our Accommodations",
-      title: "Featured Apartments",
-      description: "Discover our most popular accommodation options, each offering a perfect blend of comfort, style, and breathtaking sea views.",
-      viewAll: "View All Apartments"
+      title: "Featured Suites",
+      description: "Discover our most popular suite options, each offering a perfect blend of comfort, style, and convenience in downtown Cancún.",
+      viewAll: "View All Suites"
     },
     amenities: {
       subtitle: "Hotel Amenities",
@@ -72,40 +73,40 @@ export const en = {
       description: "Enjoy our premium facilities and services designed to make your stay exceptional.",
       features: {
         beachfront: {
-          title: "Beachfront Location",
-          description: "Direct access to pristine beaches with crystal clear waters."
+          title: "Downtown Location",
+          description: "Centrally located with easy access to markets, restaurants, and transportation."
         },
         pools: {
-          title: "Swimming Pools",
-          description: "Relax by our infinity pools with stunning sea views."
+          title: "Outdoor Pool",
+          description: "Relax by our refreshing pool in the heart of downtown Cancún."
         },
         restaurant: {
-          title: "Gourmet Restaurant",
-          description: "Enjoy exquisite local and international cuisine."
+          title: "On-site Restaurant",
+          description: "Enjoy delicious local and international cuisine without leaving the hotel."
         },
         wifi: {
           title: "High-Speed Wi-Fi",
-          description: "Stay connected with complimentary high-speed internet."
+          description: "Stay connected with complimentary high-speed internet throughout the hotel."
         },
         bar: {
-          title: "Beach Bar & Café",
-          description: "Refreshing drinks and snacks served right on the beach."
+          title: "Hotel Bar",
+          description: "Unwind with refreshing drinks in our comfortable bar area."
         },
         location: {
-          title: "Prime Location",
-          description: "Close to local attractions, shops, and restaurants."
+          title: "Business Facilities",
+          description: "Dedicated workspace in every suite and business services available."
         }
       }
     },
     cta: {
-      title: "Ready for Your Dream Vacation?",
-      description: "Book your stay today and experience the perfect blend of luxury, comfort, and stunning sea views.",
+      title: "Ready for Your Cancún Adventure?",
+      description: "Book your stay today and experience the perfect blend of comfort, convenience, and exceptional service in downtown Cancún.",
       bookNow: "Book Now"
     }
   },
   apartments: {
-    title: "Our Apartments & Rooms",
-    subtitle: "Discover our selection of premium accommodations, ranging from cozy studios to luxurious penthouses.",
+    title: "Our Suites",
+    subtitle: "Discover our selection of premium two-bedroom suites, perfect for families, business travelers, and extended stays.",
     filters: {
       guests: "Guests",
       anyGuests: "Any number of guests",
@@ -113,14 +114,14 @@ export const en = {
       twoPlus: "2+ guests",
       threePlus: "3+ guests",
       fourPlus: "4+ guests",
-      location: "Location",
-      allLocations: "All locations",
+      location: "Suite Type",
+      allLocations: "All suite types",
       priceRange: "Price Range",
       showing: "Showing",
       of: "of",
-      accommodations: "accommodations",
+      accommodations: "suites",
       resetFilters: "Reset Filters",
-      noMatch: "No apartments match your filters",
+      noMatch: "No suites match your filters",
       adjustFilters: "Try adjusting your filter criteria to see more options.",
       viewDetails: "View Details",
       features: "features",
@@ -129,11 +130,11 @@ export const en = {
   },
   gallery: {
     title: "Photo Gallery",
-    subtitle: "Explore our seaside paradise through captivating imagery.",
+    subtitle: "Explore our downtown Cancún hotel through captivating imagery.",
     filters: {
       all: "All",
       exterior: "Exterior",
-      rooms: "Rooms",
+      rooms: "Suites",
       amenities: "Amenities"
     }
   },
@@ -227,7 +228,7 @@ export const en = {
   },
   contact: {
     title: "Contact Us",
-    subtitle: "We're here to help make your stay unforgettable. Reach out with any questions or special requests.",
+    subtitle: "We're here to help make your stay in Cancún unforgettable. Reach out with any questions or special requests.",
     getInTouch: "Get In Touch",
     address: "Address",
     phone: "Phone",
@@ -252,143 +253,143 @@ export const en = {
         answer: "Check-in is from 3:00 PM onwards, and check-out is until 11:00 AM. Early check-in or late check-out may be arranged based on availability."
       },
       parking: {
-        question: "Is parking available at the property?",
-        answer: "Yes, we offer complimentary parking for all guests. Valet parking service is also available for an additional fee."
+        question: "Is parking available at the hotel?",
+        answer: "Yes, we offer parking for all guests. Please note that spaces are limited and available on a first-come, first-served basis."
       },
       pets: {
-        question: "Are pets allowed in the apartments?",
-        answer: "We welcome pets in designated pet-friendly apartments. Please inform us in advance if you plan to bring a pet, as additional charges may apply."
+        question: "Are pets allowed in the suites?",
+        answer: "We regret that pets are not allowed in our hotel, with the exception of service animals."
       },
       breakfast: {
         question: "Is breakfast included in the room rate?",
-        answer: "Breakfast is included in select room packages. You can check the inclusion during the booking process or add it to your reservation at any time."
+        answer: "Breakfast is available at our on-site restaurant for an additional fee. You can add it to your reservation during booking or upon arrival."
       },
       transfers: {
         question: "Do you offer airport transfers?",
-        answer: "Yes, we offer airport transfers for an additional fee. Please contact our concierge at least 48 hours before your arrival to arrange transportation."
+        answer: "We can arrange airport transfers for an additional fee. Please contact our front desk at least 48 hours before your arrival to arrange transportation."
       },
       amenities: {
-        question: "What amenities are available at the property?",
-        answer: "Our property features swimming pools, a spa, restaurants, a beach bar, fitness center, and direct beach access. All apartments include Wi-Fi, air conditioning, and modern appliances."
+        question: "What amenities are available at the hotel?",
+        answer: "Our hotel features an outdoor pool, on-site restaurant and bar, free WiFi, and business facilities. All suites include kitchenettes, air conditioning, and dedicated workspace areas."
       }
     }
   },
   apartmentDescriptions: {
     "1": {
-      name: "Deluxe Sea View Suite",
-      description: "Luxurious suite with panoramic sea views, modern amenities, and a private balcony."
+      name: "Standard Two-Bedroom Suite",
+      description: "Comfortable two-bedroom suite with kitchenette, workspace, and all essential amenities for a pleasant stay."
     },
     "2": {
-      name: "Premium Family Apartment",
-      description: "Spacious apartment ideal for families, with full kitchen and stunning coastal views."
+      name: "Premium Two-Bedroom Suite",
+      description: "Spacious suite ideal for families and extended stays, with full kitchenette and city views."
     },
     "3": {
-      name: "Executive Beach Studio",
-      description: "Elegant studio with direct beach access, modern design, and premium finishes."
+      name: "Executive Two-Bedroom Suite",
+      description: "Elegant suite with premium furnishings, enhanced amenities, and superior comfort."
     },
     "4": {
-      name: "Luxury Penthouse Suite",
-      description: "Exclusive top-floor suite with expansive terrace and panoramic sea views."
+      name: "Deluxe Corner Suite",
+      description: "Exclusive corner suite with extra space, panoramic city views, and premium amenities."
     },
     "5": {
-      name: "Classic Double Room",
-      description: "Comfortable hotel room with modern amenities and partial sea views."
+      name: "Business Suite",
+      description: "Tailored for business travelers with enhanced workspace and business amenities."
     },
     "6": {
-      name: "Garden View Apartment",
-      description: "Peaceful apartment surrounded by lush gardens, just a short walk from the beach."
+      name: "Family Suite",
+      description: "Specially designed for families with extra space and child-friendly features."
     }
   },
   amenitiesPage: {
     title: "Our Amenities",
-    subtitle: "Discover the luxury amenities and services that make your stay unforgettable.",
-    description: "At MareSereno, we are dedicated to providing a comprehensive and luxurious stay experience. From our beachfront services to wellness facilities, every detail has been curated to ensure maximum comfort and pleasure.",
+    subtitle: "Discover the amenities and services that make your stay comfortable and convenient.",
+    description: "At Hotel 28 Cancún, we focus on providing essential amenities that enhance your downtown Cancún experience. From our refreshing outdoor pool to our business facilities, every detail has been considered to ensure your comfort and convenience.",
     categories: {
       wellness: {
-        title: "Wellness & Relaxation",
-        description: "Treat yourself with our range of wellness services designed to rejuvenate body and mind.",
+        title: "Comfort & Relaxation",
+        description: "Amenities designed to help you unwind and refresh during your stay.",
         items: [
           {
-            title: "Luxury Spa",
-            description: "Our spa offers a full range of treatments, from traditional therapies to the most modern beauty treatments."
+            title: "Outdoor Pool",
+            description: "Cool off in our refreshing outdoor pool, a perfect retreat after a day of exploring Cancún."
           },
           {
-            title: "Fitness Center",
-            description: "Maintain your fitness routine with our state-of-the-art gym featuring panoramic sea views."
+            title: "Air Conditioning",
+            description: "All suites feature individually controlled air conditioning for your optimal comfort."
           },
           {
-            title: "Infinity Pool",
-            description: "Immerse yourself in our infinity pool while admiring the endless horizon of the sea."
+            title: "Premium Bedding",
+            description: "Enjoy a restful night's sleep with our high-quality mattresses and premium linens."
           },
           {
-            title: "Beach Yoga",
-            description: "Join our morning yoga sessions on the beach for a revitalizing awakening."
+            title: "Housekeeping",
+            description: "Our 5.0-rated cleanliness standards ensure your suite is always perfectly maintained."
           }
         ]
       },
       dining: {
         title: "Dining",
-        description: "Discover the best of local and international cuisine at our restaurants and bars.",
+        description: "Convenient dining options for all our guests.",
         items: [
           {
-            title: "Gourmet Restaurant",
-            description: "Savor fine dishes prepared by our chefs with fresh local ingredients."
+            title: "Restaurant",
+            description: "Our on-site restaurant serves delicious local and international cuisine throughout the day."
           },
           {
-            title: "Beach Bar",
-            description: "Enjoy refreshing cocktails and light snacks with your feet in the sand."
+            title: "Bar",
+            description: "Enjoy refreshing drinks and light snacks in our comfortable hotel bar."
           },
           {
-            title: "Lounge Bar",
-            description: "Relax with a selection of fine wines and spirits in an elegant atmosphere."
+            title: "In-Suite Kitchenettes",
+            description: "Prepare your own meals with our fully equipped kitchenettes in every suite."
           },
           {
-            title: "Room Service",
-            description: "Enjoy gourmet meals in the privacy of your apartment, available 24 hours a day."
+            title: "Local Restaurants",
+            description: "Discover numerous dining options within walking distance of the hotel."
           }
         ]
       },
       services: {
-        title: "Extra Services",
+        title: "Guest Services",
         description: "Take advantage of our additional services for a hassle-free stay.",
         items: [
           {
-            title: "24/7 Concierge",
-            description: "Our concierge team is available at any time to assist you with any request."
+            title: "24/7 Reception",
+            description: "Our front desk team is available at any time to assist you with any request."
           },
           {
             title: "Airport Transfers",
-            description: "Travel comfortably to and from the airport with our private transfer service."
+            description: "Travel comfortably to and from the airport with our transfer service (additional fee)."
           },
           {
-            title: "Car Rental",
-            description: "Explore the area with our fleet of premium vehicles available for rent."
+            title: "Laundry Service",
+            description: "Convenient laundry services are available for guests staying with us."
           },
           {
-            title: "Guided Excursions",
-            description: "Discover local attractions with our personalized expert-guided tours."
+            title: "Tour Assistance",
+            description: "Let us help you discover the best of Cancún with our tour booking assistance."
           }
         ]
       },
       entertainment: {
-        title: "Entertainment",
-        description: "Enjoy a variety of recreational activities designed for all tastes.",
+        title: "Business & Connectivity",
+        description: "Stay connected and productive during your stay.",
         items: [
           {
-            title: "Water Sports",
-            description: "Try a wide range of water sports, from paddleboarding to jet skiing."
+            title: "High-Speed WiFi",
+            description: "Complimentary high-speed internet access throughout the hotel."
           },
           {
-            title: "Kids Play Area",
-            description: "Little ones can have fun in our safe and supervised play area."
+            title: "Business Facilities",
+            description: "Each suite includes a dedicated workspace for your convenience."
           },
           {
-            title: "Themed Evenings",
-            description: "Join our weekly themed evenings with live music and entertainment."
+            title: "Smart TVs",
+            description: "All suites feature smart TVs with streaming capabilities."
           },
           {
-            title: "Library & Game Room",
-            description: "Relax with a good book or enjoy board games in our common room."
+            title: "Central Location",
+            description: "Easy access to downtown businesses, shops, and attractions."
           }
         ]
       }
