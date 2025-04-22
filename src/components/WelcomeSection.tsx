@@ -29,7 +29,7 @@ export default function WelcomeSection() {
             </Button>
           </div>
           
-          <div className="relative animate-fade-in [animation-delay:300ms]">
+          <div className="relative animate-fade-in [animation-delay:300ms] object-fill">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden">
               <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&h=600&fit=crop" alt="Seaside view" className="w-full h-full object-cover" />
             </div>
