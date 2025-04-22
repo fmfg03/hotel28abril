@@ -33,7 +33,7 @@ export default function WelcomeSection() {
             <div className="aspect-[4/3] rounded-2xl overflow-hidden">
               <img src="/lovable-uploads/bravofromh_20-p-800.webp" alt="Hotel 28 Hero Image" className="w-full h-full object-cover" />
             </div>
-            <div className="absolute -bottom-6 -right-10 w-1/2 rounded-2xl overflow-hidden shadow-xl">
+            <div className="absolute -bottom-6 -left-10 w-1/2 rounded-2xl overflow-hidden shadow-xl">
               <img alt="Luxury apartment interior" src="/lovable-uploads/cofeebythepool.webp" className="w-full h-full object-fill" />
             </div>
             <div className="absolute -top-6 -left-6 w-1/2 rounded-2xl overflow-hidden shadow-xl">
