@@ -25,7 +25,7 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/public/lovable-uploads/herohotel28.webp')`,
+          backgroundImage: `url('/public/lovable-uploads/hotel28herosinlogo.webp')`,
           transform: `translateY(${scrollY * 0.5}px)`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
