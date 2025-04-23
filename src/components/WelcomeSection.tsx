@@ -25,7 +25,7 @@ export default function WelcomeSection() {
               {t.welcome.description2}
             </p>
             <Button asChild className="btn-primary">
-              <Link to="/apartments">
+              <Link to="/gallery">
                 {t.welcome.exploreRooms} <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

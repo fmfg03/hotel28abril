@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,6 +5,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import GalleryFilterBar from "@/components/gallery/GalleryFilterBar";
 import GalleryGrid from "@/components/gallery/GalleryGrid";
 import GalleryLightbox from "@/components/gallery/GalleryLightbox";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 // Sample gallery images
 const galleryImages = [
@@ -93,7 +94,6 @@ export default function Gallery() {
     window.scrollTo(0, 0);
   }, []);
 
-  // Filter gallery images by category
   const filterGallery = (category: string) => {
     setActiveFilter(category);
     if (category === "all") {
@@ -103,7 +103,6 @@ export default function Gallery() {
     }
   };
 
-  // Handle lightbox navigation
   const navigateGallery = (direction: "prev" | "next") => {
     if (selectedImage === null) return;
 
@@ -119,7 +118,6 @@ export default function Gallery() {
     setSelectedImage(filteredImages[newIndex].id);
   };
 
-  // Keyboard navigation for lightbox
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedImage === null) return;
@@ -157,7 +155,6 @@ export default function Gallery() {
             </div>
           </div>
 
-          {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
             <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-primary/50 blur-3xl" />
             <div className="absolute bottom-10 right-40 w-48 h-48 rounded-full bg-sea-light blur-3xl" />
@@ -174,7 +171,6 @@ export default function Gallery() {
               t={t}
             />
 
-            {/* Gallery Grid */}
             <GalleryGrid images={filteredImages} onImageClick={setSelectedImage} />
           </div>
         </section>
@@ -189,6 +185,20 @@ export default function Gallery() {
             onNext={() => navigateGallery("next")}
           />
         )}
+
+        {/* CTA Buttons at the bottom */}
+        <div className="container py-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Button asChild size="lg" className="btn-primary w-full sm:w-auto">
+            <Link to="/apartments">
+              {t.welcome.exploreRooms}
+            </Link>
+          </Button>
+          <Button asChild size="lg" className="btn-primary w-full sm:w-auto">
+            <Link to="/booking">
+              {t.home.cta.bookNow}
+            </Link>
+          </Button>
+        </div>
       </main>
 
       <Footer />
