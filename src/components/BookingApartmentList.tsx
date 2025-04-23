@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -54,7 +53,7 @@ export default function BookingApartmentList({
               </div>
               <div className="flex items-center justify-between mt-4">
                 <div>
-                  <span className="text-xl font-bold">${apartment.price}</span>
+                  <span className="text-xl font-bold">From ${apartment.price}</span>
                   <span className="text-muted-foreground text-sm"> / night</span>
                 </div>
                 <Button
