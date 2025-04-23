@@ -1,10 +1,11 @@
+
 import BookingDatesGuestsForm from "@/components/BookingDatesGuestsForm";
 import BookingApartmentList from "@/components/BookingApartmentList";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { ApartmentProps } from "@/components/ApartmentCard";
 import { getAllowedSuitesAndSelection } from "@/utils/calculateRoomSelection";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 interface BookingStepRoomProps {
   startDate?: Date;
@@ -24,14 +25,25 @@ interface BookingStepRoomProps {
 }
 
 const BookingStepRoom = ({
-  startDate, endDate, adults, children,
-  setStartDate, setEndDate, setAdults, setChildren,
-  apartments, selectedApartment, setSelectedApartment,
-  isLoading, error, onContinue
+  startDate,
+  endDate,
+  adults,
+  children,
+  setStartDate,
+  setEndDate,
+  setAdults,
+  setChildren,
+  apartments,
+  selectedApartment,
+  setSelectedApartment,
+  isLoading,
+  error,
+  onContinue,
 }: BookingStepRoomProps) => {
   const intAdults = parseInt(adults, 10) || 1;
   const { filtered, preselected } = getAllowedSuitesAndSelection(intAdults, apartments);
   const [hasAutoselected, setHasAutoselected] = useState(false);
+  const continueRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (filtered.length && preselected.length && !hasAutoselected) {
@@ -53,6 +65,16 @@ const BookingStepRoom = ({
       setSelectedApartment(null);
     }
   }, [selectedApartment, intAdults, setSelectedApartment]);
+
+  // Automatically scroll to Continue button when a suite is selected:
+  useEffect(() => {
+    if (selectedApartment && continueRef.current) {
+      // A slight delay ensures animation is smooth and refs are present
+      setTimeout(() => {
+        continueRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 150);
+    }
+  }, [selectedApartment]);
 
   return (
     <div className="animate-fade-in [animation-delay:300ms]">
@@ -83,7 +105,8 @@ const BookingStepRoom = ({
             setSelectedApartment={setSelectedApartment}
           />
         )}
-        <div className="flex justify-end mt-8">
+        {/* This ref is used as the scroll target after selecting a suite */}
+        <div className="flex justify-end mt-8" ref={continueRef}>
           <Button
             className="btn-primary"
             disabled={!selectedApartment}
