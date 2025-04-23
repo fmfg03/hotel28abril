@@ -1,4 +1,3 @@
-
 import {
   Select,
   SelectContent,
@@ -73,8 +72,8 @@ export default function ApartmentsFilters({
           {t.apartments.filters.priceRange}: ${priceRange[0]} - ${priceRange[1]}
         </label>
         <Slider
-          defaultValue={[100, 350]}
-          min={100}
+          defaultValue={[0, 350]}
+          min={0}
           max={350}
           step={10}
           value={priceRange}

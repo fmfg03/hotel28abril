@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,7 +13,7 @@ export default function Apartments() {
   const [filteredApartments, setFilteredApartments] = useState<ApartmentProps[]>([]);
   const [capacityFilter, setCapacityFilter] = useState<string>("all");
   const [locationFilter, setLocationFilter] = useState<string>("all");
-  const [priceRange, setPriceRange] = useState<number[]>([100, 350]);
+  const [priceRange, setPriceRange] = useState<number[]>([0, 350]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -57,7 +56,7 @@ export default function Apartments() {
   const resetFilters = () => {
     setCapacityFilter("all");
     setLocationFilter("all");
-    setPriceRange([100, 350]);
+    setPriceRange([0, 350]);
   };
 
   return (
