@@ -40,16 +40,16 @@ export default function HeroSection() {
       >
         <div className="max-w-4xl animate-fade-in flex flex-col items-center">
           <span className="inline-block text-white/90 text-sm uppercase tracking-widest mb-4 font-medium">
-            DOWNTOWN CANCÚN HOTEL
+            DOWNTOWN CANCUN HOTEL
           </span>
           <div className="w-32 h-0.5 bg-primary mb-6 mt-1"></div>
           
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6">
-            Experience Hotel 28<br />Cancún
+            Experience Hotel 28<br />Cancun
           </h1>
           
           <p className="text-lg text-white/90 mb-12 max-w-3xl mx-auto">
-            Discover our exclusive two-bedroom suites in downtown Cancún, offering unparalleled
+            Discover our exclusive two-bedroom suites in downtown Cancun, offering unparalleled
             comfort, exceptional cleanliness, and the perfect location for exploring the city.
           </p>
           
