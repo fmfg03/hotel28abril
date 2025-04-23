@@ -63,12 +63,10 @@ export default function BookingRoomSelector({
 
   // Max number of rooms user can select is limited by adults and suite capacities.
   const handleAdjust = (apt: ApartmentProps, delta: number) => {
-    setSelection(prev => {
-      const current = prev[apt.id] || 0;
-      let next = { ...prev };
-      next[apt.id] = Math.max(0, current + delta);
-      return next;
-    });
+    // Fix: Create a new object directly instead of using a function
+    const newSelection: RoomSelection = { ...selection };
+    newSelection[apt.id] = Math.max(0, (selection[apt.id] || 0) + delta);
+    setSelection(newSelection);
   };
 
   // Remaining adults after selected rooms
