@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
@@ -71,9 +70,9 @@ export default function HeroSection() {
       </div>
 
       {/*Bottom wave*/}
-      <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
+      <div className="absolute bottom-0 left-0 right-0 h-16 overflow-hidden">
         <svg 
-          className="absolute bottom-0 w-full h-24 fill-white dark:fill-background"
+          className="absolute bottom-0 w-full h-16 fill-white dark:fill-background"
           preserveAspectRatio="none"
           viewBox="0 0 1440 74"
           xmlns="http://www.w3.org/2000/svg"
