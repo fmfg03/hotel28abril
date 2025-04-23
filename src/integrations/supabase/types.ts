@@ -72,6 +72,41 @@ export type Database = {
         }
         Relationships: []
       }
+      apartment_images: {
+        Row: {
+          alt_text: string | null
+          apartment_id: string
+          created_at: string
+          id: string
+          image_url: string
+          order: number | null
+        }
+        Insert: {
+          alt_text?: string | null
+          apartment_id: string
+          created_at?: string
+          id?: string
+          image_url: string
+          order?: number | null
+        }
+        Update: {
+          alt_text?: string | null
+          apartment_id?: string
+          created_at?: string
+          id?: string
+          image_url?: string
+          order?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "apartment_images_apartment_id_fkey"
+            columns: ["apartment_id"]
+            isOneToOne: false
+            referencedRelation: "apartments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       apartments: {
         Row: {
           capacity: number

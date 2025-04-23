@@ -8,12 +8,22 @@ import { ApartmentProps } from "@/components/ApartmentCard";
 import { Bath, Coffee, Wifi, Bed, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ApartmentImageGallery from "@/components/ApartmentImageGallery";
+
+type ApartmentImage = {
+  id: string;
+  apartment_id: string;
+  image_url: string;
+  alt_text: string | null;
+  order: number | null;
+};
 
 export default function ApartmentDetail() {
   const { id } = useParams<{ id: string }>();
   const { t, language } = useLanguage();
   const [apartment, setApartment] = useState<ApartmentProps | null>(null);
   const [loading, setLoading] = useState(true);
+  const [images, setImages] = useState<ApartmentImage[]>([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,6 +48,22 @@ export default function ApartmentDetail() {
       setLoading(false);
     }
     if (id) fetchApartment();
+  }, [id]);
+
+  useEffect(() => {
+    // Fetch apartment (suite) images gallery
+    async function fetchImages() {
+      if (!id) return;
+      const { data, error } = await supabase
+        .from("apartment_images")
+        .select("*")
+        .eq("apartment_id", id)
+        .order("order", { ascending: true });
+      if (!error && data) {
+        setImages(data);
+      }
+    }
+    fetchImages();
   }, [id]);
 
   // Translation logic
@@ -88,11 +114,20 @@ export default function ApartmentDetail() {
           </Button>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <img
-                src={apartment.image}
-                alt={translatedName}
-                className="w-full rounded-lg shadow-lg object-cover max-h-[450px] mb-4"
-                style={{ background: "#e5e7eb" }}
+              <ApartmentImageGallery
+                images={images.length > 0 ? images : [
+                  {
+                    id: "main-img",
+                    apartment_id: apartment.id,
+                    image_url: apartment.image,
+                    alt_text: translatedName || "image",
+                    order: 0
+                  }
+                ]}
+                fallbackImage={{
+                  url: apartment.image,
+                  alt: translatedName || "image"
+                }}
               />
             </div>
             <div className="flex flex-col gap-6">
