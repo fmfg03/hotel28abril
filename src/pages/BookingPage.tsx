@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { format, addDays, differenceInDays } from "date-fns";
 import { Link } from "react-router-dom";
@@ -25,7 +24,6 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ApartmentProps } from "@/components/ApartmentCard";
 
-// Sample apartments data
 const apartmentsData: ApartmentProps[] = [
   {
     id: "1",
@@ -86,43 +84,32 @@ export default function BookingPage() {
     specialRequests: ""
   });
   const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
-  
+
   useEffect(() => {
-    // Scroll to top when component mounts
     window.scrollTo(0, 0);
   }, []);
-  
-  // Calculate nights and total price
+
   const nightsCount = startDate && endDate ? differenceInDays(endDate, startDate) : 0;
   const totalPrice = selectedApartment ? selectedApartment.price * nightsCount : 0;
-  
-  // Handle form input changes
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
-  // Handle select changes
+
   const handleSelectChange = (name: string, value: string) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
-  // Submit booking
+
   const handleSubmitBooking = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // In a real app, this would send the booking data to a server
     console.log("Booking submitted:", {
       apartment: selectedApartment,
       dates: { startDate, endDate },
       guests: { adults, children },
       customerInfo: formData
     });
-    
-    // Show confirmation
     setIsBookingConfirmed(true);
-    
-    // Reset form after booking is confirmed
     setTimeout(() => {
       setCurrentStep(1);
       setSelectedApartment(null);
@@ -149,13 +136,33 @@ export default function BookingPage() {
       setIsBookingConfirmed(false);
     }, 5000);
   };
-  
+
+  const buildCloudbedsUrl = () => {
+    const propertyCode = "Od3X7u";
+    const baseUrl = `https://hotels.cloudbeds.com/reservation/${propertyCode}`;
+    const params = new URLSearchParams();
+
+    if (startDate) params.append("start_date", format(startDate, "yyyy-MM-dd"));
+    if (endDate) params.append("end_date", format(endDate, "yyyy-MM-dd"));
+    if (selectedApartment) params.append("room_id", selectedApartment.id);
+    if (adults) params.append("adults", adults);
+    if (children) params.append("children", children);
+
+    params.append("lang", "en");
+
+    return `${baseUrl}?${params.toString()}`;
+  };
+
+  const handleBookNow = () => {
+    const url = buildCloudbedsUrl();
+    window.open(url, "_blank", "noopener");
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="flex-1 pt-20">
-        {/* Header Section */}
         <section className="relative py-16 bg-gradient-to-r from-sea-light to-white dark:from-sea-dark dark:to-background overflow-hidden">
           <div className="container relative z-10">
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
@@ -168,14 +175,12 @@ export default function BookingPage() {
             </div>
           </div>
           
-          {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
             <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-primary/50 blur-3xl" />
             <div className="absolute bottom-10 right-40 w-48 h-48 rounded-full bg-sea-light blur-3xl" />
           </div>
         </section>
         
-        {/* Booking Steps */}
         <section className="container py-8">
           <div className="relative animate-fade-in [animation-delay:200ms]">
             <div className="flex justify-between items-center mb-8">
@@ -209,7 +214,6 @@ export default function BookingPage() {
               ))}
             </div>
             
-            {/* Progress line */}
             <div className="absolute top-5 left-0 right-0 h-0.5 bg-muted z-0">
               <div
                 className="h-full bg-primary transition-all duration-300"
@@ -218,15 +222,12 @@ export default function BookingPage() {
             </div>
           </div>
           
-          {/* Step 1: Choose Room */}
           {currentStep === 1 && (
             <div className="animate-fade-in [animation-delay:300ms]">
               <div className="max-w-4xl mx-auto">
-                {/* Date and Guests Selection */}
                 <div className="glass-card p-6 mb-8">
                   <h2 className="text-xl font-semibold mb-4">Select Dates and Guests</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {/* Check-in Date */}
                     <div className="space-y-2">
                       <label htmlFor="check-in" className="block text-sm font-medium">
                         Check-in Date
@@ -258,7 +259,6 @@ export default function BookingPage() {
                       </Popover>
                     </div>
                     
-                    {/* Check-out Date */}
                     <div className="space-y-2">
                       <label htmlFor="check-out" className="block text-sm font-medium">
                         Check-out Date
@@ -290,7 +290,6 @@ export default function BookingPage() {
                       </Popover>
                     </div>
                     
-                    {/* Adults */}
                     <div className="space-y-2">
                       <label htmlFor="adults" className="block text-sm font-medium">
                         Adults
@@ -309,7 +308,6 @@ export default function BookingPage() {
                       </Select>
                     </div>
                     
-                    {/* Children */}
                     <div className="space-y-2">
                       <label htmlFor="children" className="block text-sm font-medium">
                         Children
@@ -330,7 +328,6 @@ export default function BookingPage() {
                   </div>
                 </div>
                 
-                {/* Apartments Selection */}
                 <h2 className="text-xl font-semibold mb-4">Select Your Accommodation</h2>
                 <div className="space-y-6">
                   {apartmentsData.map((apartment) => (
@@ -404,12 +401,10 @@ export default function BookingPage() {
             </div>
           )}
           
-          {/* Step 2: Guest Details */}
           {currentStep === 2 && (
             <div className="animate-fade-in [animation-delay:300ms]">
               <div className="max-w-4xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {/* Guest Information Form */}
                   <div className="md:col-span-2">
                     <h2 className="text-xl font-semibold mb-4">Guest Information</h2>
                     <form className="space-y-6">
@@ -579,7 +574,6 @@ export default function BookingPage() {
                     </form>
                   </div>
                   
-                  {/* Booking Summary */}
                   <div className="md:col-span-1">
                     <h2 className="text-xl font-semibold mb-4">Booking Summary</h2>
                     <div className="glass-card p-6 sticky top-24">
@@ -659,7 +653,6 @@ export default function BookingPage() {
             </div>
           )}
           
-          {/* Step 3: Confirmation */}
           {currentStep === 3 && (
             <div className="animate-fade-in [animation-delay:300ms]">
               <div className="max-w-4xl mx-auto">
@@ -669,7 +662,6 @@ export default function BookingPage() {
                     
                     <div className="glass-card p-6 mb-8">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {/* Apartment Details */}
                         <div>
                           <h3 className="text-lg font-medium mb-4">Accommodation Details</h3>
                           {selectedApartment && (
@@ -710,7 +702,6 @@ export default function BookingPage() {
                           )}
                         </div>
                         
-                        {/* Guest Details */}
                         <div>
                           <h3 className="text-lg font-medium mb-4">Guest Details</h3>
                           <div className="space-y-4">
@@ -766,7 +757,6 @@ export default function BookingPage() {
                       </div>
                     </div>
                     
-                    {/* Price Summary */}
                     <div className="glass-card p-6 mb-8">
                       <h3 className="text-lg font-medium mb-4">Price Summary</h3>
                       <div className="space-y-2">
@@ -795,7 +785,6 @@ export default function BookingPage() {
                       </div>
                     </div>
                     
-                    {/* Terms and Conditions */}
                     <div className="mb-8">
                       <div className="flex items-start">
                         <input
@@ -816,12 +805,14 @@ export default function BookingPage() {
                       >
                         Back
                       </Button>
-                      <Button 
-                        className="btn-primary"
-                        onClick={handleSubmitBooking}
+                      <button
+                        className="btn-primary px-6 py-3 rounded-lg text-white font-bold bg-primary hover:bg-primary/90 transition-colors"
+                        onClick={handleBookNow}
+                        disabled={!selectedApartment || !startDate || !endDate}
+                        type="button"
                       >
-                        Confirm Booking <Check className="ml-2 h-4 w-4" />
-                      </Button>
+                        Book Now on Cloudbeds
+                      </button>
                     </div>
                   </>
                 ) : (
