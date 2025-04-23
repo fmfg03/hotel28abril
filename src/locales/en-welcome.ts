@@ -1,9 +1,9 @@
 
 const en_welcome = {
-  subtitle: "Welcome to Mare Sereno",
-  title: "Experience Coastal Luxury",
-  description1: "Nestled on the beautiful Italian coastline, Mare Sereno offers a perfect blend of luxury, comfort, and authenticity for your Mediterranean getaway.",
-  description2: "Our exclusive beachfront apartments provide stunning sea views, modern amenities, and personalized service to make your stay truly unforgettable.",
+  subtitle: "Welcome to Hotel 28",
+  title: "Experience Downtown Cancun Luxury",
+  description1: "Nestled in the heart of downtown Cancun, Hotel 28 offers a perfect blend of comfort, modern design, and authentic local hospitality for your ultimate urban getaway.",
+  description2: "Our exclusive two-bedroom suites provide stunning city views, premium amenities, and personalized service to make your stay truly unforgettable.",
   learnMore: "Learn More About Us"
 };
 export default en_welcome;
