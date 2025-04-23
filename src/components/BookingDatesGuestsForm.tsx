@@ -1,4 +1,3 @@
-
 import { CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -26,6 +25,7 @@ interface BookingDatesGuestsFormProps {
   setEndDate: (d: Date | undefined) => void;
   setAdults: (a: string) => void;
   setChildren: (c: string) => void;
+  maxAdults?: number;
 }
 
 export default function BookingDatesGuestsForm({
@@ -36,7 +36,8 @@ export default function BookingDatesGuestsForm({
   setStartDate,
   setEndDate,
   setAdults,
-  setChildren
+  setChildren,
+  maxAdults = 6
 }: BookingDatesGuestsFormProps) {
   return (
     <div className="glass-card p-6 mb-8">
@@ -114,7 +115,7 @@ export default function BookingDatesGuestsForm({
               <SelectValue placeholder="Select" />
             </SelectTrigger>
             <SelectContent>
-              {[1, 2, 3, 4, 5, 6].map((num) => (
+              {Array.from({ length: maxAdults }, (_, i) => i + 1).map((num) => (
                 <SelectItem key={num} value={num.toString()}>
                   {num} {num === 1 ? "Adult" : "Adults"}
                 </SelectItem>

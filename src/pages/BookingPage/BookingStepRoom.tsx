@@ -1,9 +1,10 @@
-
 import BookingDatesGuestsForm from "@/components/BookingDatesGuestsForm";
 import BookingApartmentList from "@/components/BookingApartmentList";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { ApartmentProps } from "@/components/ApartmentCard";
+import { getAllowedSuitesAndSelection } from "@/utils/calculateRoomSelection";
+import React, { useEffect, useState } from "react";
 
 interface BookingStepRoomProps {
   startDate?: Date;
@@ -27,45 +28,73 @@ const BookingStepRoom = ({
   setStartDate, setEndDate, setAdults, setChildren,
   apartments, selectedApartment, setSelectedApartment,
   isLoading, error, onContinue
-}: BookingStepRoomProps) => (
-  <div className="animate-fade-in [animation-delay:300ms]">
-    <div className="max-w-4xl mx-auto">
-      <BookingDatesGuestsForm
-        startDate={startDate}
-        endDate={endDate}
-        adults={adults}
-        children={children}
-        setStartDate={setStartDate}
-        setEndDate={setEndDate}
-        setAdults={setAdults}
-        setChildren={setChildren}
-      />
-      {isLoading ? (
-        <div className="text-center py-12">
-          <p className="text-muted-foreground">Loading apartments...</p>
-        </div>
-      ) : error ? (
-        <div className="text-center py-12">
-          <p className="text-red-500">Error loading apartments. Please try again later.</p>
-        </div>
-      ) : (
-        <BookingApartmentList
-          apartments={apartments}
-          selectedApartment={selectedApartment}
-          setSelectedApartment={setSelectedApartment}
+}: BookingStepRoomProps) => {
+  const intAdults = parseInt(adults, 10) || 1;
+  const { filtered, preselected } = getAllowedSuitesAndSelection(intAdults, apartments);
+  const [hasAutoselected, setHasAutoselected] = useState(false);
+
+  useEffect(() => {
+    if (filtered.length && preselected.length && !hasAutoselected) {
+      setSelectedApartment(preselected[0]);
+      setHasAutoselected(true);
+    }
+    if (!filtered.length && selectedApartment) {
+      setSelectedApartment(null);
+      setHasAutoselected(false);
+    }
+  }, [adults, apartments, filtered, preselected, setSelectedApartment, selectedApartment, hasAutoselected]);
+
+  useEffect(() => {
+    if (
+      selectedApartment &&
+      selectedApartment.name.toLowerCase().includes("smart") &&
+      intAdults > 2
+    ) {
+      setSelectedApartment(null);
+    }
+  }, [selectedApartment, intAdults, setSelectedApartment]);
+
+  return (
+    <div className="animate-fade-in [animation-delay:300ms]">
+      <div className="max-w-4xl mx-auto">
+        <BookingDatesGuestsForm
+          startDate={startDate}
+          endDate={endDate}
+          adults={adults}
+          children={children}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+          setAdults={setAdults}
+          setChildren={setChildren}
+          maxAdults={12}
         />
-      )}
-      <div className="flex justify-end mt-8">
-        <Button
-          className="btn-primary"
-          disabled={!selectedApartment}
-          onClick={onContinue}
-        >
-          Continue <ChevronRight className="ml-2 h-4 w-4" />
-        </Button>
+        {isLoading ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Loading apartments...</p>
+          </div>
+        ) : error ? (
+          <div className="text-center py-12">
+            <p className="text-red-500">Error loading apartments. Please try again later.</p>
+          </div>
+        ) : (
+          <BookingApartmentList
+            apartments={filtered}
+            selectedApartment={selectedApartment}
+            setSelectedApartment={setSelectedApartment}
+          />
+        )}
+        <div className="flex justify-end mt-8">
+          <Button
+            className="btn-primary"
+            disabled={!selectedApartment}
+            onClick={onContinue}
+          >
+            Continue <ChevronRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default BookingStepRoom;
