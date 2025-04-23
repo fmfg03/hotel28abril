@@ -1,4 +1,3 @@
-
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -15,9 +14,9 @@ export default function ContactInfo() {
           <div>
             <h3 className="font-semibold mb-1">{t.contact.address}</h3>
             <p className="text-muted-foreground">
-              123 Seaside Boulevard<br />
-              Costa Bella, 12345<br />
-              Italy
+              SM 27 Mza. 14 L 13,14 AV. XEL HA<br />
+              CP 77509 Cancun<br />
+              Quintana Roo, Mexico
             </p>
           </div>
         </div>
@@ -27,8 +26,7 @@ export default function ContactInfo() {
           </div>
           <div>
             <h3 className="font-semibold mb-1">{t.contact.phone}</h3>
-            <p className="text-muted-foreground">+39 123 4567 890</p>
-            <p className="text-muted-foreground">+39 098 7654 321 (Reservations)</p>
+            <p className="text-muted-foreground">+52 (998) 677 4855</p>
           </div>
         </div>
         <div className="flex items-start">
@@ -37,8 +35,8 @@ export default function ContactInfo() {
           </div>
           <div>
             <h3 className="font-semibold mb-1">{t.contact.email}</h3>
-            <p className="text-muted-foreground">info@maresereno.com</p>
-            <p className="text-muted-foreground">reservations@maresereno.com</p>
+            <p className="text-muted-foreground">hello@hotel28cancun.com</p>
+            <p className="text-muted-foreground">reservations@hotel28cancun.com</p>
           </div>
         </div>
         <div className="flex items-start">

@@ -66,18 +66,22 @@ export default function Footer() {
               <li className="flex items-start">
                 <MapPin className="w-5 h-5 mr-2 mt-0.5 text-primary" />
                 <span className="text-muted-foreground">
-                  123 Seaside Boulevard<br />
-                  Costa Bella, 12345<br />
-                  Italy
+                  SM 27 Mza. 14 L 13,14 AV. XEL HA<br />
+                  CP 77509 Cancun<br />
+                  Quintana Roo, Mexico
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone className="w-5 h-5 mr-2 text-primary" />
-                <span className="text-muted-foreground">+39 123 4567 890</span>
+                <span className="text-muted-foreground">+52 (998) 677 4855</span>
               </li>
               <li className="flex items-center">
                 <Mail className="w-5 h-5 mr-2 text-primary" />
-                <span className="text-muted-foreground">info@maresereno.com</span>
+                <span className="text-muted-foreground">hello@hotel28cancun.com</span>
+              </li>
+              <li className="flex items-center">
+                <Mail className="w-5 h-5 mr-2 text-primary" />
+                <span className="text-muted-foreground">reservations@hotel28cancun.com</span>
               </li>
             </ul>
           </div>
