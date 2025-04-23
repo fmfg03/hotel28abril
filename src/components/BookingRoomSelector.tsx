@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ApartmentProps } from "@/components/ApartmentCard";
@@ -43,6 +44,15 @@ export default function BookingRoomSelector({
     return priorityA !== priorityB 
       ? priorityA - priorityB 
       : a.price - b.price;
+  });
+
+  // Update apartments with new prices
+  const updatedApartments = sorted.map(apt => {
+    const name = apt.name.toLowerCase();
+    if (name.includes("smart")) return { ...apt, price: 80 };
+    if (name.includes("flex")) return { ...apt, price: 90 };
+    if (name.includes("signature") || name.includes("sigantura")) return { ...apt, price: 100 };
+    return apt;
   });
 
   // Helper: suite type
@@ -92,7 +102,7 @@ export default function BookingRoomSelector({
     <div>
       <h2 className="text-xl font-semibold mb-4">Select Suite Types & Quantities</h2>
       <div className="space-y-6">
-        {sorted.map((apartment) => {
+        {updatedApartments.map((apartment) => {
           const suiteType = getSuiteType(apartment);
           const qty = selection[apartment.id] || 0;
           const isSmart = suiteType === "Smart Suite";
@@ -127,7 +137,7 @@ export default function BookingRoomSelector({
                     {apartment.location}
                   </span>
                   <span className="bg-muted px-3 py-1 rounded-full">
-                    ${apartment.price} / night
+                    From ${apartment.price} / night
                   </span>
                 </div>
                 <div className="text-xs text-muted-foreground mt-1">
