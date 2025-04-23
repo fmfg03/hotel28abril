@@ -1,4 +1,3 @@
-
 import BookingDatesGuestsForm from "@/components/BookingDatesGuestsForm";
 import BookingApartmentList from "@/components/BookingApartmentList";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import { ChevronRight } from "lucide-react";
 import { ApartmentProps } from "@/components/ApartmentCard";
 import { getAllowedSuitesAndSelection } from "@/utils/calculateRoomSelection";
 import React, { useEffect, useState, useRef } from "react";
+import BookingRoomSelector, { RoomSelection } from "@/components/BookingRoomSelector";
 
 interface BookingStepRoomProps {
   startDate?: Date;
@@ -41,40 +41,44 @@ const BookingStepRoom = ({
   onContinue,
 }: BookingStepRoomProps) => {
   const intAdults = parseInt(adults, 10) || 1;
-  const { filtered, preselected } = getAllowedSuitesAndSelection(intAdults, apartments);
-  const [hasAutoselected, setHasAutoselected] = useState(false);
+
+  // Enable up to 12 adults
+  const maxAdults = 12;
+
+  // Use state for multi-room selection
+  const [selection, setSelection] = useState<RoomSelection>({});
+  const [valid, setValid] = useState(false);
   const continueRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (filtered.length && preselected.length && !hasAutoselected) {
-      setSelectedApartment(preselected[0]);
-      setHasAutoselected(true);
-    }
-    if (!filtered.length && selectedApartment) {
-      setSelectedApartment(null);
-      setHasAutoselected(false);
-    }
-  }, [adults, apartments, filtered, preselected, setSelectedApartment, selectedApartment, hasAutoselected]);
+    // Reset selection if adults count changes
+    setSelection({});
+  }, [adults, apartments]);
 
-  useEffect(() => {
-    if (
-      selectedApartment &&
-      selectedApartment.name.toLowerCase().includes("smart") &&
-      intAdults > 2
-    ) {
-      setSelectedApartment(null);
-    }
-  }, [selectedApartment, intAdults, setSelectedApartment]);
+  // Filter apartments based on adults (apply Smart/Flex/Signature logic)
+  const { filtered } = getAllowedSuitesAndSelection(intAdults, apartments);
 
-  // Automatically scroll to Continue button when a suite is selected:
+  // Sync old single selectedApartment API for parent, needed for now:
   useEffect(() => {
-    if (selectedApartment && continueRef.current) {
-      // A slight delay ensures animation is smooth and refs are present
+    // Pick the first selected room as "selectedApartment" for compatibility if needed
+    if (Object.keys(selection).length && filtered.length) {
+      const firstId = Object.keys(selection).find(
+        (id) => selection[id] > 0 && filtered.some(a => a.id === id)
+      );
+      if (firstId) {
+        setSelectedApartment(filtered.find(a => a.id === firstId)!);
+      }
+    }
+  }, [selection, filtered, setSelectedApartment]);
+
+  // Scroll to continue button when valid selection made
+  useEffect(() => {
+    if (valid && continueRef.current) {
       setTimeout(() => {
         continueRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
       }, 150);
     }
-  }, [selectedApartment]);
+  }, [valid]);
 
   return (
     <div className="animate-fade-in [animation-delay:300ms]">
@@ -88,7 +92,7 @@ const BookingStepRoom = ({
           setEndDate={setEndDate}
           setAdults={setAdults}
           setChildren={setChildren}
-          maxAdults={12}
+          maxAdults={maxAdults}
         />
         {isLoading ? (
           <div className="text-center py-12">
@@ -99,17 +103,20 @@ const BookingStepRoom = ({
             <p className="text-red-500">Error loading apartments. Please try again later.</p>
           </div>
         ) : (
-          <BookingApartmentList
+          <BookingRoomSelector
             apartments={filtered}
-            selectedApartment={selectedApartment}
-            setSelectedApartment={setSelectedApartment}
+            selection={selection}
+            setSelection={setSelection}
+            totalAdults={intAdults}
+            maxAdults={maxAdults}
+            onChangeValid={setValid}
+            childrenCount={parseInt(children, 10) || 0}
           />
         )}
-        {/* This ref is used as the scroll target after selecting a suite */}
         <div className="flex justify-end mt-8" ref={continueRef}>
           <Button
             className="btn-primary"
-            disabled={!selectedApartment}
+            disabled={!valid}
             onClick={onContinue}
           >
             Continue <ChevronRight className="ml-2 h-4 w-4" />
