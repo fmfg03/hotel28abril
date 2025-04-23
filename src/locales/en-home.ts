@@ -1,4 +1,3 @@
-
 const en_home = {
   amenities: {
     subtitle: "PREMIER AMENITIES",
@@ -34,7 +33,7 @@ const en_home = {
   booking: {
     subtitle: "RESERVATION",
     title: "Book Your Stay",
-    description: "Reserve your perfect getaway at Hotel 28 Cancún. Enjoy exclusive benefits when booking directly with us.",
+    description: "Reserve your perfect getaway at Hotel 28 Cancun. Enjoy exclusive benefits when booking directly with us.",
     benefits: [
       "Best rate guarantee",
       "Free cancellation up to 24 hours before arrival",
@@ -44,7 +43,7 @@ const en_home = {
   },
   cta: {
     title: "Ready for an Unforgettable Stay?",
-    description: "Book your suite now and start planning your perfect getaway in Cancún.",
+    description: "Book your suite now and start planning your perfect getaway in Cancun.",
     bookNow: "Book Your Stay Now"
   }
 };

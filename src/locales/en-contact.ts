@@ -1,4 +1,3 @@
-
 const en_contact = {
   title: "Contact Us",
   subtitle: "Get in touch with our team for any inquiries or assistance",
