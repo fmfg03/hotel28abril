@@ -1,5 +1,5 @@
 
-const it_booking = {
+const es_booking = {
   title: "Prenota il tuo Soggiorno",
   subtitle: "Completa la tua prenotazione in pochi semplici passi.",
   steps: {
@@ -87,4 +87,4 @@ const it_booking = {
     returnToHome: "Torna alla Homepage"
   }
 };
-export default it_booking;
+export default es_booking;

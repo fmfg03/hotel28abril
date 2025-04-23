@@ -1,5 +1,5 @@
 
-const it_apartmentDescriptions = {
+const es_apartmentDescriptions = {
   "1": {
     name: "Suite Deluxe con Vista al Mar",
     description: "Suite lujosa con vistas panorámicas al mar, comodidades modernas y un balcón privado."
@@ -13,4 +13,4 @@ const it_apartmentDescriptions = {
     description: "Elegante estudio con acceso directo a la playa, diseño moderno y acabados premium."
   }
 };
-export default it_apartmentDescriptions;
+export default es_apartmentDescriptions;

@@ -1,5 +1,5 @@
 
-const it_amenitiesPage = {
+const es_amenitiesPage = {
   title: "Nuestras Comodidades",
   subtitle: "Descubre las características y servicios excepcionales que hacen tu estancia inolvidable",
   description: "En Hotel 28 Cancún, nos enorgullecemos de ofrecer una gama excepcional de comodidades diseñadas para elevar tu estancia. Desde instalaciones de bienestar hasta opciones gastronómicas premium, nos aseguramos de que cada aspecto de tu experiencia supere las expectativas.",
@@ -94,4 +94,4 @@ const it_amenitiesPage = {
     }
   }
 };
-export default it_amenitiesPage;
+export default es_amenitiesPage;

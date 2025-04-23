@@ -1,5 +1,5 @@
 
-const it_home = {
+const es_home = {
   amenities: {
     subtitle: "SERVICIOS PREMIUM",
     title: "Experimenta Nuestros Servicios",
@@ -48,4 +48,4 @@ const it_home = {
     bookNow: "Reserva tu Estancia Ahora"
   }
 };
-export default it_home;
+export default es_home;

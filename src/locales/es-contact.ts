@@ -1,5 +1,5 @@
 
-const it_contact = {
+const es_contact = {
   title: "Contáctanos",
   subtitle: "Comunícate con nuestro equipo para cualquier consulta o asistencia",
   getInTouch: "Ponte en Contacto",
@@ -47,4 +47,4 @@ const it_contact = {
     }
   }
 };
-export default it_contact;
+export default es_contact;

@@ -1,5 +1,5 @@
 
-const it_apartments = {
+const es_apartments = {
   title: "Nuestras Suites",
   subtitle: "Descubre nuestra selección de suites premium de dos habitaciones, perfectas para familias, viajeros de negocios y estancias prolongadas.",
   filters: {
@@ -28,4 +28,4 @@ const it_apartments = {
   bathroom: "Baño",
   bookNow: "Reservar Ahora"
 };
-export default it_apartments;
+export default es_apartments;

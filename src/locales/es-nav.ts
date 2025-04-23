@@ -1,5 +1,5 @@
 
-const it_nav = {
+const es_nav = {
   home: "Inicio",
   apartments: "Suites",
   amenities: "Servicios",
@@ -7,4 +7,4 @@ const it_nav = {
   contact: "Contacto",
   bookNow: "Reservar Ahora"
 };
-export default it_nav;
+export default es_nav;

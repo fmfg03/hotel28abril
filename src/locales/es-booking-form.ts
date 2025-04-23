@@ -1,5 +1,5 @@
 
-const it_bookingForm = {
+const es_bookingForm = {
   title: "Reserva tu Estancia",
   checkIn: "Fecha de Entrada",
   checkOut: "Fecha de Salida",
@@ -11,4 +11,4 @@ const it_bookingForm = {
   checkAvailability: "Verificar Disponibilidad",
   bookingConfirmed: "¡Reserva Confirmada!"
 };
-export default it_bookingForm;
+export default es_bookingForm;

@@ -1,7 +1,6 @@
-
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
 import { en } from '../locales/en-index';
-import { it } from '../locales/it-index';
+import { es } from '../locales/es-index';
 
 type Translations = typeof en;
 
@@ -13,7 +12,7 @@ interface LanguageContextType {
 
 const translations: Record<string, Translations> = {
   en,
-  it
+  es
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);

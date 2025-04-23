@@ -1,5 +1,5 @@
 
-const it_gallery = {
+const es_gallery = {
   title: "Galería de Fotos",
   subtitle: "Explora nuestros espacios a través de hermosas imágenes",
   filters: {
@@ -9,4 +9,4 @@ const it_gallery = {
     amenities: "Comodidades"
   }
 };
-export default it_gallery;
+export default es_gallery;

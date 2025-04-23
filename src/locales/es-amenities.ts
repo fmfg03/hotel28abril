@@ -1,5 +1,5 @@
 
-const it_amenities = {
+const es_amenities = {
   subtitle: "SERVICIOS PREMIUM",
   title: "Experimenta Nuestros Servicios",
   description: "Nuestro hotel ofrece una gama de servicios y comodidades premium diseñados para mejorar tu estancia y proporcionar el máximo confort.",
@@ -30,4 +30,4 @@ const it_amenities = {
     }
   }
 };
-export default it_amenities;
+export default es_amenities;
