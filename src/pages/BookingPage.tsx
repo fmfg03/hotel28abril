@@ -3,25 +3,8 @@ import { format, addDays, differenceInDays } from "date-fns";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { CalendarIcon, Users, CreditCard, Check, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ApartmentProps } from "@/components/ApartmentCard";
 import BookingStepper from "@/components/BookingStepper";
 import BookingDatesGuestsForm from "@/components/BookingDatesGuestsForm";
@@ -29,42 +12,8 @@ import BookingApartmentList from "@/components/BookingApartmentList";
 import BookingGuestForm from "@/components/BookingGuestForm";
 import BookingSummarySidebar from "@/components/BookingSummarySidebar";
 import BookingReview from "@/components/BookingReview";
-
-const apartmentsData: ApartmentProps[] = [
-  {
-    id: "1",
-    name: "Deluxe Sea View Suite",
-    description: "Luxurious suite with panoramic sea views, modern amenities, and a private balcony.",
-    price: 180,
-    capacity: 2,
-    size: 45,
-    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
-    location: "Beachfront",
-    features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Balcony"]
-  },
-  {
-    id: "2",
-    name: "Premium Family Apartment",
-    description: "Spacious apartment ideal for families, with full kitchen and stunning coastal views.",
-    price: 250,
-    capacity: 4,
-    size: 75,
-    image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
-    location: "Second row",
-    features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Washing Machine"]
-  },
-  {
-    id: "3",
-    name: "Executive Beach Studio",
-    description: "Elegant studio with direct beach access, modern design, and premium finishes.",
-    price: 150,
-    capacity: 2,
-    size: 35,
-    image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=800&h=600&fit=crop",
-    location: "Beachfront",
-    features: ["Wi-Fi", "Kitchenette", "Bathroom", "Air Conditioning", "TV"]
-  },
-];
+import { supabase } from "@/integrations/supabase/client";
+import { useQuery } from "@tanstack/react-query";
 
 export default function BookingPage() {
   const [startDate, setStartDate] = useState<Date | undefined>(new Date());
@@ -90,6 +39,25 @@ export default function BookingPage() {
     specialRequests: ""
   });
   const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
+
+  const fetchApartments = async () => {
+    const { data, error } = await supabase
+      .from('apartments')
+      .select('*')
+      .order('price', { ascending: true });
+    
+    if (error) {
+      console.error('Error fetching apartments:', error);
+      throw new Error(error.message);
+    }
+    
+    return data as ApartmentProps[];
+  };
+
+  const { data: apartments, isLoading, error } = useQuery({
+    queryKey: ['apartments'],
+    queryFn: fetchApartments,
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -205,11 +173,21 @@ export default function BookingPage() {
                   setAdults={setAdults}
                   setChildren={setChildren}
                 />
-                <BookingApartmentList
-                  apartments={apartmentsData}
-                  selectedApartment={selectedApartment}
-                  setSelectedApartment={setSelectedApartment}
-                />
+                {isLoading ? (
+                  <div className="text-center py-12">
+                    <p className="text-muted-foreground">Loading apartments...</p>
+                  </div>
+                ) : error ? (
+                  <div className="text-center py-12">
+                    <p className="text-red-500">Error loading apartments. Please try again later.</p>
+                  </div>
+                ) : (
+                  <BookingApartmentList
+                    apartments={apartments || []}
+                    selectedApartment={selectedApartment}
+                    setSelectedApartment={setSelectedApartment}
+                  />
+                )}
                 <div className="flex justify-end mt-8">
                   <Button
                     className="btn-primary"
