@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ApartmentProps } from "@/components/ApartmentCard";
@@ -63,7 +64,7 @@ export default function BookingRoomSelector({
 
   // Max number of rooms user can select is limited by adults and suite capacities.
   const handleAdjust = (apt: ApartmentProps, delta: number) => {
-    // Fix: Create a new object directly instead of using a function
+    // Create a new object directly instead of using a function
     const newSelection: RoomSelection = { ...selection };
     newSelection[apt.id] = Math.max(0, (selection[apt.id] || 0) + delta);
     setSelection(newSelection);
@@ -143,19 +144,33 @@ export default function BookingRoomSelector({
           );
         })}
       </div>
-      <div className="mt-4">
-        <div>
-          Adults to accommodate: <b>{totalAdults}</b>
-        </div>
-        <div>
-          Currently accommodated:{" "}
-          <b>
-            {totalCapacity}{" "}
-            {totalCapacity < totalAdults ? "(Add more rooms)" : ""}
-          </b>
-        </div>
-        <div>
-          Children: <b>{childrenCount}</b>
+      <div className="mt-4 p-4 border rounded-lg bg-muted/50">
+        <div className="flex flex-col gap-2">
+          <div className={`flex justify-between ${totalAdults > totalCapacity ? "text-red-500 font-semibold" : ""}`}>
+            <span>Adults to accommodate:</span>
+            <span>{totalAdults}</span>
+          </div>
+          <div className={`flex justify-between ${totalAdults > totalCapacity ? "text-red-500 font-semibold" : "text-green-600"}`}>
+            <span>Currently accommodated:</span>
+            <span>
+              {totalCapacity}{" "}
+              {totalCapacity < totalAdults ? "(Need more rooms)" : "✓"}
+            </span>
+          </div>
+          <div className="flex justify-between">
+            <span>Children:</span>
+            <span>{childrenCount}</span>
+          </div>
+          {adultsRemaining > 0 && (
+            <div className="mt-2 text-sm text-red-500">
+              Please select more suites to accommodate all guests.
+            </div>
+          )}
+          {totalCapacity >= totalAdults && (
+            <div className="mt-2 text-sm text-green-600">
+              All guests are accommodated. You can proceed.
+            </div>
+          )}
         </div>
       </div>
     </div>
