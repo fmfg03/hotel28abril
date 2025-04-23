@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HeroSection() {
@@ -40,25 +39,24 @@ export default function HeroSection() {
       >
         <div className="max-w-4xl animate-fade-in flex flex-col items-center">
           <span className="inline-block text-white/90 text-sm uppercase tracking-widest mb-4 font-medium">
-            DOWNTOWN CANCUN HOTEL
+            {t.hero.subtitle}
           </span>
           <div className="w-32 h-0.5 bg-primary mb-6 mt-1"></div>
           
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6">
-            Experience Hotel 28<br />Cancun
+            {t.hero.title}
           </h1>
           
           <p className="text-lg text-white/90 mb-12 max-w-3xl mx-auto">
-            Discover our exclusive two-bedroom suites in downtown Cancun, offering unparalleled
-            comfort, exceptional cleanliness, and the perfect location for exploring the city.
+            {t.hero.description}
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button asChild size="lg" variant="heroSolid" className="min-w-[200px] rounded-md bg-[#0d78f1] hover:bg-[#0d6de0]">
-              <Link to="/booking">Book Your Stay</Link>
+              <Link to="/booking">{t.hero.bookStay}</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="min-w-[200px] rounded-md border-white/20 bg-transparent text-white hover:bg-white/10">
-              <Link to="/apartments">Explore Our Suites</Link>
+              <Link to="/apartments">{t.hero.exploreApartments}</Link>
             </Button>
           </div>
         </div>
@@ -67,7 +65,7 @@ export default function HeroSection() {
       {/* Scroll down indicator */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
         <div className="flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity">
-          <span className="text-sm mb-2">Scroll Down</span>
+          <span className="text-sm mb-2">{t.hero.scrollDown}</span>
           <ChevronDown className="h-6 w-6" />
         </div>
       </div>
@@ -87,8 +85,6 @@ export default function HeroSection() {
           <path 
             d="M0,37.1L40,34.5C80,32,160,27,240,29.6C320,32,400,42,480,42.9C560,44,640,35,720,32.1C800,30,880,34,960,40.8C1040,47,1120,56,1200,56.6C1280,57,1360,48,1400,43.3L1440,39.1L1440,74L1400,74C1360,74,1280,74,1200,74C1120,74,1040,74,960,74C880,74,800,74,720,74C640,74,560,74,480,74C400,74,320,74,240,74C160,74,80,74,40,74L0,74Z"
             className="animate-wave opacity-100 [animation-delay:-4s]"
-      
-     
           />
         </svg>
       </div>
