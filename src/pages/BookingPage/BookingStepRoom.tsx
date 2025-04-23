@@ -1,5 +1,5 @@
+
 import BookingDatesGuestsForm from "@/components/BookingDatesGuestsForm";
-import BookingApartmentList from "@/components/BookingApartmentList";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { ApartmentProps } from "@/components/ApartmentCard";
