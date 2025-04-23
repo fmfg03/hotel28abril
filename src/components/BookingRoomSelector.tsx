@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ApartmentProps } from "@/components/ApartmentCard";
@@ -27,8 +26,24 @@ export default function BookingRoomSelector({
   onChangeValid,
   childrenCount,
 }: BookingRoomSelectorProps) {
-  // Apartments sorted: Smart, Signature, Flex
-  const sorted = apartments.slice().sort((a, b) => a.price - b.price);
+  // Apartments sorted: Smart, Flex, then Signature
+  const sorted = apartments.slice().sort((a, b) => {
+    const getSortPriority = (apt: ApartmentProps) => {
+      const name = apt.name.toLowerCase();
+      if (name.includes("smart")) return 0;
+      if (name.includes("flex")) return 1;
+      if (name.includes("signature") || name.includes("sigantura")) return 2;
+      return 3;
+    };
+    
+    const priorityA = getSortPriority(a);
+    const priorityB = getSortPriority(b);
+    
+    // If priorities are the same, sort by price
+    return priorityA !== priorityB 
+      ? priorityA - priorityB 
+      : a.price - b.price;
+  });
 
   // Helper: suite type
   const getSuiteType = (apt: ApartmentProps) => {
