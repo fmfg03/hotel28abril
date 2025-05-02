@@ -1,9 +1,9 @@
 
 import { format, differenceInDays } from "date-fns";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/types/Suite";
 
 interface BookingSummarySidebarProps {
-  selectedApartment: ApartmentProps | null;
+  selectedApartment: SuiteProps | null;
   startDate?: Date;
   endDate?: Date;
   adults: string;

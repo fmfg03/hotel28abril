@@ -1,14 +1,14 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/types/Suite";
 import BookingConfirmation from "./BookingConfirmation";
 import BookingDetailsCard from "./BookingDetailsCard";
 import BookingPriceSummary from "./BookingPriceSummary";
 import { CreditCard } from "lucide-react";
 
 interface BookingReviewProps {
-  selectedApartment: ApartmentProps | null;
+  selectedApartment: SuiteProps | null;
   startDate?: Date;
   endDate?: Date;
   adults: string;

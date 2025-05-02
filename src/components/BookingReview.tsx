@@ -2,12 +2,12 @@
 import { Check, CreditCard } from "lucide-react";
 import { format, differenceInDays } from "date-fns";
 import { Button } from "@/components/ui/button";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/types/Suite";
 import { Link } from "react-router-dom";
 import React from "react";
 
 interface BookingReviewProps {
-  selectedApartment: ApartmentProps | null;
+  selectedApartment: SuiteProps | null;
   startDate?: Date;
   endDate?: Date;
   adults: string;

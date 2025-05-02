@@ -1,9 +1,9 @@
 
 import React from "react";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/types/Suite";
 
 interface PriceBreakdownProps {
-  selectedApartment: ApartmentProps;
+  selectedApartment: SuiteProps;
   nightsCount: number;
 }
 

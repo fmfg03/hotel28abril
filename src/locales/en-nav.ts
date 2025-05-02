@@ -1,7 +1,7 @@
 
 const en_nav = {
   home: "Home",
-  apartments: "Suites",
+  suites: "Suites",
   amenities: "Amenities",
   gallery: "Gallery",
   contact: "Contact",

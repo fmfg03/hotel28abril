@@ -1,4 +1,4 @@
-import { SuiteProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/types/Suite";
 
 type SuiteRule = {
   typeMatch: (suite: SuiteProps) => boolean;

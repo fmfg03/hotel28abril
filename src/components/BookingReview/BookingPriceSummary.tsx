@@ -1,10 +1,10 @@
 
 import React from "react";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/types/Suite";
 import { differenceInDays } from "date-fns";
 
 interface BookingPriceSummaryProps {
-  selectedApartment: ApartmentProps | null;
+  selectedApartment: SuiteProps | null;
   startDate?: Date;
   endDate?: Date;
 }

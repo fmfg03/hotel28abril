@@ -1,10 +1,10 @@
 
 import React from "react";
 import { format } from "date-fns";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/types/Suite";
 
 interface BookingDetailsCardProps {
-  selectedApartment: ApartmentProps | null;
+  selectedApartment: SuiteProps | null;
   startDate?: Date;
   endDate?: Date;
   adults: string;

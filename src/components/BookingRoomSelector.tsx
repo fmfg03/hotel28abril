@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/types/Suite";
 import { Minus, Plus } from "lucide-react";
 
 export interface RoomSelection {
@@ -8,7 +8,7 @@ export interface RoomSelection {
 }
 
 interface BookingRoomSelectorProps {
-  apartments: ApartmentProps[];
+  apartments: SuiteProps[];
   selection: RoomSelection;
   setSelection: (s: RoomSelection) => void;
   totalAdults: number;
@@ -28,7 +28,7 @@ export default function BookingRoomSelector({
 }: BookingRoomSelectorProps) {
   // Apartments sorted: Smart, Flex, then Signature
   const sorted = apartments.slice().sort((a, b) => {
-    const getSortPriority = (apt: ApartmentProps) => {
+    const getSortPriority = (apt: SuiteProps) => {
       const name = apt.name.toLowerCase();
       if (name.includes("smart")) return 0;
       if (name.includes("flex")) return 1;
@@ -46,7 +46,7 @@ export default function BookingRoomSelector({
   });
 
   // Helper: suite type
-  const getSuiteType = (apt: ApartmentProps) => {
+  const getSuiteType = (apt: SuiteProps) => {
     const name = apt.name.toLowerCase();
     if (name.includes("smart")) return "Smart Suite";
     if (name.includes("signature") || name.includes("sigantura")) return "Signature Suite";
@@ -78,7 +78,7 @@ export default function BookingRoomSelector({
   }, [selection, totalAdults, apartments, onChangeValid]);
 
   // Max number of rooms user can select is limited by adults and suite capacities.
-  const handleAdjust = (apt: ApartmentProps, delta: number) => {
+  const handleAdjust = (apt: SuiteProps, delta: number) => {
     // Create a new object directly instead of using a function
     const newSelection: RoomSelection = { ...selection };
     newSelection[apt.id] = Math.max(0, (selection[apt.id] || 0) + delta);

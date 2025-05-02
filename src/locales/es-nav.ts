@@ -1,10 +1,10 @@
 
 const es_nav = {
   home: "Inicio",
-  apartments: "Suites",
+  suites: "Suites",
   amenities: "Servicios",
   gallery: "Galería",
   contact: "Contacto",
-  bookNow: "Reservar Ahora"
+  bookNow: "Reservar"
 };
 export default es_nav;

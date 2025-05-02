@@ -2,36 +2,36 @@
 import nav from "./es-nav";
 import hero from "./es-hero";
 import footer from "./es-footer";
-import apartments from "./es-apartments";
+import suites from "./es-suites";
 import booking from "./es-booking";
 import home from "./es-home";
 import amenities from "./es-amenities";
 import bookingForm from "./es-booking-form";
-import apartmentDescriptions from "./es-apartment-descriptions";
+import suiteDescriptions from "./es-suite-descriptions";
 import amenitiesPage from "./es-amenities-page";
 import gallery from "./es-gallery";
 import testimonials from "./es-testimonials";
 import contact from "./es-contact";
 import welcome from "./es-welcome";
-import featuredApartments from "./es-featured-apartments";
+import featuredSuites from "./es-featured-suites";
 import notFound from "./es-notFound";
 
 export const es = {
   nav,
   hero,
   footer,
-  apartments,
+  suites,
   booking,
   home,
   amenities,
   bookingForm,
-  apartmentDescriptions,
+  suiteDescriptions,
   amenitiesPage,
   gallery,
   testimonials,
   contact,
   welcome,
-  featuredApartments,
+  featuredSuites,
   notFound
 };
 

@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -5,15 +6,15 @@ import HeroSection from "@/components/HeroSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import WelcomeSection from "@/components/WelcomeSection";
 import BookingSection from "@/components/BookingSection";
-import FeaturedApartmentsSection from "@/components/FeaturedApartmentsSection";
+import FeaturedSuitesSection from "@/components/FeaturedSuitesSection";
 import AmenitiesSection from "@/components/AmenitiesSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/types/Suite";
 
-// Sample apartments data
-const featuredApartments: ApartmentProps[] = [{
+// Sample suites data
+const featuredSuites: SuiteProps[] = [{
   id: "1",
   name: "Deluxe Sea View Suite",
   description: "Luxurious suite with panoramic sea views, modern amenities, and a private balcony.",
@@ -25,8 +26,8 @@ const featuredApartments: ApartmentProps[] = [{
   features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Balcony"]
 }, {
   id: "2",
-  name: "Premium Family Apartment",
-  description: "Spacious apartment ideal for families, with full kitchen and stunning coastal views.",
+  name: "Premium Family Suite",
+  description: "Spacious suite ideal for families, with full kitchen and stunning coastal views.",
   price: 250,
   capacity: 4,
   size: 75,
@@ -63,8 +64,8 @@ export default function Index() {
         <WelcomeSection />
         {/* Booking Form Section */}
         <BookingSection />
-        {/* Featured Apartments */}
-        <FeaturedApartmentsSection />
+        {/* Featured Suites */}
+        <FeaturedSuitesSection />
         {/* Testimonials Section */}
         <TestimonialsSection />
         {/* Features/Amenities Section */}
