@@ -5,29 +5,18 @@ import { Users, Maximize, MapPin, Bath, Coffee, Wifi } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-export interface SuiteProps {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  capacity: number;
-  size: number;
-  image: string;
-  location: string;
-  features: string[];
-}
+import { SuiteProps } from "@/types/Suite";
 
 export default function SuiteCard({ suite }: { suite: SuiteProps }) {
   const { t, language } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
   
   // Use translated name and description if available
-  const translatedName = language !== 'en' && t.suiteDescriptions[suite.id]?.name 
+  const translatedName = language !== 'en' && t.suiteDescriptions && t.suiteDescriptions[suite.id]?.name 
     ? t.suiteDescriptions[suite.id].name 
     : suite.name;
     
-  const translatedDescription = language !== 'en' && t.suiteDescriptions[suite.id]?.description 
+  const translatedDescription = language !== 'en' && t.suiteDescriptions && t.suiteDescriptions[suite.id]?.description 
     ? t.suiteDescriptions[suite.id].description 
     : suite.description;
   
@@ -56,8 +45,7 @@ export default function SuiteCard({ suite }: { suite: SuiteProps }) {
             <div className="flex items-center space-x-3 text-white">
               <div className="flex items-center">
                 <Users className="h-4 w-4 mr-1" />
-                <span>{suite.capacity} {suite.capacity === 1 ? 
-                  t.suites.filters.guests : t.suites.filters.guests}</span>
+                <span>{suite.capacity} {t.suites && t.suites.filters ? t.suites.filters.guests : "Guests"}</span>
               </div>
               <div className="flex items-center">
                 <Maximize className="h-4 w-4 mr-1" />
@@ -85,7 +73,7 @@ export default function SuiteCard({ suite }: { suite: SuiteProps }) {
           ))}
           {suite.features.length > 3 && (
             <div className="text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full">
-              +{suite.features.length - 3} {t.suites.filters.more}
+              +{suite.features.length - 3} {t.suites && t.suites.filters ? t.suites.filters.more : "more"}
             </div>
           )}
         </div>
@@ -93,10 +81,10 @@ export default function SuiteCard({ suite }: { suite: SuiteProps }) {
         <div className="flex items-end justify-between pt-2">
           <div>
             <span className="text-xl font-bold">${suite.price}</span>
-            <span className="text-muted-foreground text-sm"> / {t.booking.summary.night}</span>
+            <span className="text-muted-foreground text-sm"> / {t.booking && t.booking.summary ? t.booking.summary.night : "night"}</span>
           </div>
           <Button asChild className="btn-primary">
-            <Link to={`/suites/${suite.id}`}>{t.suites.filters.viewDetails}</Link>
+            <Link to={`/suites/${suite.id}`}>{t.suites && t.suites.filters ? t.suites.filters.viewDetails : "View Details"}</Link>
           </Button>
         </div>
       </div>

@@ -42,17 +42,32 @@ export default function BookingPage() {
   const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
 
   const fetchSuites = async () => {
-    const { data, error } = await supabase
-      .from('suites')
-      .select('*')
-      .order('price', { ascending: true });
-    
-    if (error) {
-      console.error('Error fetching suites:', error);
-      throw new Error(error.message);
+    try {
+      const { data, error } = await supabase
+        .from('suites')
+        .select('*')
+        .order('price', { ascending: true });
+      
+      if (error) {
+        console.error('Error fetching suites:', error);
+        throw new Error(error.message);
+      }
+      
+      return (data || []).map(suite => ({
+        id: suite.id.toString(),
+        name: suite.name,
+        description: suite.description,
+        price: suite.price,
+        capacity: suite.capacity,
+        size: suite.size,
+        image: suite.image,
+        location: suite.location,
+        features: suite.features
+      })) as SuiteProps[];
+    } catch (err) {
+      console.error("Error in fetchSuites:", err);
+      throw err;
     }
-    
-    return data as SuiteProps[];
   };
 
   const { data: suites, isLoading, error } = useQuery({

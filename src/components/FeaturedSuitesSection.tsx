@@ -16,16 +16,28 @@ export default function FeaturedSuitesSection() {
   useEffect(() => {
     async function fetchFeaturedSuites() {
       setLoading(true);
-      const { data, error } = await supabase
-        .from("suites")
-        .select("*")
-        .order("price", { ascending: true })
-        .limit(3);
-      if (!error && data) {
-        setSuites(data.map(apt => ({
-          ...apt,
-          id: apt.id.toString(),
-        })));
+      try {
+        const { data, error } = await supabase
+          .from("suites")
+          .select("*")
+          .order("price", { ascending: true })
+          .limit(3);
+        
+        if (!error && data) {
+          setSuites(data.map(suite => ({
+            id: suite.id.toString(),
+            name: suite.name,
+            description: suite.description,
+            price: suite.price,
+            capacity: suite.capacity,
+            size: suite.size,
+            image: suite.image,
+            location: suite.location,
+            features: suite.features
+          })));
+        }
+      } catch (err) {
+        console.error("Error fetching suites:", err);
       }
       setLoading(false);
     }

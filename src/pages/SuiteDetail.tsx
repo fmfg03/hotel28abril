@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
-import { SuiteProps } from "@/components/SuiteCard";
+import { SuiteProps } from "@/types/Suite";
 import { Bath, Coffee, Wifi, Bed, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -32,19 +32,29 @@ export default function SuiteDetail() {
   useEffect(() => {
     async function fetchSuite() {
       setLoading(true);
-      const { data, error } = await supabase
-        .from("suites")
-        .select("*")
-        .eq("id", id)
-        .maybeSingle();
+      try {
+        const { data, error } = await supabase
+          .from("suites")
+          .select("*")
+          .eq("id", id)
+          .maybeSingle();
 
-      if (!error && data) {
-        setSuite({
-          ...data,
-          id: data.id.toString(),
-        });
+        if (!error && data) {
+          setSuite({
+            id: data.id.toString(),
+            name: data.name,
+            description: data.description,
+            price: data.price,
+            capacity: data.capacity,
+            size: data.size,
+            image: data.image,
+            location: data.location,
+            features: data.features
+          });
+        }
+      } catch (err) {
+        console.error("Error fetching suite:", err);
       }
-
       setLoading(false);
     }
     if (id) fetchSuite();
@@ -54,13 +64,18 @@ export default function SuiteDetail() {
     // Fetch suite images gallery
     async function fetchImages() {
       if (!id) return;
-      const { data, error } = await supabase
-        .from("suite_images")
-        .select("*")
-        .eq("suite_id", id)
-        .order("order", { ascending: true });
-      if (!error && data) {
-        setImages(data);
+      try {
+        const { data, error } = await supabase
+          .from("suite_images")
+          .select("*")
+          .eq("suite_id", id)
+          .order("order", { ascending: true });
+          
+        if (!error && data) {
+          setImages(data);
+        }
+      } catch (err) {
+        console.error("Error fetching suite images:", err);
       }
     }
     fetchImages();

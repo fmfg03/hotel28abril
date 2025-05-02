@@ -6,7 +6,7 @@ import SuitesFilters from "@/components/SuitesFilters";
 import SuitesList from "@/components/SuitesList";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
-import { SuiteProps } from "@/components/SuiteCard";
+import { SuiteProps } from "@/types/Suite";
 
 export default function Suites() {
   const { t } = useLanguage();
@@ -24,15 +24,27 @@ export default function Suites() {
   useEffect(() => {
     async function fetchSuites() {
       setLoading(true);
-      const { data, error } = await supabase
-        .from("suites")
-        .select("*")
-        .order("price", { ascending: true });
-      if (!error && data) {
-        setSuites(data.map(suite => ({
-          ...suite,
-          id: suite.id.toString(),
-        })));
+      try {
+        const { data, error } = await supabase
+          .from("suites")
+          .select("*")
+          .order("price", { ascending: true });
+          
+        if (!error && data) {
+          setSuites(data.map(suite => ({
+            id: suite.id.toString(),
+            name: suite.name,
+            description: suite.description,
+            price: suite.price,
+            capacity: suite.capacity,
+            size: suite.size,
+            image: suite.image,
+            location: suite.location,
+            features: suite.features
+          })));
+        }
+      } catch (err) {
+        console.error("Error fetching suites:", err);
       }
       setLoading(false);
     }
