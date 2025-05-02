@@ -1,54 +1,22 @@
 
 import SuiteCard from "@/components/SuiteCard";
-import { SuiteProps } from "@/types/Suite";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useSuites } from "@/hooks/useSuites";
 
 export default function FeaturedSuitesSection() {
   const { t } = useLanguage();
-  const [suites, setSuites] = useState<SuiteProps[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchFeaturedSuites() {
-      setLoading(true);
-      try {
-        // Cast data to any to handle schema access
-        const { data, error } = await supabase
-          .from("hotel28.suites" as any)
-          .select("*")
-          .order("price", { ascending: true })
-          .limit(3);
-        
-        if (error) {
-          console.error("Error fetching suites:", error);
-        } else if (data) {
-          // Map the data with proper type checking
-          const mappedSuites: SuiteProps[] = data.map(suite => ({
-            id: suite?.id?.toString() || "",
-            name: suite?.name || "",
-            description: suite?.description || "",
-            price: suite?.price || 0,
-            capacity: suite?.capacity || 0,
-            size: suite?.size || 0,
-            image: suite?.image || "",
-            location: suite?.location || "",
-            features: Array.isArray(suite?.features) ? suite.features : []
-          }));
-          setSuites(mappedSuites);
-        }
-      } catch (err) {
-        console.error("Error fetching suites:", err);
-      }
-      setLoading(false);
-    }
-    fetchFeaturedSuites();
-  }, []);
+  const [isHovered, setIsHovered] = useState(false);
+  
+  // Use the hook to get suites data
+  const { data: suites = [], isLoading } = useSuites();
+  
+  // Only display the first 3 suites
+  const featuredSuites = suites.slice(0, 3);
 
   return (
     <section className="section">
@@ -64,21 +32,36 @@ export default function FeaturedSuitesSection() {
             {t.featuredSuites.description}
           </p>
         </div>
-        {loading ? (
-          <div className="text-center py-12 animate-fade-in">
-            <h3 className="text-xl font-semibold mb-2">{t.suites.filters.showing}</h3>
+        
+        {isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((index) => (
+              <div key={index} className="animate-pulse">
+                <Skeleton className="h-64 w-full rounded-t-xl" />
+                <div className="p-6 space-y-4">
+                  <Skeleton className="h-6 w-2/3" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-3/4" />
+                  <div className="flex justify-between">
+                    <Skeleton className="h-8 w-20" />
+                    <Skeleton className="h-8 w-32" />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {suites.map((suite, index) => (
-            <div key={suite.id} className="animate-fade-in" style={{
-              animationDelay: `${(index + 1) * 100}ms`
-            }}>
-              <SuiteCard suite={suite} />
-            </div>
-          ))}
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredSuites.map((suite, index) => (
+              <div key={suite.id} className="animate-fade-in" style={{
+                animationDelay: `${(index + 1) * 100}ms`
+              }}>
+                <SuiteCard suite={suite} />
+              </div>
+            ))}
+          </div>
         )}
+        
         <div className="text-center mt-12">
           <Button asChild className="btn-primary">
             <Link to="/suites">

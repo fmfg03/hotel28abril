@@ -39,8 +39,8 @@ export default function BookingPage() {
   });
   const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
 
-  // Use the fixed useSuites hook instead of duplicating the fetch logic
-  const { data: suites, isLoading, error } = useSuites();
+  // Use the hook to get suites data
+  const { data: suites = [], isLoading, error } = useSuites();
 
   useEffect(() => {
     window.scrollTo(0, 0);

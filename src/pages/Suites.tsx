@@ -1,58 +1,24 @@
-
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SuitesFilters from "@/components/SuitesFilters";
 import SuitesList from "@/components/SuitesList";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { supabase } from "@/integrations/supabase/client";
 import { SuiteProps } from "@/types/Suite";
+import { useSuites } from "@/hooks/useSuites";
 
 export default function Suites() {
   const { t } = useLanguage();
-  const [suites, setSuites] = useState<SuiteProps[]>([]);
   const [filteredSuites, setFilteredSuites] = useState<SuiteProps[]>([]);
   const [capacityFilter, setCapacityFilter] = useState<string>("all");
   const [locationFilter, setLocationFilter] = useState<string>("all");
   const [priceRange, setPriceRange] = useState<number[]>([0, 350]);
-  const [loading, setLoading] = useState(true);
+  
+  // Use the hook to get suites data
+  const { data: suites = [], isLoading } = useSuites();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
-    async function fetchSuites() {
-      setLoading(true);
-      try {
-        const { data, error } = await supabase
-          .from("hotel28.suites" as any)
-          .select("*")
-          .order("price", { ascending: true });
-          
-        if (error) {
-          console.error("Error fetching suites:", error);
-        } else if (data) {
-          // Map the data with proper type checking
-          const mappedSuites: SuiteProps[] = data.map(suite => ({
-            id: suite?.id?.toString() || "",
-            name: suite?.name || "",
-            description: suite?.description || "", 
-            price: suite?.price || 0,
-            capacity: suite?.capacity || 0,
-            size: suite?.size || 0,
-            image: suite?.image || "",
-            location: suite?.location || "",
-            features: Array.isArray(suite?.features) ? suite.features : []
-          }));
-          setSuites(mappedSuites);
-        }
-      } catch (err) {
-        console.error("Error fetching suites:", err);
-      }
-      setLoading(false);
-    }
-    fetchSuites();
   }, []);
 
   useEffect(() => {
@@ -120,7 +86,7 @@ export default function Suites() {
             <SuitesList
               suites={suites}
               filteredSuites={filteredSuites}
-              loading={loading}
+              loading={isLoading}
               resetFilters={resetFilters}
             />
           </div>

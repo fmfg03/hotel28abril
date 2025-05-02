@@ -1,14 +1,13 @@
-
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { supabase } from "@/integrations/supabase/client";
 import { SuiteProps } from "@/types/Suite";
 import { Bath, Coffee, Wifi, Bed, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SuiteImageGallery from "@/components/SuiteImageGallery";
+import { mockSuites, mockSuiteImages } from "@/data/suitesMockData";
 
 type SuiteImage = {
   id: string;
@@ -33,27 +32,11 @@ export default function SuiteDetail() {
     async function fetchSuite() {
       setLoading(true);
       try {
-        const { data, error } = await supabase
-          .from("hotel28.suites" as any)
-          .select("*")
-          .eq("id", id)
-          .maybeSingle();
-
-        if (error) {
-          console.error("Error fetching suite:", error);
-        } else if (data) {
-          // Map with proper type safety
-          setSuite({
-            id: data?.id?.toString() || "",
-            name: data?.name || "",
-            description: data?.description || "",
-            price: data?.price || 0,
-            capacity: data?.capacity || 0,
-            size: data?.size || 0,
-            image: data?.image || "",
-            location: data?.location || "",
-            features: Array.isArray(data?.features) ? data.features : []
-          });
+        // Use mock data instead of Supabase query
+        const foundSuite = mockSuites.find(s => s.id === id);
+        
+        if (foundSuite) {
+          setSuite(foundSuite);
         }
       } catch (err) {
         console.error("Error fetching suite:", err);
@@ -64,21 +47,13 @@ export default function SuiteDetail() {
   }, [id]);
 
   useEffect(() => {
-    // Fetch suite images gallery
-    async function fetchImages() {
+    // Fetch suite images gallery from mock data
+    function fetchImages() {
       if (!id) return;
       try {
-        const { data, error } = await supabase
-          .from("hotel28.suite_images" as any)
-          .select("*")
-          .eq("suite_id", id)
-          .order("order", { ascending: true });
-          
-        if (error) {
-          console.error("Error fetching suite images:", error);
-        } else if (data) {
-          setImages(data as SuiteImage[]);
-        }
+        // Use mock image data
+        const suiteImages = mockSuiteImages.filter(img => img.suite_id === id);
+        setImages(suiteImages);
       } catch (err) {
         console.error("Error fetching suite images:", err);
       }
