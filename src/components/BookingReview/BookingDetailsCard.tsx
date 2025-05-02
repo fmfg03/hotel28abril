@@ -1,6 +1,7 @@
 
 import React from "react";
 import { format } from "date-fns";
+import { CreditCard } from "lucide-react";
 import { SuiteProps } from "@/types/Suite";
 
 interface BookingDetailsCardProps {
