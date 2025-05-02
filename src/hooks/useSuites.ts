@@ -9,6 +9,7 @@ export function useSuites() {
     queryKey: ["suites"],
     queryFn: async () => {
       try {
+        // Use a more type-safe approach for schema.table access
         const { data, error } = await supabase
           .from("hotel28.suites")
           .select("*")
@@ -19,17 +20,21 @@ export function useSuites() {
           throw new Error(error.message);
         }
         
-        return (data || []).map(suite => ({
-          id: suite.id?.toString() || "",
-          name: suite.name || "",
-          description: suite.description || "",
-          price: suite.price || 0,
-          capacity: suite.capacity || 0,
-          size: suite.size || 0,
-          image: suite.image || "",
-          location: suite.location || "",
-          features: suite.features || []
-        })) as SuiteProps[];
+        // Ensure data is properly typed
+        return (data || []).map(suite => {
+          // Explicitly convert DB fields to the Suite model
+          return {
+            id: suite?.id?.toString() || "",
+            name: suite?.name || "",
+            description: suite?.description || "",
+            price: suite?.price || 0,
+            capacity: suite?.capacity || 0,
+            size: suite?.size || 0,
+            image: suite?.image || "",
+            location: suite?.location || "",
+            features: Array.isArray(suite?.features) ? suite.features : []
+          } as SuiteProps;
+        });
       } catch (err) {
         console.error("Error in useSuites:", err);
         throw err;

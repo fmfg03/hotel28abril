@@ -34,22 +34,25 @@ export default function SuiteDetail() {
       setLoading(true);
       try {
         const { data, error } = await supabase
-          .from("hotel28.suites")
+          .from("hotel28.suites" as any)
           .select("*")
           .eq("id", id)
           .maybeSingle();
 
-        if (!error && data) {
+        if (error) {
+          console.error("Error fetching suite:", error);
+        } else if (data) {
+          // Map with proper type safety
           setSuite({
-            id: data.id?.toString() || "",
-            name: data.name || "",
-            description: data.description || "",
-            price: data.price || 0,
-            capacity: data.capacity || 0,
-            size: data.size || 0,
-            image: data.image || "",
-            location: data.location || "",
-            features: data.features || []
+            id: data?.id?.toString() || "",
+            name: data?.name || "",
+            description: data?.description || "",
+            price: data?.price || 0,
+            capacity: data?.capacity || 0,
+            size: data?.size || 0,
+            image: data?.image || "",
+            location: data?.location || "",
+            features: Array.isArray(data?.features) ? data.features : []
           });
         }
       } catch (err) {
@@ -66,13 +69,15 @@ export default function SuiteDetail() {
       if (!id) return;
       try {
         const { data, error } = await supabase
-          .from("hotel28.suite_images")
+          .from("hotel28.suite_images" as any)
           .select("*")
           .eq("suite_id", id)
           .order("order", { ascending: true });
           
-        if (!error && data) {
-          setImages(data);
+        if (error) {
+          console.error("Error fetching suite images:", error);
+        } else if (data) {
+          setImages(data as SuiteImage[]);
         }
       } catch (err) {
         console.error("Error fetching suite images:", err);

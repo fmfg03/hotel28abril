@@ -18,24 +18,29 @@ export default function FeaturedSuitesSection() {
     async function fetchFeaturedSuites() {
       setLoading(true);
       try {
+        // Cast data to any to handle schema access
         const { data, error } = await supabase
-          .from("hotel28.suites")
+          .from("hotel28.suites" as any)
           .select("*")
           .order("price", { ascending: true })
           .limit(3);
         
-        if (!error && data) {
-          setSuites(data.map(suite => ({
-            id: suite.id?.toString() || "",
-            name: suite.name || "",
-            description: suite.description || "",
-            price: suite.price || 0,
-            capacity: suite.capacity || 0,
-            size: suite.size || 0,
-            image: suite.image || "",
-            location: suite.location || "",
-            features: suite.features || []
-          })));
+        if (error) {
+          console.error("Error fetching suites:", error);
+        } else if (data) {
+          // Map the data with proper type checking
+          const mappedSuites: SuiteProps[] = data.map(suite => ({
+            id: suite?.id?.toString() || "",
+            name: suite?.name || "",
+            description: suite?.description || "",
+            price: suite?.price || 0,
+            capacity: suite?.capacity || 0,
+            size: suite?.size || 0,
+            image: suite?.image || "",
+            location: suite?.location || "",
+            features: Array.isArray(suite?.features) ? suite.features : []
+          }));
+          setSuites(mappedSuites);
         }
       } catch (err) {
         console.error("Error fetching suites:", err);

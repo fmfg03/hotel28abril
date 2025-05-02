@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { format, addDays, differenceInDays } from "date-fns";
 import { Link } from "react-router-dom";
@@ -13,8 +12,7 @@ import BookingSuiteList from "@/components/BookingSuiteList";
 import BookingGuestForm from "@/components/BookingGuestForm";
 import BookingSummarySidebar from "@/components/BookingSummarySidebar";
 import BookingReview from "@/components/BookingReview";
-import { supabase } from "@/integrations/supabase/client";
-import { useQuery } from "@tanstack/react-query";
+import { useSuites } from "@/hooks/useSuites";
 
 export default function BookingPage() {
   const [startDate, setStartDate] = useState<Date | undefined>(new Date());
@@ -41,39 +39,8 @@ export default function BookingPage() {
   });
   const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
 
-  const fetchSuites = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('hotel28.suites')
-        .select('*')
-        .order('price', { ascending: true });
-      
-      if (error) {
-        console.error('Error fetching suites:', error);
-        throw new Error(error.message);
-      }
-      
-      return (data || []).map(suite => ({
-        id: suite.id?.toString() || "",
-        name: suite.name || "",
-        description: suite.description || "",
-        price: suite.price || 0,
-        capacity: suite.capacity || 0,
-        size: suite.size || 0,
-        image: suite.image || "",
-        location: suite.location || "",
-        features: suite.features || []
-      })) as SuiteProps[];
-    } catch (err) {
-      console.error("Error in fetchSuites:", err);
-      throw err;
-    }
-  };
-
-  const { data: suites, isLoading, error } = useQuery({
-    queryKey: ['suites'],
-    queryFn: fetchSuites,
-  });
+  // Use the fixed useSuites hook instead of duplicating the fetch logic
+  const { data: suites, isLoading, error } = useSuites();
 
   useEffect(() => {
     window.scrollTo(0, 0);
