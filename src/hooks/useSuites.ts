@@ -10,7 +10,7 @@ export function useSuites() {
     queryFn: async () => {
       try {
         const { data, error } = await supabase
-          .from("suites")
+          .from("hotel28.suites")
           .select("*")
           .order("price", { ascending: true });
           
@@ -20,15 +20,15 @@ export function useSuites() {
         }
         
         return (data || []).map(suite => ({
-          id: suite.id.toString(),
-          name: suite.name,
-          description: suite.description,
-          price: suite.price,
-          capacity: suite.capacity,
-          size: suite.size,
-          image: suite.image,
-          location: suite.location,
-          features: suite.features
+          id: suite.id?.toString() || "",
+          name: suite.name || "",
+          description: suite.description || "",
+          price: suite.price || 0,
+          capacity: suite.capacity || 0,
+          size: suite.size || 0,
+          image: suite.image || "",
+          location: suite.location || "",
+          features: suite.features || []
         })) as SuiteProps[];
       } catch (err) {
         console.error("Error in useSuites:", err);

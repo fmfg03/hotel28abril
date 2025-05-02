@@ -1,5 +1,6 @@
 
-import SuiteCard, { SuiteProps } from "@/components/SuiteCard";
+import SuiteCard from "@/components/SuiteCard";
+import { SuiteProps } from "@/types/Suite";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -18,22 +19,22 @@ export default function FeaturedSuitesSection() {
       setLoading(true);
       try {
         const { data, error } = await supabase
-          .from("suites")
+          .from("hotel28.suites")
           .select("*")
           .order("price", { ascending: true })
           .limit(3);
         
         if (!error && data) {
           setSuites(data.map(suite => ({
-            id: suite.id.toString(),
-            name: suite.name,
-            description: suite.description,
-            price: suite.price,
-            capacity: suite.capacity,
-            size: suite.size,
-            image: suite.image,
-            location: suite.location,
-            features: suite.features
+            id: suite.id?.toString() || "",
+            name: suite.name || "",
+            description: suite.description || "",
+            price: suite.price || 0,
+            capacity: suite.capacity || 0,
+            size: suite.size || 0,
+            image: suite.image || "",
+            location: suite.location || "",
+            features: suite.features || []
           })));
         }
       } catch (err) {

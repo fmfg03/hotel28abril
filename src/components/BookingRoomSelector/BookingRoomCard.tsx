@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { SuiteProps } from "@/components/SuiteCard";
+import { SuiteProps } from "@/types/Suite";
 import { Minus, Plus } from "lucide-react";
 
 interface BookingRoomCardProps {

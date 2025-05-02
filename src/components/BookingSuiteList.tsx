@@ -1,8 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { SuiteProps } from "@/components/SuiteCard";
+import { SuiteProps } from "@/types/Suite";
 
 interface BookingSuiteListProps {
   suites: SuiteProps[];

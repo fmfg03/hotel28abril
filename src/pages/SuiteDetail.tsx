@@ -34,22 +34,22 @@ export default function SuiteDetail() {
       setLoading(true);
       try {
         const { data, error } = await supabase
-          .from("suites")
+          .from("hotel28.suites")
           .select("*")
           .eq("id", id)
           .maybeSingle();
 
         if (!error && data) {
           setSuite({
-            id: data.id.toString(),
-            name: data.name,
-            description: data.description,
-            price: data.price,
-            capacity: data.capacity,
-            size: data.size,
-            image: data.image,
-            location: data.location,
-            features: data.features
+            id: data.id?.toString() || "",
+            name: data.name || "",
+            description: data.description || "",
+            price: data.price || 0,
+            capacity: data.capacity || 0,
+            size: data.size || 0,
+            image: data.image || "",
+            location: data.location || "",
+            features: data.features || []
           });
         }
       } catch (err) {
@@ -66,7 +66,7 @@ export default function SuiteDetail() {
       if (!id) return;
       try {
         const { data, error } = await supabase
-          .from("suite_images")
+          .from("hotel28.suite_images")
           .select("*")
           .eq("suite_id", id)
           .order("order", { ascending: true });

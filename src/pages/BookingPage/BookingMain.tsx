@@ -1,9 +1,8 @@
-
 import { useEffect, useState } from "react";
 import { addDays, differenceInDays, format } from "date-fns";
 import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SuiteProps } from "@/components/SuiteCard";
+import { SuiteProps } from "@/types/Suite";
 import BookingStepper from "@/components/BookingStepper";
 import { useSuites } from "@/hooks/useSuites";
 import BookingStepRoom from "./BookingStepRoom";

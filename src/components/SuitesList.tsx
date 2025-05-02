@@ -1,5 +1,5 @@
-
-import SuiteCard, { SuiteProps } from "@/components/SuiteCard";
+import SuiteCard from "@/components/SuiteCard";
+import { SuiteProps } from "@/types/Suite";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
