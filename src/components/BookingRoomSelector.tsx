@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { SuiteProps } from "@/types/Suite";
 import { Minus, Plus } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export interface RoomSelection {
   [apartmentId: string]: number;
@@ -26,32 +27,21 @@ export default function BookingRoomSelector({
   onChangeValid,
   childrenCount,
 }: BookingRoomSelectorProps) {
-  // Apartments sorted: Smart, Flex, then Signature
-  const sorted = apartments.slice().sort((a, b) => {
-    const getSortPriority = (apt: SuiteProps) => {
-      const name = apt.name.toLowerCase();
-      if (name.includes("smart")) return 0;
-      if (name.includes("flex")) return 1;
-      if (name.includes("signature") || name.includes("sigantura")) return 2;
-      return 3;
-    };
-    
-    const priorityA = getSortPriority(a);
-    const priorityB = getSortPriority(b);
-    
-    // If priorities are the same, sort by price
-    return priorityA !== priorityB 
-      ? priorityA - priorityB 
-      : a.price - b.price;
+  const { t, language } = useLanguage();
+
+  // Sort by capacity (ascending) then price (ascending)
+  const sorted = [...apartments].sort((a, b) => {
+    if (a.capacity !== b.capacity) {
+      return a.capacity - b.capacity;
+    }
+    return a.price - b.price;
   });
 
-  // Helper: suite type
+  // Helper: suite type based on capacity
   const getSuiteType = (apt: SuiteProps) => {
-    const name = apt.name.toLowerCase();
-    if (name.includes("smart")) return "Smart Suite";
-    if (name.includes("signature") || name.includes("sigantura")) return "Signature Suite";
-    if (name.includes("flex")) return "Flex Suite";
-    return apt.name;
+    if (apt.capacity <= 2) return "Small Suite";
+    if (apt.capacity <= 4) return "Medium Suite";
+    return "Large Suite";
   };
 
   // Count total adults accommodated by selection
@@ -67,10 +57,11 @@ export default function BookingRoomSelector({
       Object.entries(selection).every(([id, qty]) => {
         const apt = apartments.find(a => a.id === id);
         if (!apt || qty < 0) return false;
-        const isSmart = getSuiteType(apt) === "Smart Suite";
-        // Only allow Smart Suite if totalAdults <= 2, and max 2 adults per suite
-        if (isSmart && totalAdults > 2) return false;
-        if (isSmart && qty > 0 && totalAdults > 2) return false;
+        
+        const isSmall = apt.capacity <= 2;
+        // Only allow small suites for groups of 1-2 adults
+        if (isSmall && totalAdults > 2 && qty > 0) return false;
+        
         // Otherwise, always valid if qty >= 0
         return true;
       });
@@ -88,6 +79,19 @@ export default function BookingRoomSelector({
   // Remaining adults after selected rooms
   const adultsRemaining = Math.max(0, totalAdults - totalCapacity);
 
+  // Translate names and descriptions if available
+  const getTranslatedName = (suite: SuiteProps) => {
+    return language !== 'en' && t.suiteDescriptions && t.suiteDescriptions[suite.id]?.name 
+      ? t.suiteDescriptions[suite.id].name 
+      : suite.name;
+  };
+  
+  const getTranslatedDescription = (suite: SuiteProps) => {
+    return language !== 'en' && t.suiteDescriptions && t.suiteDescriptions[suite.id]?.description
+      ? t.suiteDescriptions[suite.id].description
+      : suite.description;
+  };
+
   return (
     <div>
       <h2 className="text-xl font-semibold mb-4">Select Suite Types & Quantities</h2>
@@ -95,14 +99,16 @@ export default function BookingRoomSelector({
         {sorted.map((apartment) => {
           const suiteType = getSuiteType(apartment);
           const qty = selection[apartment.id] || 0;
-          const isSmart = suiteType === "Smart Suite";
-          // Smart suite rules
+          const isSmallSuite = apartment.capacity <= 2;
+          
+          // Small suite rules
           let disabled = false;
           let subtext = `${apartment.capacity} adults max per suite`;
-          if (isSmart && totalAdults > 2) {
+          if (isSmallSuite && totalAdults > 2) {
             disabled = true;
             subtext = "Not available for more than 2 adults";
           }
+          
           return (
             <div
               key={apartment.id}
@@ -112,13 +118,13 @@ export default function BookingRoomSelector({
               }
             >
               <div className="flex-1 min-w-0">
-                <div className="font-semibold">{suiteType}</div>
+                <div className="font-semibold">{getTranslatedName(apartment)}</div>
                 <div className="text-muted-foreground text-sm">
-                  {apartment.description}
+                  {getTranslatedDescription(apartment)}
                 </div>
                 <div className="flex flex-wrap gap-2 mt-2 text-sm">
                   <span className="bg-muted px-3 py-1 rounded-full">
-                    {apartment.capacity} Guests
+                    {apartment.capacity} {t.suites?.filters?.guests || "Guests"}
                   </span>
                   <span className="bg-muted px-3 py-1 rounded-full">
                     {apartment.size} m²
@@ -127,7 +133,7 @@ export default function BookingRoomSelector({
                     {apartment.location}
                   </span>
                   <span className="bg-muted px-3 py-1 rounded-full">
-                    From ${apartment.price} / night
+                    From ${apartment.price} / {t.booking?.summary?.night || "night"}
                   </span>
                 </div>
                 <div className="text-xs text-muted-foreground mt-1">

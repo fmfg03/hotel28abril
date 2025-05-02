@@ -1,22 +1,17 @@
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { useState, useEffect } from "react";
 import { Slider } from "@/components/ui/slider";
-import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Select, SelectItem, SelectContent, SelectTrigger, SelectValue, } from "@/components/ui/select";
+import { useSuites } from "@/hooks/useSuites";
 
 interface SuitesFiltersProps {
   capacityFilter: string;
-  setCapacityFilter: (v: string) => void;
+  setCapacityFilter: (value: string) => void;
   locationFilter: string;
-  setLocationFilter: (v: string) => void;
+  setLocationFilter: (value: string) => void;
   priceRange: number[];
-  setPriceRange: (v: number[]) => void;
+  setPriceRange: (value: number[]) => void;
   resetFilters: () => void;
   locations: string[];
 }
@@ -32,16 +27,49 @@ export default function SuitesFilters({
   locations,
 }: SuitesFiltersProps) {
   const { t } = useLanguage();
+  const { data: suites = [] } = useSuites();
+  const [maxPrice, setMaxPrice] = useState(350);
+
+  // Calculate the max price dynamically from suites data
+  useEffect(() => {
+    if (suites.length > 0) {
+      const highestPrice = Math.max(...suites.map(suite => suite.price));
+      // Round up to the nearest 50 for a nice UI range
+      setMaxPrice(Math.ceil(highestPrice / 50) * 50);
+      
+      // Reset price range if the current max is lower than the highest price
+      if (priceRange[1] < highestPrice) {
+        setPriceRange([0, highestPrice]);
+      }
+    }
+  }, [suites, setPriceRange]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
       <div>
-        <label className="block text-sm font-medium mb-2">
-          {t.suites.filters.guests}
-        </label>
+        <label className="block font-medium mb-1">{t.suites.filters.location}</label>
+        <Select value={locationFilter} onValueChange={setLocationFilter}>
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">{t.suites.filters.allLocations}</SelectItem>
+            {locations
+              .filter(l => l !== "all")
+              .map((location) => (
+                <SelectItem key={location} value={location}>
+                  {location}
+                </SelectItem>
+              ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div>
+        <label className="block font-medium mb-1">{t.suites.filters.guests}</label>
         <Select value={capacityFilter} onValueChange={setCapacityFilter}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder={t.suites.filters.guests} />
+          <SelectTrigger>
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">{t.suites.filters.anyGuests}</SelectItem>
@@ -52,41 +80,23 @@ export default function SuitesFilters({
           </SelectContent>
         </Select>
       </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">
-          {t.suites.filters.location}
-        </label>
-        <Select value={locationFilter} onValueChange={setLocationFilter}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder={t.suites.filters.location} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{t.suites.filters.allLocations}</SelectItem>
-            {locations.filter(loc => loc !== "all").map(location => (
-              <SelectItem key={location} value={location}>{location}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">
-          {t.suites.filters.priceRange}: ${priceRange[0]} - ${priceRange[1]}
-        </label>
-        <Slider
-          defaultValue={[0, 350]}
-          min={0}
-          max={350}
-          step={10}
-          value={priceRange}
-          onValueChange={setPriceRange}
-          className="my-4"
-        />
-      </div>
-      <div className="md:col-span-3 flex justify-between items-center mt-6 animate-fade-in [animation-delay:200ms]">
-        <div />
-        <Button variant="outline" onClick={resetFilters}>
-          {t.suites.filters.resetFilters}
-        </Button>
+
+      <div className="lg:col-span-2">
+        <div className="flex justify-between mb-1">
+          <span className="font-medium">{t.suites.filters.priceRange}</span>
+          <span>
+            ${priceRange[0]} - ${priceRange[1]}
+          </span>
+        </div>
+        <div className="px-1">
+          <Slider
+            defaultValue={[0, 350]}
+            value={priceRange}
+            max={maxPrice}
+            step={10}
+            onValueChange={setPriceRange}
+          />
+        </div>
       </div>
     </div>
   );

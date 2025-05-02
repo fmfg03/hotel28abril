@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -16,30 +17,42 @@ export default function Suites() {
   
   // Use the hook to get suites data
   const { data: suites = [], isLoading } = useSuites();
+  const [locations, setLocations] = useState<string[]>(['all']);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Extract unique locations from suite data
+  useEffect(() => {
+    if (suites.length > 0) {
+      const uniqueLocations = Array.from(new Set(suites.map(suite => suite.location)));
+      setLocations(['all', ...uniqueLocations]);
+      
+      // Set initial price range based on available suites
+      const maxPrice = Math.max(...suites.map(suite => suite.price));
+      setPriceRange([0, maxPrice]);
+    }
+  }, [suites]);
+
   useEffect(() => {
     let result = suites;
     if (capacityFilter !== "all") {
       const capacity = parseInt(capacityFilter);
-      result = result.filter(apt => apt.capacity >= capacity);
+      result = result.filter(suite => suite.capacity >= capacity);
     }
     if (locationFilter !== "all") {
-      result = result.filter(apt => apt.location === locationFilter);
+      result = result.filter(suite => suite.location === locationFilter);
     }
-    result = result.filter(apt => apt.price >= priceRange[0] && apt.price <= priceRange[1]);
+    result = result.filter(suite => suite.price >= priceRange[0] && suite.price <= priceRange[1]);
     setFilteredSuites(result);
   }, [suites, capacityFilter, locationFilter, priceRange]);
-
-  const locations = ["all", ...Array.from(new Set(suites.map(apt => apt.location)))];
 
   const resetFilters = () => {
     setCapacityFilter("all");
     setLocationFilter("all");
-    setPriceRange([0, 350]);
+    const maxPrice = suites.length > 0 ? Math.max(...suites.map(suite => suite.price)) : 350;
+    setPriceRange([0, maxPrice]);
   };
 
   return (

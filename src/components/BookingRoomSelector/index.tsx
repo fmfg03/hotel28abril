@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { SuiteProps } from "@/types/Suite";
 import BookingRoomCard from "./BookingRoomCard";
@@ -27,30 +26,18 @@ export default function BookingRoomSelector({
   onChangeValid,
   childrenCount,
 }: BookingRoomSelectorProps) {
-  // Apartments sorted: Smart, Flex, then Signature
-  const sorted = apartments.slice().sort((a, b) => {
-    const getSortPriority = (apt: SuiteProps) => {
-      const name = apt.name.toLowerCase();
-      if (name.includes("smart")) return 0;
-      if (name.includes("flex")) return 1;
-      if (name.includes("signature") || name.includes("sigantura")) return 2;
-      return 3;
-    };
-    
-    const priorityA = getSortPriority(a);
-    const priorityB = getSortPriority(b);
-    
-    // If priorities are the same, sort by price
-    return priorityA !== priorityB 
-      ? priorityA - priorityB 
-      : a.price - b.price;
+  // Sort suites by capacity, then by price
+  const sorted = [...apartments].sort((a, b) => {
+    // First sort by capacity
+    if (a.capacity !== b.capacity) {
+      return a.capacity - b.capacity;
+    }
+    // If same capacity, sort by price
+    return a.price - b.price;
   });
 
-  // Helper: check if a suite is Smart type
-  const isSmart = (apt: SuiteProps) => {
-    const name = apt.name.toLowerCase();
-    return name.includes("smart");
-  };
+  // Helper function to determine if a suite is suitable for smaller groups
+  const isSmallSuite = (suite: SuiteProps) => suite.capacity <= 2;
 
   // Count total adults accommodated by selection
   const totalCapacity = sorted.reduce(
@@ -66,9 +53,9 @@ export default function BookingRoomSelector({
         const apt = apartments.find(a => a.id === id);
         if (!apt || qty < 0) return false;
         
-        // Only allow Smart Suite if totalAdults <= 2, and max 2 adults per suite
-        if (isSmart(apt) && totalAdults > 2) return false;
-        if (isSmart(apt) && qty > 0 && totalAdults > 2) return false;
+        // Small suites with capacity <= 2 aren't suitable for larger groups
+        const smallSuite = isSmallSuite(apt);
+        if (smallSuite && totalAdults > 2 && qty > 0) return false;
         
         // Otherwise, always valid if qty >= 0
         return true;
@@ -92,14 +79,14 @@ export default function BookingRoomSelector({
       <h2 className="text-xl font-semibold mb-4">Select Suite Types & Quantities</h2>
       <div className="space-y-6">
         {sorted.map((suite) => {
-          const isSmartSuite = isSmart(suite);
+          const isSmall = isSmallSuite(suite);
           const qty = selection[suite.id] || 0;
           
-          // Smart suite rules
+          // Suite rules
           let disabled = false;
           let subtext = `${suite.capacity} adults max per suite`;
           
-          if (isSmartSuite && totalAdults > 2) {
+          if (isSmall && totalAdults > 2) {
             disabled = true;
             subtext = "Not available for more than 2 adults";
           }
