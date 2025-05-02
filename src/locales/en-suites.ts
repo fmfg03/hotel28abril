@@ -1,5 +1,5 @@
 
-const en_apartments = {
+const en_suites = {
   title: "Our Suites",
   subtitle: "Discover our selection of premium two-bedroom suites, perfect for families, business travelers, and extended stays.",
   filters: {
@@ -23,9 +23,9 @@ const en_apartments = {
     more: "more"
   },
   loading: "Loading...",
-  notFound: "Apartment not found.",
-  goBack: "Back to Apartments",
+  notFound: "Suite not found.",
+  goBack: "Back to Suites",
   bathroom: "Bathroom",
   bookNow: "Book Now"
 };
-export default en_apartments;
+export default en_suites;

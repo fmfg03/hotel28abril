@@ -5,10 +5,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/components/SuiteCard";
 import BookingStepper from "@/components/BookingStepper";
 import BookingDatesGuestsForm from "@/components/BookingDatesGuestsForm";
-import BookingApartmentList from "@/components/BookingApartmentList";
+import BookingSuiteList from "@/components/BookingSuiteList";
 import BookingGuestForm from "@/components/BookingGuestForm";
 import BookingSummarySidebar from "@/components/BookingSummarySidebar";
 import BookingReview from "@/components/BookingReview";
@@ -20,7 +20,7 @@ export default function BookingPage() {
   const [endDate, setEndDate] = useState<Date | undefined>(addDays(new Date(), 7));
   const [adults, setAdults] = useState("2");
   const [children, setChildren] = useState("0");
-  const [selectedApartment, setSelectedApartment] = useState<ApartmentProps | null>(null);
+  const [selectedSuite, setSelectedSuite] = useState<SuiteProps | null>(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -40,23 +40,23 @@ export default function BookingPage() {
   });
   const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
 
-  const fetchApartments = async () => {
+  const fetchSuites = async () => {
     const { data, error } = await supabase
-      .from('apartments')
+      .from('suites')
       .select('*')
       .order('price', { ascending: true });
     
     if (error) {
-      console.error('Error fetching apartments:', error);
+      console.error('Error fetching suites:', error);
       throw new Error(error.message);
     }
     
-    return data as ApartmentProps[];
+    return data as SuiteProps[];
   };
 
-  const { data: apartments, isLoading, error } = useQuery({
-    queryKey: ['apartments'],
-    queryFn: fetchApartments,
+  const { data: suites, isLoading, error } = useQuery({
+    queryKey: ['suites'],
+    queryFn: fetchSuites,
   });
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function BookingPage() {
   }, []);
 
   const nightsCount = startDate && endDate ? differenceInDays(endDate, startDate) : 0;
-  const totalPrice = selectedApartment ? selectedApartment.price * nightsCount : 0;
+  const totalPrice = selectedSuite ? selectedSuite.price * nightsCount : 0;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -78,7 +78,7 @@ export default function BookingPage() {
   const handleSubmitBooking = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Booking submitted:", {
-      apartment: selectedApartment,
+      suite: selectedSuite,
       dates: { startDate, endDate },
       guests: { adults, children },
       customerInfo: formData
@@ -86,7 +86,7 @@ export default function BookingPage() {
     setIsBookingConfirmed(true);
     setTimeout(() => {
       setCurrentStep(1);
-      setSelectedApartment(null);
+      setSelectedSuite(null);
       setStartDate(new Date());
       setEndDate(addDays(new Date(), 7));
       setAdults("2");
@@ -118,7 +118,7 @@ export default function BookingPage() {
 
     if (startDate) params.append("start_date", format(startDate, "yyyy-MM-dd"));
     if (endDate) params.append("end_date", format(endDate, "yyyy-MM-dd"));
-    if (selectedApartment) params.append("room_id", selectedApartment.id);
+    if (selectedSuite) params.append("room_id", selectedSuite.id);
     if (adults) params.append("adults", adults);
     if (children) params.append("children", children);
 
@@ -175,23 +175,23 @@ export default function BookingPage() {
                 />
                 {isLoading ? (
                   <div className="text-center py-12">
-                    <p className="text-muted-foreground">Loading apartments...</p>
+                    <p className="text-muted-foreground">Loading suites...</p>
                   </div>
                 ) : error ? (
                   <div className="text-center py-12">
-                    <p className="text-red-500">Error loading apartments. Please try again later.</p>
+                    <p className="text-red-500">Error loading suites. Please try again later.</p>
                   </div>
                 ) : (
-                  <BookingApartmentList
-                    apartments={apartments || []}
-                    selectedApartment={selectedApartment}
-                    setSelectedApartment={setSelectedApartment}
+                  <BookingSuiteList
+                    suites={suites || []}
+                    selectedSuite={selectedSuite}
+                    setSelectedSuite={setSelectedSuite}
                   />
                 )}
                 <div className="flex justify-end mt-8">
                   <Button
                     className="btn-primary"
-                    disabled={!selectedApartment}
+                    disabled={!selectedSuite}
                     onClick={() => setCurrentStep(2)}
                   >
                     Continue <ChevronRight className="ml-2 h-4 w-4" />
@@ -216,7 +216,7 @@ export default function BookingPage() {
                   <div className="md:col-span-1">
                     <h2 className="text-xl font-semibold mb-4">Booking Summary</h2>
                     <BookingSummarySidebar
-                      selectedApartment={selectedApartment}
+                      selectedSuite={selectedSuite}
                       startDate={startDate}
                       endDate={endDate}
                       adults={adults}
@@ -239,7 +239,7 @@ export default function BookingPage() {
           {currentStep === 3 && (
             <div className="animate-fade-in [animation-delay:300ms]">
               <BookingReview
-                selectedApartment={selectedApartment}
+                selectedSuite={selectedSuite}
                 startDate={startDate}
                 endDate={endDate}
                 adults={adults}

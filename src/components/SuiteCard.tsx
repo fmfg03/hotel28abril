@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-export interface ApartmentProps {
+export interface SuiteProps {
   id: string;
   name: string;
   description: string;
@@ -18,18 +18,18 @@ export interface ApartmentProps {
   features: string[];
 }
 
-export default function ApartmentCard({ apartment }: { apartment: ApartmentProps }) {
+export default function SuiteCard({ suite }: { suite: SuiteProps }) {
   const { t, language } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
   
   // Use translated name and description if available
-  const translatedName = language !== 'en' && t.apartmentDescriptions[apartment.id]?.name 
-    ? t.apartmentDescriptions[apartment.id].name 
-    : apartment.name;
+  const translatedName = language !== 'en' && t.suiteDescriptions[suite.id]?.name 
+    ? t.suiteDescriptions[suite.id].name 
+    : suite.name;
     
-  const translatedDescription = language !== 'en' && t.apartmentDescriptions[apartment.id]?.description 
-    ? t.apartmentDescriptions[apartment.id].description 
-    : apartment.description;
+  const translatedDescription = language !== 'en' && t.suiteDescriptions[suite.id]?.description 
+    ? t.suiteDescriptions[suite.id].description 
+    : suite.description;
   
   return (
     <div 
@@ -39,7 +39,7 @@ export default function ApartmentCard({ apartment }: { apartment: ApartmentProps
     >
       <div className="relative overflow-hidden h-64">
         <img 
-          src={apartment.image} 
+          src={suite.image} 
           alt={translatedName}
           className={cn(
             "w-full h-full object-cover transition-transform duration-700",
@@ -51,17 +51,17 @@ export default function ApartmentCard({ apartment }: { apartment: ApartmentProps
             <h3 className="text-white text-xl font-bold mb-1">{translatedName}</h3>
             <div className="flex items-center text-white/80 text-sm mb-2">
               <MapPin className="h-4 w-4 mr-1" />
-              <span>{apartment.location}</span>
+              <span>{suite.location}</span>
             </div>
             <div className="flex items-center space-x-3 text-white">
               <div className="flex items-center">
                 <Users className="h-4 w-4 mr-1" />
-                <span>{apartment.capacity} {apartment.capacity === 1 ? 
-                  t.apartments.filters.guests : t.apartments.filters.guests}</span>
+                <span>{suite.capacity} {suite.capacity === 1 ? 
+                  t.suites.filters.guests : t.suites.filters.guests}</span>
               </div>
               <div className="flex items-center">
                 <Maximize className="h-4 w-4 mr-1" />
-                <span>{apartment.size} m²</span>
+                <span>{suite.size} m²</span>
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@ export default function ApartmentCard({ apartment }: { apartment: ApartmentProps
         <p className="text-muted-foreground line-clamp-2">{translatedDescription}</p>
         
         <div className="flex flex-wrap gap-2">
-          {apartment.features.slice(0, 3).map((feature, index) => (
+          {suite.features.slice(0, 3).map((feature, index) => (
             <div 
               key={index} 
               className="flex items-center text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full"
@@ -83,20 +83,20 @@ export default function ApartmentCard({ apartment }: { apartment: ApartmentProps
               <span>{feature}</span>
             </div>
           ))}
-          {apartment.features.length > 3 && (
+          {suite.features.length > 3 && (
             <div className="text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full">
-              +{apartment.features.length - 3} {t.apartments.filters.more}
+              +{suite.features.length - 3} {t.suites.filters.more}
             </div>
           )}
         </div>
         
         <div className="flex items-end justify-between pt-2">
           <div>
-            <span className="text-xl font-bold">${apartment.price}</span>
+            <span className="text-xl font-bold">${suite.price}</span>
             <span className="text-muted-foreground text-sm"> / {t.booking.summary.night}</span>
           </div>
           <Button asChild className="btn-primary">
-            <Link to={`/apartments/${apartment.id}`}>{t.apartments.filters.viewDetails}</Link>
+            <Link to={`/suites/${suite.id}`}>{t.suites.filters.viewDetails}</Link>
           </Button>
         </div>
       </div>

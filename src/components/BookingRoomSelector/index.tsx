@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/components/SuiteCard";
 import BookingRoomCard from "./BookingRoomCard";
 import BookingSummaryPanel from "./BookingSummaryPanel";
 
 export interface RoomSelection {
-  [apartmentId: string]: number;
+  [suiteId: string]: number;
 }
 
 interface BookingRoomSelectorProps {
-  apartments: ApartmentProps[];
+  apartments: SuiteProps[];
   selection: RoomSelection;
   setSelection: (s: RoomSelection) => void;
   totalAdults: number;
@@ -28,7 +28,7 @@ export default function BookingRoomSelector({
 }: BookingRoomSelectorProps) {
   // Apartments sorted: Smart, Flex, then Signature
   const sorted = apartments.slice().sort((a, b) => {
-    const getSortPriority = (apt: ApartmentProps) => {
+    const getSortPriority = (apt: SuiteProps) => {
       const name = apt.name.toLowerCase();
       if (name.includes("smart")) return 0;
       if (name.includes("flex")) return 1;
@@ -46,7 +46,7 @@ export default function BookingRoomSelector({
   });
 
   // Helper: check if a suite is Smart type
-  const isSmart = (apt: ApartmentProps) => {
+  const isSmart = (apt: SuiteProps) => {
     const name = apt.name.toLowerCase();
     return name.includes("smart");
   };
@@ -76,7 +76,7 @@ export default function BookingRoomSelector({
   }, [selection, totalAdults, apartments, onChangeValid]);
 
   // Max number of rooms user can select is limited by adults and suite capacities.
-  const handleAdjust = (apt: ApartmentProps, delta: number) => {
+  const handleAdjust = (apt: SuiteProps, delta: number) => {
     // Create a new object directly instead of using a function
     const newSelection: RoomSelection = { ...selection };
     newSelection[apt.id] = Math.max(0, (selection[apt.id] || 0) + delta);
@@ -90,13 +90,13 @@ export default function BookingRoomSelector({
     <div>
       <h2 className="text-xl font-semibold mb-4">Select Suite Types & Quantities</h2>
       <div className="space-y-6">
-        {sorted.map((apartment) => {
-          const isSmartSuite = isSmart(apartment);
-          const qty = selection[apartment.id] || 0;
+        {sorted.map((suite) => {
+          const isSmartSuite = isSmart(suite);
+          const qty = selection[suite.id] || 0;
           
           // Smart suite rules
           let disabled = false;
-          let subtext = `${apartment.capacity} adults max per suite`;
+          let subtext = `${suite.capacity} adults max per suite`;
           
           if (isSmartSuite && totalAdults > 2) {
             disabled = true;
@@ -105,8 +105,8 @@ export default function BookingRoomSelector({
           
           return (
             <BookingRoomCard
-              key={apartment.id}
-              apartment={apartment}
+              key={suite.id}
+              suite={suite}
               quantity={qty}
               onAdjust={handleAdjust}
               disabled={disabled}

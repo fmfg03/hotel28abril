@@ -1,7 +1,7 @@
 
 import BookingGuestForm from "@/components/BookingGuestForm";
 import BookingSummarySidebar from "@/components/BookingSummarySidebar";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/components/SuiteCard";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import React from "react";
@@ -10,7 +10,7 @@ interface BookingStepGuestFormProps {
   formData: any;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   handleSelectChange: (name: string, value: string) => void;
-  selectedApartment: ApartmentProps | null;
+  selectedSuite: SuiteProps | null;
   startDate?: Date;
   endDate?: Date;
   adults: string;
@@ -23,7 +23,7 @@ const BookingStepGuestForm = ({
   formData,
   handleInputChange,
   handleSelectChange,
-  selectedApartment,
+  selectedSuite,
   startDate,
   endDate,
   adults,
@@ -45,7 +45,7 @@ const BookingStepGuestForm = ({
         <div className="md:col-span-1">
           <h2 className="text-xl font-semibold mb-4">Booking Summary</h2>
           <BookingSummarySidebar
-            selectedApartment={selectedApartment}
+            selectedApartment={selectedSuite}
             startDate={startDate}
             endDate={endDate}
             adults={adults}

@@ -1,12 +1,12 @@
 
 import React from "react";
 import { differenceInDays } from "date-fns";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/components/SuiteCard";
 import StayDetails from "./StayDetails";
 import PriceBreakdown from "./PriceBreakdown";
 
 interface BookingSummarySidebarProps {
-  selectedApartment: ApartmentProps | null;
+  selectedApartment: SuiteProps | null;
   startDate?: Date;
   endDate?: Date;
   adults: string;
@@ -21,8 +21,8 @@ export default function BookingSummarySidebar({
   children
 }: BookingSummarySidebarProps) {
   const nightsCount = startDate && endDate ? differenceInDays(endDate, startDate) : 0;
-  const apartmentPrice = selectedApartment ? selectedApartment.price * nightsCount : 0;
-  const totalPrice = apartmentPrice + 50 + 30; // Apartment price + cleaning fee + service fee
+  const suitePrice = selectedApartment ? selectedApartment.price * nightsCount : 0;
+  const totalPrice = suitePrice + 50 + 30; // Suite price + cleaning fee + service fee
 
   return (
     <div className="glass-card p-6 sticky top-24">

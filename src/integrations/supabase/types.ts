@@ -72,80 +72,6 @@ export type Database = {
         }
         Relationships: []
       }
-      apartment_images: {
-        Row: {
-          alt_text: string | null
-          apartment_id: string
-          created_at: string
-          id: string
-          image_url: string
-          order: number | null
-        }
-        Insert: {
-          alt_text?: string | null
-          apartment_id: string
-          created_at?: string
-          id?: string
-          image_url: string
-          order?: number | null
-        }
-        Update: {
-          alt_text?: string | null
-          apartment_id?: string
-          created_at?: string
-          id?: string
-          image_url?: string
-          order?: number | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "apartment_images_apartment_id_fkey"
-            columns: ["apartment_id"]
-            isOneToOne: false
-            referencedRelation: "apartments"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      apartments: {
-        Row: {
-          capacity: number
-          created_at: string
-          description: string
-          features: string[]
-          id: string
-          image: string
-          location: string
-          name: string
-          price: number
-          size: number
-        }
-        Insert: {
-          capacity: number
-          created_at?: string
-          description: string
-          features: string[]
-          id?: string
-          image: string
-          location: string
-          name: string
-          price: number
-          size: number
-        }
-        Update: {
-          capacity?: number
-          created_at?: string
-          description?: string
-          features?: string[]
-          id?: string
-          image?: string
-          location?: string
-          name?: string
-          price?: number
-          size?: number
-        }
-        Relationships: []
-      }
       blog_posts: {
         Row: {
           author: string
@@ -543,6 +469,80 @@ export type Database = {
           key?: string
           updated_at?: string
           value?: Json
+        }
+        Relationships: []
+      }
+      suite_images: {
+        Row: {
+          alt_text: string | null
+          created_at: string
+          id: string
+          image_url: string
+          order: number | null
+          suite_id: string
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string
+          id?: string
+          image_url: string
+          order?: number | null
+          suite_id: string
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string
+          order?: number | null
+          suite_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "suite_images_suite_id_fkey"
+            columns: ["suite_id"]
+            isOneToOne: false
+            referencedRelation: "suites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      suites: {
+        Row: {
+          capacity: number
+          created_at: string
+          description: string
+          features: string[]
+          id: string
+          image: string
+          location: string
+          name: string
+          price: number
+          size: number
+        }
+        Insert: {
+          capacity: number
+          created_at?: string
+          description: string
+          features: string[]
+          id?: string
+          image: string
+          location: string
+          name: string
+          price: number
+          size: number
+        }
+        Update: {
+          capacity?: number
+          created_at?: string
+          description?: string
+          features?: string[]
+          id?: string
+          image?: string
+          location?: string
+          name?: string
+          price?: number
+          size?: number
         }
         Relationships: []
       }

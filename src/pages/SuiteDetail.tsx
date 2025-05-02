@@ -4,42 +4,42 @@ import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/components/SuiteCard";
 import { Bath, Coffee, Wifi, Bed, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import ApartmentImageGallery from "@/components/ApartmentImageGallery";
+import SuiteImageGallery from "@/components/SuiteImageGallery";
 
-type ApartmentImage = {
+type SuiteImage = {
   id: string;
-  apartment_id: string;
+  suite_id: string;
   image_url: string;
   alt_text: string | null;
   order: number | null;
 };
 
-export default function ApartmentDetail() {
+export default function SuiteDetail() {
   const { id } = useParams<{ id: string }>();
   const { t, language } = useLanguage();
-  const [apartment, setApartment] = useState<ApartmentProps | null>(null);
+  const [suite, setSuite] = useState<SuiteProps | null>(null);
   const [loading, setLoading] = useState(true);
-  const [images, setImages] = useState<ApartmentImage[]>([]);
+  const [images, setImages] = useState<SuiteImage[]>([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    async function fetchApartment() {
+    async function fetchSuite() {
       setLoading(true);
       const { data, error } = await supabase
-        .from("apartments")
+        .from("suites")
         .select("*")
         .eq("id", id)
         .maybeSingle();
 
       if (!error && data) {
-        setApartment({
+        setSuite({
           ...data,
           id: data.id.toString(),
         });
@@ -47,17 +47,17 @@ export default function ApartmentDetail() {
 
       setLoading(false);
     }
-    if (id) fetchApartment();
+    if (id) fetchSuite();
   }, [id]);
 
   useEffect(() => {
-    // Fetch apartment (suite) images gallery
+    // Fetch suite images gallery
     async function fetchImages() {
       if (!id) return;
       const { data, error } = await supabase
-        .from("apartment_images")
+        .from("suite_images")
         .select("*")
-        .eq("apartment_id", id)
+        .eq("suite_id", id)
         .order("order", { ascending: true });
       if (!error && data) {
         setImages(data);
@@ -68,32 +68,32 @@ export default function ApartmentDetail() {
 
   // Translation logic
   const translatedName =
-    language !== "en" && apartment && t.apartmentDescriptions[apartment.id]?.name
-      ? t.apartmentDescriptions[apartment.id].name
-      : apartment?.name;
+    language !== "en" && suite && t.suiteDescriptions[suite.id]?.name
+      ? t.suiteDescriptions[suite.id].name
+      : suite?.name;
 
   const translatedDescription =
-    language !== "en" && apartment && t.apartmentDescriptions[apartment.id]?.description
-      ? t.apartmentDescriptions[apartment.id].description
-      : apartment?.description;
+    language !== "en" && suite && t.suiteDescriptions[suite.id]?.description
+      ? t.suiteDescriptions[suite.id].description
+      : suite?.description;
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-lg">{t.apartments.loading}</div>
+        <div className="animate-pulse text-lg">{t.suites.loading}</div>
       </div>
     );
   }
 
-  if (!apartment) {
+  if (!suite) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div>
-          <div className="text-2xl font-bold mb-2">{t.apartments.notFound}</div>
+          <div className="text-2xl font-bold mb-2">{t.suites.notFound}</div>
           <Button asChild variant="outline">
-            <Link to="/apartments">
+            <Link to="/suites">
               <ArrowLeft className="mr-2 inline" />
-              {t.apartments.goBack}
+              {t.suites.goBack}
             </Link>
           </Button>
         </div>
@@ -107,25 +107,25 @@ export default function ApartmentDetail() {
       <main className="flex-1 pt-20 bg-gradient-to-tr from-sea-light to-white dark:from-sea-dark dark:to-background">
         <div className="container py-14">
           <Button asChild variant="outline" className="mb-8">
-            <Link to="/apartments">
+            <Link to="/suites">
               <ArrowLeft className="mr-2" />
-              {t.apartments.goBack}
+              {t.suites.goBack}
             </Link>
           </Button>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <ApartmentImageGallery
+              <SuiteImageGallery
                 images={images.length > 0 ? images : [
                   {
                     id: "main-img",
-                    apartment_id: apartment.id,
-                    image_url: apartment.image,
+                    suite_id: suite.id,
+                    image_url: suite.image,
                     alt_text: translatedName || "image",
                     order: 0
                   }
                 ]}
                 fallbackImage={{
-                  url: apartment.image,
+                  url: suite.image,
                   alt: translatedName || "image"
                 }}
               />
@@ -139,23 +139,23 @@ export default function ApartmentDetail() {
                 <div className="flex items-center gap-2 text-base">
                   <Bed className="h-5 w-5" />
                   <span>
-                    {apartment.capacity} {t.apartments.filters.guests}
+                    {suite.capacity} {t.suites.filters.guests}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-base">
                   <Bath className="h-5 w-5" />
-                  <span>{t.apartments.bathroom}</span>
+                  <span>{t.suites.bathroom}</span>
                 </div>
                 <div className="flex items-center gap-2 text-base">
-                  <span>{apartment.size} m²</span>
+                  <span>{suite.size} m²</span>
                 </div>
                 <div className="flex items-center gap-2 text-base">
-                  <span>{apartment.location}</span>
+                  <span>{suite.location}</span>
                 </div>
               </div>
               {/* Features list */}
               <ul className="flex flex-wrap gap-3 mt-2">
-                {apartment.features.map((feature, index) => (
+                {suite.features.map((feature, index) => (
                   <li
                     key={index}
                     className="flex items-center rounded-full border border-muted px-3 py-1 text-sm bg-white/75 dark:bg-background/60 backdrop-blur"
@@ -169,12 +169,12 @@ export default function ApartmentDetail() {
               </ul>
               {/* Price */}
               <div className="flex gap-2 items-end mt-4">
-                <span className="text-2xl font-bold">${apartment.price}</span>
+                <span className="text-2xl font-bold">${suite.price}</span>
                 <span className="text-muted-foreground text-base">/ {t.booking.summary.night}</span>
               </div>
               {/* Book Now Button */}
               <Button asChild size="lg" className="btn-primary mt-4 w-full md:w-fit">
-                <Link to="/booking">{t.apartments.bookNow}</Link>
+                <Link to="/booking">{t.suites.bookNow}</Link>
               </Button>
             </div>
           </div>

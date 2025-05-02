@@ -1,10 +1,10 @@
 
 import BookingReview from "@/components/BookingReview";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/components/SuiteCard";
 import React, { useEffect } from "react";
 
 interface BookingStepReviewProps {
-  selectedApartment: ApartmentProps | null;
+  selectedSuite: SuiteProps | null;
   startDate?: Date;
   endDate?: Date;
   adults: string;
@@ -18,7 +18,7 @@ interface BookingStepReviewProps {
 }
 
 const BookingStepReview = ({
-  selectedApartment,
+  selectedSuite,
   startDate,
   endDate,
   adults,
@@ -42,7 +42,7 @@ const BookingStepReview = ({
   return (
     <div className="animate-fade-in [animation-delay:300ms]">
       <BookingReview
-        selectedApartment={selectedApartment}
+        selectedApartment={selectedSuite}
         startDate={startDate}
         endDate={endDate}
         adults={adults}

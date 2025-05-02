@@ -9,23 +9,23 @@ import {
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
-type ApartmentImage = {
+type SuiteImage = {
   id: string;
-  apartment_id: string;
+  suite_id: string;
   image_url: string;
   alt_text: string | null;
   order: number | null;
 };
 
-interface ApartmentImageGalleryProps {
-  images: ApartmentImage[];
+interface SuiteImageGalleryProps {
+  images: SuiteImage[];
   fallbackImage?: { url: string; alt: string };
 }
 
-export default function ApartmentImageGallery({
+export default function SuiteImageGallery({
   images,
   fallbackImage,
-}: ApartmentImageGalleryProps) {
+}: SuiteImageGalleryProps) {
   const [loaded, setLoaded] = useState<{ [key: string]: boolean }>({});
 
   if (!images || images.length === 0) {
@@ -50,7 +50,7 @@ export default function ApartmentImageGallery({
             <div className="w-full aspect-[4/3] overflow-hidden rounded-lg relative">
               <img
                 src={img.image_url}
-                alt={img.alt_text || "Apartment image"}
+                alt={img.alt_text || "Suite image"}
                 className={cn(
                   "object-cover w-full h-full transition-opacity duration-500",
                   loaded[img.id] ? "opacity-100" : "opacity-0"

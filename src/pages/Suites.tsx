@@ -1,16 +1,17 @@
+
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ApartmentsFilters from "@/components/ApartmentsFilters";
-import ApartmentsList from "@/components/ApartmentsList";
+import SuitesFilters from "@/components/SuitesFilters";
+import SuitesList from "@/components/SuitesList";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/components/SuiteCard";
 
-export default function Apartments() {
+export default function Suites() {
   const { t } = useLanguage();
-  const [apartments, setApartments] = useState<ApartmentProps[]>([]);
-  const [filteredApartments, setFilteredApartments] = useState<ApartmentProps[]>([]);
+  const [suites, setSuites] = useState<SuiteProps[]>([]);
+  const [filteredSuites, setFilteredSuites] = useState<SuiteProps[]>([]);
   const [capacityFilter, setCapacityFilter] = useState<string>("all");
   const [locationFilter, setLocationFilter] = useState<string>("all");
   const [priceRange, setPriceRange] = useState<number[]>([0, 350]);
@@ -21,25 +22,25 @@ export default function Apartments() {
   }, []);
 
   useEffect(() => {
-    async function fetchApartments() {
+    async function fetchSuites() {
       setLoading(true);
       const { data, error } = await supabase
-        .from("apartments")
+        .from("suites")
         .select("*")
         .order("price", { ascending: true });
       if (!error && data) {
-        setApartments(data.map(apt => ({
-          ...apt,
-          id: apt.id.toString(),
+        setSuites(data.map(suite => ({
+          ...suite,
+          id: suite.id.toString(),
         })));
       }
       setLoading(false);
     }
-    fetchApartments();
+    fetchSuites();
   }, []);
 
   useEffect(() => {
-    let result = apartments;
+    let result = suites;
     if (capacityFilter !== "all") {
       const capacity = parseInt(capacityFilter);
       result = result.filter(apt => apt.capacity >= capacity);
@@ -48,10 +49,10 @@ export default function Apartments() {
       result = result.filter(apt => apt.location === locationFilter);
     }
     result = result.filter(apt => apt.price >= priceRange[0] && apt.price <= priceRange[1]);
-    setFilteredApartments(result);
-  }, [apartments, capacityFilter, locationFilter, priceRange]);
+    setFilteredSuites(result);
+  }, [suites, capacityFilter, locationFilter, priceRange]);
 
-  const locations = ["all", ...Array.from(new Set(apartments.map(apt => apt.location)))];
+  const locations = ["all", ...Array.from(new Set(suites.map(apt => apt.location)))];
 
   const resetFilters = () => {
     setCapacityFilter("all");
@@ -67,10 +68,10 @@ export default function Apartments() {
           <div className="container relative z-10">
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                {t.apartments.title}
+                {t.suites.title}
               </h1>
               <p className="text-muted-foreground text-lg mb-6">
-                {t.apartments.subtitle}
+                {t.suites.subtitle}
               </p>
             </div>
           </div>
@@ -81,7 +82,7 @@ export default function Apartments() {
         </section>
         <section className="py-8 border-b">
           <div className="container">
-            <ApartmentsFilters
+            <SuitesFilters
               capacityFilter={capacityFilter}
               setCapacityFilter={setCapacityFilter}
               locationFilter={locationFilter}
@@ -93,16 +94,16 @@ export default function Apartments() {
             />
             <div className="flex justify-between items-center mt-6 animate-fade-in [animation-delay:200ms]">
               <p className="text-muted-foreground">
-                {t.apartments.filters.showing} {filteredApartments.length} {t.apartments.filters.of} {apartments.length} {t.apartments.filters.accommodations}
+                {t.suites.filters.showing} {filteredSuites.length} {t.suites.filters.of} {suites.length} {t.suites.filters.accommodations}
               </p>
             </div>
           </div>
         </section>
         <section className="section">
           <div className="container">
-            <ApartmentsList
-              apartments={apartments}
-              filteredApartments={filteredApartments}
+            <SuitesList
+              suites={suites}
+              filteredSuites={filteredSuites}
               loading={loading}
               resetFilters={resetFilters}
             />

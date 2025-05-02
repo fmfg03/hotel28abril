@@ -1,22 +1,22 @@
 
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/components/SuiteCard";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 
-// Apartments fetching hook for booking
-export function useApartments() {
+// Suites fetching hook for booking
+export function useSuites() {
   return useQuery({
-    queryKey: ["apartments"],
+    queryKey: ["suites"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("apartments")
+        .from("suites")
         .select("*")
         .order("price", { ascending: true })
       if (error) {
-        console.error("Error fetching apartments:", error);
+        console.error("Error fetching suites:", error);
         throw new Error(error.message);
       }
-      return data as ApartmentProps[];
+      return data as SuiteProps[];
     },
   });
 }

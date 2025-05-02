@@ -1,38 +1,38 @@
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/components/ApartmentCard";
 
 type SuiteRule = {
-  typeMatch: (apartment: ApartmentProps) => boolean;
+  typeMatch: (suite: SuiteProps) => boolean;
   minAdults: number;
   maxAdults: number;
 };
 
 /**
- * Returns filtered apartments and the minimum rooms needed to accommodate adults.
+ * Returns filtered suites and the minimum rooms needed to accommodate adults.
  */
-export function getAllowedSuitesAndSelection(adults: number, apartments: ApartmentProps[]) {
-  // Rule definitions (must match apartment.name or similar property)
+export function getAllowedSuitesAndSelection(adults: number, suites: SuiteProps[]) {
+  // Rule definitions (must match suite.name or similar property)
   const rules: SuiteRule[] = [
     {
-      typeMatch: (apt) => apt.name.toLowerCase().includes("smart"),
+      typeMatch: (suite) => suite.name.toLowerCase().includes("smart"),
       minAdults: 1,
       maxAdults: 2,
     },
     {
-      typeMatch: (apt) => apt.name.toLowerCase().includes("signature") || apt.name.toLowerCase().includes("sigantura"),
+      typeMatch: (suite) => suite.name.toLowerCase().includes("signature") || suite.name.toLowerCase().includes("sigantura"),
       minAdults: 3,
       maxAdults: 12,
     },
     {
-      typeMatch: (apt) => apt.name.toLowerCase().includes("flex"),
+      typeMatch: (suite) => suite.name.toLowerCase().includes("flex"),
       minAdults: 3,
       maxAdults: 12,
     },
   ];
 
   // Determine allowed types
-  const allowed = apartments.filter(apt => {
+  const allowed = suites.filter(suite => {
     for (let rule of rules) {
-      if (rule.typeMatch(apt)) {
+      if (rule.typeMatch(suite)) {
         return adults >= rule.minAdults && adults <= rule.maxAdults;
       }
     }
@@ -40,7 +40,7 @@ export function getAllowedSuitesAndSelection(adults: number, apartments: Apartme
   });
 
   // If adults <=2, auto-select one Smart suite if available
-  let preselected: ApartmentProps[] = [];
+  let preselected: SuiteProps[] = [];
   if (adults <= 2) {
     const smart = allowed.find(a => a.name.toLowerCase().includes("smart"));
     if (smart) preselected = [smart];

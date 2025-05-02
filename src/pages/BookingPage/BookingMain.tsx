@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { addDays, differenceInDays, format } from "date-fns";
 import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ApartmentProps } from "@/components/ApartmentCard";
+import { SuiteProps } from "@/components/SuiteCard";
 import BookingStepper from "@/components/BookingStepper";
-import { useApartments } from "@/hooks/useApartments";
+import { useSuites } from "@/hooks/useSuites";
 import BookingStepRoom from "./BookingStepRoom";
 import BookingStepGuestForm from "./BookingStepGuestForm";
 import BookingStepReview from "./BookingStepReview";
@@ -15,7 +15,7 @@ export default function BookingMain() {
   const [endDate, setEndDate] = useState<Date | undefined>(addDays(new Date(), 7));
   const [adults, setAdults] = useState("2");
   const [children, setChildren] = useState("0");
-  const [selectedApartment, setSelectedApartment] = useState<ApartmentProps | null>(null);
+  const [selectedSuite, setSelectedSuite] = useState<SuiteProps | null>(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -35,7 +35,7 @@ export default function BookingMain() {
   });
   const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
 
-  const { data: apartments, isLoading, error } = useApartments();
+  const { data: suites, isLoading, error } = useSuites();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -57,7 +57,7 @@ export default function BookingMain() {
 
     if (startDate) params.append("start_date", format(startDate, "yyyy-MM-dd"));
     if (endDate) params.append("end_date", format(endDate, "yyyy-MM-dd"));
-    if (selectedApartment) params.append("room_id", selectedApartment.id);
+    if (selectedSuite) params.append("room_id", selectedSuite.id);
     if (adults) params.append("adults", adults);
     if (children) params.append("children", children);
 
@@ -69,7 +69,7 @@ export default function BookingMain() {
   // Booking reset after confirmation.
   const resetBooking = () => {
     setCurrentStep(1);
-    setSelectedApartment(null);
+    setSelectedSuite(null);
     setStartDate(new Date());
     setEndDate(addDays(new Date(), 7));
     setAdults("2");
@@ -128,9 +128,9 @@ export default function BookingMain() {
             setEndDate={setEndDate}
             setAdults={setAdults}
             setChildren={setChildren}
-            apartments={apartments || []}
-            selectedApartment={selectedApartment}
-            setSelectedApartment={setSelectedApartment}
+            suites={suites || []}
+            selectedSuite={selectedSuite}
+            setSelectedSuite={setSelectedSuite}
             isLoading={isLoading}
             error={error}
             onContinue={() => setCurrentStep(2)}
@@ -142,7 +142,7 @@ export default function BookingMain() {
             formData={formData}
             handleInputChange={handleInputChange}
             handleSelectChange={handleSelectChange}
-            selectedApartment={selectedApartment}
+            selectedSuite={selectedSuite}
             startDate={startDate}
             endDate={endDate}
             adults={adults}
@@ -154,7 +154,7 @@ export default function BookingMain() {
 
         {currentStep === 3 && (
           <BookingStepReview
-            selectedApartment={selectedApartment}
+            selectedSuite={selectedSuite}
             startDate={startDate}
             endDate={endDate}
             adults={adults}
