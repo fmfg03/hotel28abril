@@ -3,66 +3,31 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { SuiteProps } from "@/types/Suite";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SuiteImageGallery from "@/components/SuiteImageGallery";
-import { mockSuites, mockSuiteImages } from "@/data/suitesMockData";
 import SuiteDetailHeader from "@/components/suite/SuiteDetailHeader";
 import SuiteInfo from "@/components/suite/SuiteInfo";
 import SuiteLoading from "@/components/suite/SuiteLoading";
 import SuiteNotFound from "@/components/suite/SuiteNotFound";
-
-type SuiteImage = {
-  id: string;
-  suite_id: string;
-  image_url: string;
-  alt_text: string | null;
-  order: number | null;
-};
+import { useSuites } from "@/hooks/useSuites";
+import { useSuiteImages, SuiteImage } from "@/hooks/useSuiteImages";
 
 export default function SuiteDetail() {
   const { id } = useParams<{ id: string }>();
   const { t, language } = useLanguage();
-  const [suite, setSuite] = useState<SuiteProps | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [images, setImages] = useState<SuiteImage[]>([]);
+  
+  // Fetch all suites
+  const { data: suites, isLoading } = useSuites();
+  
+  // Fetch images for this suite
+  const { data: images = [] } = useSuiteImages(id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    async function fetchSuite() {
-      setLoading(true);
-      try {
-        // Use mock data instead of Supabase query
-        const foundSuite = mockSuites.find(s => s.id === id);
-        
-        if (foundSuite) {
-          setSuite(foundSuite);
-        }
-      } catch (err) {
-        console.error("Error fetching suite:", err);
-      }
-      setLoading(false);
-    }
-    if (id) fetchSuite();
-  }, [id]);
-
-  useEffect(() => {
-    // Fetch suite images gallery from mock data
-    function fetchImages() {
-      if (!id) return;
-      try {
-        // Use mock image data
-        const suiteImages = mockSuiteImages.filter(img => img.suite_id === id);
-        setImages(suiteImages);
-      } catch (err) {
-        console.error("Error fetching suite images:", err);
-      }
-    }
-    fetchImages();
-  }, [id]);
+  // Find the current suite from the fetched suites
+  const suite = suites?.find(s => s.id === id);
 
   // Translation logic
   const translatedName =
@@ -75,7 +40,7 @@ export default function SuiteDetail() {
       ? t.suiteDescriptions[suite.id].description
       : suite?.description;
 
-  if (loading) {
+  if (isLoading) {
     return <SuiteLoading loadingText={t.suites.loading} />;
   }
 
