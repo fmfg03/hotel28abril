@@ -1,6 +1,6 @@
 
 import { Bed, Bath } from "lucide-react";
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface SuiteDetailsProps {

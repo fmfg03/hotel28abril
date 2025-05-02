@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import SuitesFilters from "@/components/SuitesFilters";
 import SuitesList from "@/components/SuitesList";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 import { useSuites } from "@/hooks/useSuites";
 
 export default function Suites() {

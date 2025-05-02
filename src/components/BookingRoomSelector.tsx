@@ -1,6 +1,7 @@
+
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 import { Minus, Plus } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 

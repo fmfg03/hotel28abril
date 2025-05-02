@@ -1,4 +1,17 @@
-import { SuiteProps } from "@/types/Suite";
+import { supabase } from "@/integrations/supabase/client";
+
+// Use the type from the database schema
+export type SuiteProps = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  capacity: number;
+  size: number;
+  image: string;
+  location: string;
+  features: string[];
+}
 
 type SuiteRule = {
   typeMatch: (suite: SuiteProps) => boolean;

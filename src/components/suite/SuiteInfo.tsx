@@ -1,5 +1,5 @@
 
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SuiteDetails from "./SuiteDetails";
 import SuiteFeatures from "./SuiteFeatures";

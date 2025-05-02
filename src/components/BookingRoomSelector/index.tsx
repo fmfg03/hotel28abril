@@ -1,5 +1,6 @@
+
 import React, { useEffect } from "react";
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 import BookingRoomCard from "./BookingRoomCard";
 import BookingSummaryPanel from "./BookingSummaryPanel";
 
