@@ -2,7 +2,6 @@
 import React from "react";
 import { format } from "date-fns";
 import { SuiteProps } from "@/types/Suite";
-import { CreditCard } from "lucide-react";
 
 interface BookingDetailsCardProps {
   selectedSuite: SuiteProps | null;
@@ -42,22 +41,17 @@ export default function BookingDetailsCard({
               <div className="space-y-1 text-sm">
                 <div className="flex justify-between">
                   <span>Check-in:</span>
-                  <span className="font-medium">
-                    {startDate ? format(startDate, "EEE, MMM d, yyyy") : "Not selected"}
-                  </span>
+                  <span className="font-medium">{startDate ? format(startDate, "EEE, MMM d, yyyy") : "Not selected"}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Check-out:</span>
-                  <span className="font-medium">
-                    {endDate ? format(endDate, "EEE, MMM d, yyyy") : "Not selected"}
-                  </span>
+                  <span className="font-medium">{endDate ? format(endDate, "EEE, MMM d, yyyy") : "Not selected"}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Guests:</span>
                   <span className="font-medium">
                     {adults} {parseInt(adults) === 1 ? "Adult" : "Adults"}
-                    {parseInt(children) > 0 && 
-                      `, ${children} ${parseInt(children) === 1 ? "Child" : "Children"}`}
+                    {parseInt(children) > 0 && `, ${children} ${parseInt(children) === 1 ? "Child" : "Children"}`}
                   </span>
                 </div>
               </div>
@@ -70,9 +64,7 @@ export default function BookingDetailsCard({
             <div className="space-y-1 text-sm">
               <div className="flex justify-between">
                 <span>Name:</span>
-                <span className="font-medium">
-                  {formData.firstName} {formData.lastName}
-                </span>
+                <span className="font-medium">{formData.firstName} {formData.lastName}</span>
               </div>
               <div className="flex justify-between">
                 <span>Email:</span>
@@ -98,9 +90,7 @@ export default function BookingDetailsCard({
             {formData.specialRequests && (
               <div>
                 <h4 className="font-medium mb-1">Special Requests:</h4>
-                <p className="text-sm text-muted-foreground">
-                  {formData.specialRequests}
-                </p>
+                <p className="text-sm text-muted-foreground">{formData.specialRequests}</p>
               </div>
             )}
             <div>
