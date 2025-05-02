@@ -1,6 +1,5 @@
-
 import React from "react";
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 
 interface PriceBreakdownProps {
   selectedApartment: SuiteProps;

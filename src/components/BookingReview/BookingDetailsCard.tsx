@@ -1,8 +1,7 @@
-
 import React from "react";
 import { format } from "date-fns";
 import { CreditCard } from "lucide-react";
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 
 interface BookingDetailsCardProps {
   selectedSuite: SuiteProps | null;

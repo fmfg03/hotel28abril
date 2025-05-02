@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -11,7 +10,7 @@ import AmenitiesSection from "@/components/AmenitiesSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 
 // Sample suites data
 const featuredSuites: SuiteProps[] = [{

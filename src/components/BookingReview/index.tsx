@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 import BookingConfirmation from "./BookingConfirmation";
 import BookingDetailsCard from "./BookingDetailsCard";
 import BookingPriceSummary from "./BookingPriceSummary";

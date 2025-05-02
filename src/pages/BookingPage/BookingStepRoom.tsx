@@ -2,7 +2,7 @@
 import BookingDatesGuestsForm from "@/components/BookingDatesGuestsForm";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 import { getAllowedSuitesAndSelection } from "@/utils/calculateRoomSelection";
 import React, { useEffect, useState, useRef } from "react";
 import BookingRoomSelector, { RoomSelection } from "@/components/BookingRoomSelector";

@@ -1,6 +1,5 @@
-
 import { format, differenceInDays } from "date-fns";
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 
 interface BookingSummarySidebarProps {
   selectedSuite: SuiteProps | null;

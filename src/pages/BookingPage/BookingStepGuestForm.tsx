@@ -1,7 +1,7 @@
 
 import BookingGuestForm from "@/components/BookingGuestForm";
 import BookingSummarySidebar from "@/components/BookingSummarySidebar";
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import React from "react";

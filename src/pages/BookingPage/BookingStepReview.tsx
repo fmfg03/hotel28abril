@@ -1,6 +1,6 @@
 
 import BookingReview from "@/components/BookingReview";
-import { SuiteProps } from "@/types/Suite";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
 import React, { useEffect } from "react";
 
 interface BookingStepReviewProps {
