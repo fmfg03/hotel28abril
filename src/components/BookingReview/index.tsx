@@ -8,7 +8,7 @@ import BookingPriceSummary from "./BookingPriceSummary";
 import { CreditCard } from "lucide-react";
 
 interface BookingReviewProps {
-  selectedApartment: SuiteProps | null;
+  selectedSuite: SuiteProps | null;
   startDate?: Date;
   endDate?: Date;
   adults: string;
@@ -20,7 +20,7 @@ interface BookingReviewProps {
 }
 
 export default function BookingReview({
-  selectedApartment,
+  selectedSuite,
   startDate,
   endDate,
   adults,
@@ -41,7 +41,7 @@ export default function BookingReview({
       <h2 className="text-xl font-semibold mb-6">Review Booking Details</h2>
       
       <BookingDetailsCard
-        selectedApartment={selectedApartment}
+        selectedSuite={selectedSuite}
         startDate={startDate}
         endDate={endDate}
         adults={adults}
@@ -50,7 +50,7 @@ export default function BookingReview({
       />
       
       <BookingPriceSummary
-        selectedApartment={selectedApartment}
+        selectedSuite={selectedSuite}
         startDate={startDate}
         endDate={endDate}
       />
@@ -73,7 +73,7 @@ export default function BookingReview({
         <button
           className="btn-primary px-6 py-3 rounded-lg text-white font-bold bg-primary hover:bg-primary/90 transition-colors"
           onClick={onBookNow}
-          disabled={!selectedApartment || !startDate || !endDate}
+          disabled={!selectedSuite || !startDate || !endDate}
           type="button"
         >
           Book Now on Cloudbeds

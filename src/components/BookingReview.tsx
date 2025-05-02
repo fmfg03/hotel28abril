@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 interface BookingReviewProps {
-  selectedApartment: SuiteProps | null;
+  selectedSuite: SuiteProps | null;
   startDate?: Date;
   endDate?: Date;
   adults: string;
@@ -19,7 +19,7 @@ interface BookingReviewProps {
 }
 
 export default function BookingReview({
-  selectedApartment,
+  selectedSuite,
   startDate,
   endDate,
   adults,
@@ -30,8 +30,8 @@ export default function BookingReview({
   onBookNow
 }: BookingReviewProps) {
   const nightsCount = startDate && endDate ? differenceInDays(endDate, startDate) : 0;
-  const totalPrice = selectedApartment
-    ? selectedApartment.price * nightsCount + 50 + 30
+  const totalPrice = selectedSuite
+    ? selectedSuite.price * nightsCount + 50 + 30
     : 0;
 
   return (
@@ -43,18 +43,18 @@ export default function BookingReview({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-lg font-medium mb-4">Accommodation Details</h3>
-                {selectedApartment && (
+                {selectedSuite && (
                   <div className="space-y-4">
                     <div className="rounded-lg overflow-hidden">
                       <img
-                        src={selectedApartment.image}
-                        alt={selectedApartment.name}
+                        src={selectedSuite.image}
+                        alt={selectedSuite.name}
                         className="w-full h-48 object-cover"
                       />
                     </div>
                     <div>
-                      <h4 className="font-semibold">{selectedApartment.name}</h4>
-                      <p className="text-sm text-muted-foreground">{selectedApartment.location}</p>
+                      <h4 className="font-semibold">{selectedSuite.name}</h4>
+                      <p className="text-sm text-muted-foreground">{selectedSuite.location}</p>
                     </div>
                     <div className="space-y-1 text-sm">
                       <div className="flex justify-between">
@@ -131,13 +131,13 @@ export default function BookingReview({
           <div className="glass-card p-6 mb-8">
             <h3 className="text-lg font-medium mb-4">Price Summary</h3>
             <div className="space-y-2">
-              {selectedApartment && (
+              {selectedSuite && (
                 <>
                   <div className="flex justify-between items-center">
                     <span>
-                      ${selectedApartment.price} x {nightsCount} {nightsCount === 1 ? "night" : "nights"}
+                      ${selectedSuite.price} x {nightsCount} {nightsCount === 1 ? "night" : "nights"}
                     </span>
-                    <span className="font-medium">${selectedApartment.price * nightsCount}</span>
+                    <span className="font-medium">${selectedSuite.price * nightsCount}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Cleaning fee</span>
@@ -172,7 +172,7 @@ export default function BookingReview({
             <button
               className="btn-primary px-6 py-3 rounded-lg text-white font-bold bg-primary hover:bg-primary/90 transition-colors"
               onClick={onBookNow}
-              disabled={!selectedApartment || !startDate || !endDate}
+              disabled={!selectedSuite || !startDate || !endDate}
               type="button"
             >
               Book Now on Cloudbeds

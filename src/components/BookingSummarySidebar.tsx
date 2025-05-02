@@ -3,7 +3,7 @@ import { format, differenceInDays } from "date-fns";
 import { SuiteProps } from "@/types/Suite";
 
 interface BookingSummarySidebarProps {
-  selectedApartment: SuiteProps | null;
+  selectedSuite: SuiteProps | null;
   startDate?: Date;
   endDate?: Date;
   adults: string;
@@ -11,7 +11,7 @@ interface BookingSummarySidebarProps {
 }
 
 export default function BookingSummarySidebar({
-  selectedApartment,
+  selectedSuite,
   startDate,
   endDate,
   adults,
@@ -19,17 +19,17 @@ export default function BookingSummarySidebar({
 }: BookingSummarySidebarProps) {
   const nightsCount = startDate && endDate ? differenceInDays(endDate, startDate) : 0;
 
-  const totalPrice = selectedApartment
-    ? selectedApartment.price * nightsCount + 50 + 30
+  const totalPrice = selectedSuite
+    ? selectedSuite.price * nightsCount + 50 + 30
     : 0;
 
   return (
     <div className="glass-card p-6 sticky top-24">
-      {selectedApartment && (
+      {selectedSuite && (
         <>
           <div className="pb-4 border-b">
-            <h3 className="font-medium mb-1">{selectedApartment.name}</h3>
-            <p className="text-sm text-muted-foreground">{selectedApartment.location}</p>
+            <h3 className="font-medium mb-1">{selectedSuite.name}</h3>
+            <p className="text-sm text-muted-foreground">{selectedSuite.location}</p>
           </div>
 
           <div className="py-4 border-b space-y-2">
@@ -57,9 +57,9 @@ export default function BookingSummarySidebar({
           <div className="py-4 border-b space-y-2">
             <div className="flex justify-between items-center">
               <span>
-                ${selectedApartment.price} x {nightsCount} {nightsCount === 1 ? "night" : "nights"}
+                ${selectedSuite.price} x {nightsCount} {nightsCount === 1 ? "night" : "nights"}
               </span>
-              <span className="font-medium">${selectedApartment.price * nightsCount}</span>
+              <span className="font-medium">${selectedSuite.price * nightsCount}</span>
             </div>
             <div className="flex justify-between items-center">
               <span>Cleaning fee</span>

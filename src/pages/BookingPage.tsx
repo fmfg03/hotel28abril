@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { format, addDays, differenceInDays } from "date-fns";
 import { Link } from "react-router-dom";
@@ -5,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SuiteProps } from "@/components/SuiteCard";
+import { SuiteProps } from "@/types/Suite";
 import BookingStepper from "@/components/BookingStepper";
 import BookingDatesGuestsForm from "@/components/BookingDatesGuestsForm";
 import BookingSuiteList from "@/components/BookingSuiteList";

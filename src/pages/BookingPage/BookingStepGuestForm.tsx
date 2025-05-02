@@ -1,7 +1,7 @@
 
 import BookingGuestForm from "@/components/BookingGuestForm";
 import BookingSummarySidebar from "@/components/BookingSummarySidebar";
-import { SuiteProps } from "@/components/SuiteCard";
+import { SuiteProps } from "@/types/Suite";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import React from "react";
@@ -45,7 +45,7 @@ const BookingStepGuestForm = ({
         <div className="md:col-span-1">
           <h2 className="text-xl font-semibold mb-4">Booking Summary</h2>
           <BookingSummarySidebar
-            selectedApartment={selectedSuite}
+            selectedSuite={selectedSuite}
             startDate={startDate}
             endDate={endDate}
             adults={adults}
