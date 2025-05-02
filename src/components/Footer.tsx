@@ -109,7 +109,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-border pt-8 mt-8 text-center text-muted-foreground">
-          <p>&copy; {currentYear} MareSereno. {t.footer.allRights}</p>
+          <p>&copy; {currentYear} Hotel 28 Cancun. {t.footer.allRights}</p>
         </div>
       </div>
     </footer>
