@@ -88,12 +88,17 @@ export const useBookings = () => {
         .select("id")
         .single();
 
-      if (bookingError) {
+      if (bookingError || !bookingResult) {
         console.error("Error saving booking:", bookingError);
         return null;
       }
 
-      const bookingId = bookingResult.id;
+      // Safely access the booking ID with proper type checking
+      const bookingId = bookingResult?.id;
+      if (!bookingId) {
+        console.error("No booking ID returned");
+        return null;
+      }
 
       // If using credit card, save payment details
       if (formData.paymentMethod === "credit-card" && formData.cardNumber) {

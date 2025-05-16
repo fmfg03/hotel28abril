@@ -14,6 +14,8 @@ interface BookingReviewProps {
   children: string;
   formData: any;
   isBookingConfirmed: boolean;
+  isProcessing?: boolean;
+  bookingReference?: string;
   onBack: () => void;
   onBookNow: () => void;
 }
@@ -26,6 +28,8 @@ export default function BookingReview({
   children,
   formData,
   isBookingConfirmed,
+  isProcessing = false,
+  bookingReference,
   onBack,
   onBookNow
 }: BookingReviewProps) {
@@ -168,14 +172,20 @@ export default function BookingReview({
             </div>
           </div>
           <div className="flex justify-between">
-            <Button variant="outline" onClick={onBack}>Back</Button>
+            <Button variant="outline" onClick={onBack} disabled={isProcessing}>Back</Button>
             <button
-              className="btn-primary px-6 py-3 rounded-lg text-white font-bold bg-primary hover:bg-primary/90 transition-colors"
+              className="btn-primary px-6 py-3 rounded-lg text-white font-bold bg-primary hover:bg-primary/90 transition-colors relative"
               onClick={onBookNow}
-              disabled={!selectedSuite || !startDate || !endDate}
+              disabled={!selectedSuite || !startDate || !endDate || isProcessing}
               type="button"
             >
-              Book Now on Cloudbeds
+              {isProcessing ? (
+                <>
+                  <span className="inline-block animate-spin mr-2">⟳</span> Processing...
+                </>
+              ) : (
+                "Book Now on Cloudbeds"
+              )}
             </button>
           </div>
         </>
@@ -189,7 +199,7 @@ export default function BookingReview({
             Your reservation has been successfully confirmed. A confirmation email has been sent to {formData.email}.
           </p>
           <p className="font-medium mb-8">
-            Booking Reference: <span className="text-primary">MRS-{Math.floor(Math.random() * 10000).toString().padStart(4, '0')}</span>
+            Booking Reference: <span className="text-primary">{bookingReference || `MRS-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`}</span>
           </p>
           <Button asChild className="btn-primary">
             <Link to="/">Return to Homepage</Link>
