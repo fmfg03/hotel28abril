@@ -17,7 +17,7 @@ import {
   Bed, 
   BookOpen, 
   Bell, // Using Bell icon for the concierge service
-  Accessibility 
+  HelpCircle // Replacing Accessibility with HelpCircle for general assistance
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -37,7 +37,7 @@ export default function Amenities() {
       dining: [<Utensils key={0} />, <Coffee key={1} />, <Clock key={2} />, <MapPin key={3} />],
       mobility: [<Plane key={0} />, <Car key={1} />, <MapPin key={2} />],
       entertainment: [<Music key={0} />, <Waves key={1} />, <BookOpen key={2} />],
-      assistance: [<Bell key={0} />, <Accessibility key={1} />] // Bell icon for concierge service
+      assistance: [<Bell key={0} />, <HelpCircle key={1} />] // Bell for concierge, HelpCircle for general assistance
     };
     
     return icons[categoryName as keyof typeof icons]?.[index] || <Coffee />;
@@ -258,3 +258,4 @@ export default function Amenities() {
     </div>
   );
 }
+
