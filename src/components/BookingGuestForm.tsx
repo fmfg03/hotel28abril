@@ -1,7 +1,7 @@
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState, useEffect } from "react";
 
 interface BookingGuestFormProps {
   formData: any;
@@ -14,6 +14,97 @@ export default function BookingGuestForm({
   handleInputChange,
   handleSelectChange
 }: BookingGuestFormProps) {
+  const [cardType, setCardType] = useState<string>("");
+
+  // Format credit card number in groups of 4 digits
+  const formatCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value) {
+      // Detect card type based on first digits
+      if (value.startsWith('34') || value.startsWith('37')) {
+        setCardType('amex');
+      } else if (value.startsWith('4')) {
+        setCardType('visa');
+      } else if (/^(5[1-5]|2[2-7])/.test(value)) {
+        setCardType('mastercard');
+      } else {
+        setCardType('');
+      }
+
+      // Format the number with spaces
+      if (cardType === 'amex') {
+        // AMEX format: XXXX XXXXXX XXXXX (4-6-5)
+        value = value.slice(0, 15);
+        value = value.replace(/(\d{4})(\d{6})(\d{0,5})/, (_, p1, p2, p3) => 
+          [p1, p2, p3].filter(Boolean).join(' '));
+      } else {
+        // Other cards format: XXXX XXXX XXXX XXXX
+        value = value.slice(0, 16);
+        value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+      }
+    }
+    
+    const syntheticEvent = {
+      target: {
+        name: 'cardNumber',
+        value: value
+      }
+    } as React.ChangeEvent<HTMLInputElement>;
+    
+    handleInputChange(syntheticEvent);
+  };
+
+  // Format expiry date as MM/YY
+  const formatExpiryDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, '');
+    
+    if (value) {
+      // Limit to 4 digits (MMYY)
+      value = value.slice(0, 4);
+      
+      // Format as MM/YY
+      if (value.length > 2) {
+        value = value.slice(0, 2) + '/' + value.slice(2);
+      }
+      
+      // Validate month (01-12)
+      const month = parseInt(value.slice(0, 2));
+      if (month > 12) {
+        value = '12' + value.slice(2);
+      } else if (month === 0 && value.length >= 2) {
+        value = '01' + value.slice(2);
+      }
+    }
+    
+    const syntheticEvent = {
+      target: {
+        name: 'cardExpiry',
+        value: value
+      }
+    } as React.ChangeEvent<HTMLInputElement>;
+    
+    handleInputChange(syntheticEvent);
+  };
+
+  // Handle CVC format based on card type
+  const formatCvc = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, '');
+    const maxLength = cardType === 'amex' ? 4 : 3;
+    
+    if (value) {
+      value = value.slice(0, maxLength);
+    }
+    
+    const syntheticEvent = {
+      target: {
+        name: 'cardCvc',
+        value: value
+      }
+    } as React.ChangeEvent<HTMLInputElement>;
+    
+    handleInputChange(syntheticEvent);
+  };
+
   return (
     <form className="space-y-6">
       <div className="glass-card p-6 space-y-6">
@@ -139,13 +230,14 @@ export default function BookingGuestForm({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="cardNumber">Card Number</Label>
+              <Label htmlFor="cardNumber">Card Number {cardType && `(${cardType})`}</Label>
               <Input
                 id="cardNumber"
                 name="cardNumber"
                 value={formData.cardNumber}
-                onChange={handleInputChange}
+                onChange={formatCardNumber}
                 placeholder="0000 0000 0000 0000"
+                maxLength={19}
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -155,18 +247,20 @@ export default function BookingGuestForm({
                   id="cardExpiry"
                   name="cardExpiry"
                   value={formData.cardExpiry}
-                  onChange={handleInputChange}
+                  onChange={formatExpiryDate}
                   placeholder="MM/YY"
+                  maxLength={5}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="cardCvc">CVC</Label>
+                <Label htmlFor="cardCvc">CVC {cardType === 'amex' ? '(4 digits)' : '(3 digits)'}</Label>
                 <Input
                   id="cardCvc"
                   name="cardCvc"
                   value={formData.cardCvc}
-                  onChange={handleInputChange}
-                  placeholder="123"
+                  onChange={formatCvc}
+                  placeholder={cardType === 'amex' ? "0000" : "000"}
+                  maxLength={cardType === 'amex' ? 4 : 3}
                 />
               </div>
             </div>
