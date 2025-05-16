@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSuites } from "@/hooks/useSuites";
 import BookingStepper from "@/components/BookingStepper";
-import BookingStepRoom from "./BookingStepRoom";
+import BookingStepRoom from "./components/BookingStepRoom";
 import BookingStepGuestForm from "./BookingStepGuestForm";
 import BookingStepReview from "./BookingStepReview";
 import BookingHero from "./components/BookingHero";
