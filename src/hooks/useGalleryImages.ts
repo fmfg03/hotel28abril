@@ -24,7 +24,7 @@ export function useGalleryImages() {
         const { data, error } = await supabase
           .from('gallery_images')
           .select('*')
-          .order('order_index', { ascending: true, nullsLast: true });
+          .order('order_index', { ascending: true, nullsFirst: true });
 
         if (error) {
           throw new Error(error.message);
