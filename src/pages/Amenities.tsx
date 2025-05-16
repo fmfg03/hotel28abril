@@ -6,7 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { 
   Waves, 
   Bath,
-  Dumbbell,
+  Dumbbell, 
   Utensils, 
   Coffee, 
   Clock, 
@@ -16,8 +16,8 @@ import {
   Music, 
   Bed, 
   BookOpen, 
-  Bell, // Using Bell icon for the concierge service
-  HelpCircle // Replacing Accessibility with HelpCircle for general assistance
+  Bell, 
+  HelpCircle 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -65,8 +65,8 @@ export default function Amenities() {
             description: "Book in-room massage sessions or let us connect you with trusted spa partners nearby."
           },
           {
-            title: "Yoga Classes (upon availability)",
-            description: "Ask our team for available yoga or meditation sessions with certified instructors near the hotel."
+            title: "Beach Club (external provider)",
+            description: "Looking for a beach day? Hotel 28 guests enjoy exclusive access to a partnered Beach Club just minutes away. Day pass available with or without food credit."
           }
         ]
       },
