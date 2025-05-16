@@ -18,7 +18,7 @@ export function useAmenityImages(limit: number = 8) {
           .from('gallery_images')
           .select('*')
           .eq('image_type', 'Amenities')
-          .order('order_index', { ascending: true, nullsLast: true })
+          .order('order_index', { ascending: true })
           .limit(limit);
 
         if (error) {
