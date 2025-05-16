@@ -88,13 +88,15 @@ export const useBookings = () => {
         .select("id")
         .single();
 
-      if (bookingError || !bookingResult) {
+      if (bookingError) {
         console.error("Error saving booking:", bookingError);
         return null;
       }
 
-      // Safely access the booking ID with proper type checking
-      const bookingId = bookingResult?.id;
+      // Type assertion to handle the table not being in the TypeScript types yet
+      // This helps us safely extract the ID
+      const bookingId = bookingResult ? (bookingResult as any).id : null;
+      
       if (!bookingId) {
         console.error("No booking ID returned");
         return null;
