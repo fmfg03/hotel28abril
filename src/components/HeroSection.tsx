@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
@@ -23,7 +24,7 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/public/lovable-uploads/hotel28herosinlogo.webp')`,
+          backgroundImage: `url('/lovable-uploads/hotel28herosinlogo.webp')`,
           transform: `translateY(${scrollY * 0.5}px)`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
