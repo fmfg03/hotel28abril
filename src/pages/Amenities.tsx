@@ -5,8 +5,8 @@ import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { 
   Waves, 
-  Bath, // Replacing Spa with Bath
-  Dumbbell, // Replacing Yoga with Dumbbell
+  Bath,
+  Dumbbell,
   Utensils, 
   Coffee, 
   Clock, 
@@ -16,8 +16,8 @@ import {
   Music, 
   Bed, 
   BookOpen, 
-  Bell, 
-  Accessibility // Replacing Wheelchair with Accessibility
+  Bell, // Using Bell icon for the concierge service
+  Accessibility 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -37,7 +37,7 @@ export default function Amenities() {
       dining: [<Utensils key={0} />, <Coffee key={1} />, <Clock key={2} />, <MapPin key={3} />],
       mobility: [<Plane key={0} />, <Car key={1} />, <MapPin key={2} />],
       entertainment: [<Music key={0} />, <Waves key={1} />, <BookOpen key={2} />],
-      assistance: [<Bell key={0} />, <Accessibility key={1} />]
+      assistance: [<Bell key={0} />, <Accessibility key={1} />] // Bell icon for concierge service
     };
     
     return icons[categoryName as keyof typeof icons]?.[index] || <Coffee />;
