@@ -21,9 +21,12 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useAmenityImages } from "@/hooks/useAmenityImages";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Amenities() {
   const { t } = useLanguage();
+  const { images, isLoading, error } = useAmenityImages(8);
   
   useEffect(() => {
     // Scroll to top when component mounts
@@ -231,18 +234,35 @@ export default function Amenities() {
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-              {Array.from({ length: 8 }).map((_, index) => (
-                <div 
-                  key={index} 
-                  className="aspect-square rounded-lg overflow-hidden shadow-md transition-transform hover:scale-105"
-                >
-                  <img 
-                    src={`https://images.unsplash.com/photo-${1550000000000 + index * 100000}?w=400&h=400&fit=crop`}
-                    alt={`Amenity ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
+              {isLoading ? (
+                // Show skeletons while loading
+                Array.from({ length: 8 }).map((_, index) => (
+                  <div key={index} className="aspect-square rounded-lg overflow-hidden bg-muted">
+                    <Skeleton className="w-full h-full" />
+                  </div>
+                ))
+              ) : error ? (
+                <div className="col-span-full text-center text-destructive">
+                  <p>Error loading gallery images. Please try again later.</p>
                 </div>
-              ))}
+              ) : images.length === 0 ? (
+                <div className="col-span-full text-center text-muted-foreground">
+                  <p>No amenity images available at the moment.</p>
+                </div>
+              ) : (
+                images.map((image, index) => (
+                  <div 
+                    key={image.id} 
+                    className="aspect-square rounded-lg overflow-hidden shadow-md transition-transform hover:scale-105"
+                  >
+                    <img 
+                      src={image.image_url}
+                      alt={image.alt_text || `Amenity ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))
+              )}
             </div>
             
             <div className="flex justify-center">
@@ -258,4 +278,3 @@ export default function Amenities() {
     </div>
   );
 }
-
