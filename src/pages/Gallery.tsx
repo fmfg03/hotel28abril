@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,99 +8,34 @@ import GalleryGrid from "@/components/gallery/GalleryGrid";
 import GalleryLightbox from "@/components/gallery/GalleryLightbox";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-
-// Sample gallery images
-const galleryImages = [
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop",
-    alt: "Beachfront view",
-    category: "exterior"
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
-    alt: "Luxury suite interior",
-    category: "rooms"
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1584132905271-512c958d674a?w=800&h=600&fit=crop",
-    alt: "Swimming pool",
-    category: "amenities"
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=800&h=600&fit=crop",
-    alt: "Premium apartment",
-    category: "rooms"
-  },
-  {
-    id: 5,
-    src: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800&h=600&fit=crop",
-    alt: "Beach sunset",
-    category: "exterior"
-  },
-  {
-    id: 6,
-    src: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&h=600&fit=crop",
-    alt: "Dining area",
-    category: "amenities"
-  },
-  {
-    id: 7,
-    src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&h=600&fit=crop",
-    alt: "Bathroom",
-    category: "rooms"
-  },
-  {
-    id: 8,
-    src: "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&h=600&fit=crop",
-    alt: "Beach pathway",
-    category: "exterior"
-  },
-  {
-    id: 9,
-    src: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&h=600&fit=crop",
-    alt: "Restaurant",
-    category: "amenities"
-  },
-  {
-    id: 10,
-    src: "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?w=800&h=600&fit=crop",
-    alt: "Bedroom",
-    category: "rooms"
-  },
-  {
-    id: 11,
-    src: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&h=600&fit=crop",
-    alt: "Beach umbrellas",
-    category: "exterior"
-  },
-  {
-    id: 12,
-    src: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=600&fit=crop",
-    alt: "Spa",
-    category: "amenities"
-  },
-];
+import { useGalleryImages, GalleryImage } from "@/hooks/useGalleryImages";
+import { Skeleton } from "@/components/ui/skeleton";
+import { AlertCircle } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function Gallery() {
   const { t } = useLanguage();
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [filteredImages, setFilteredImages] = useState(galleryImages);
+  const { images, isLoading, error } = useGalleryImages();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [filteredImages, setFilteredImages] = useState<GalleryImage[]>([]);
   const [activeFilter, setActiveFilter] = useState("all");
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (images.length) {
+      filterGallery(activeFilter);
+    }
+  }, [images, activeFilter]);
+
   const filterGallery = (category: string) => {
     setActiveFilter(category);
     if (category === "all") {
-      setFilteredImages(galleryImages);
+      setFilteredImages(images);
     } else {
-      setFilteredImages(galleryImages.filter(img => img.category === category));
+      setFilteredImages(images.filter(img => img.image_type === category));
     }
   };
 
@@ -135,7 +71,8 @@ export default function Gallery() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedImage, filteredImages]);
 
-  const filterOptions = ["all", "exterior", "rooms", "amenities"];
+  // Extract unique image types for filter options
+  const filterOptions = ["all", ...new Set(images.map(img => img.image_type))];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -164,14 +101,44 @@ export default function Gallery() {
         {/* Gallery Filters */}
         <section className="py-8">
           <div className="container">
-            <GalleryFilterBar
-              filterOptions={filterOptions}
-              activeFilter={activeFilter}
-              onFilter={filterGallery}
-              t={t}
-            />
+            {error && (
+              <Alert variant="destructive" className="mb-6">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>
+                  {error}. Displaying sample images instead.
+                </AlertDescription>
+              </Alert>
+            )}
 
-            <GalleryGrid images={filteredImages} onImageClick={setSelectedImage} />
+            {isLoading ? (
+              <div className="space-y-4">
+                <div className="flex justify-center gap-2 mb-8">
+                  {[1, 2, 3, 4].map((i) => (
+                    <Skeleton key={i} className="h-10 w-24 rounded-full" />
+                  ))}
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {Array(12).fill(0).map((_, i) => (
+                    <Skeleton key={i} className="aspect-[4/3] rounded-xl" />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <>
+                <GalleryFilterBar
+                  filterOptions={filterOptions}
+                  activeFilter={activeFilter}
+                  onFilter={filterGallery}
+                  t={t}
+                />
+
+                <GalleryGrid 
+                  images={filteredImages} 
+                  onImageClick={(id) => setSelectedImage(id)} 
+                />
+              </>
+            )}
           </div>
         </section>
 

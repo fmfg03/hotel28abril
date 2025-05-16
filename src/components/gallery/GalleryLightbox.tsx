@@ -1,16 +1,11 @@
 
 import React from "react";
 import { X } from "lucide-react";
+import { GalleryImage } from "@/hooks/useGalleryImages";
 
-interface ImageType {
-  id: number;
-  src: string;
-  alt: string;
-  category: string;
-}
 interface GalleryLightboxProps {
-  selectedImage: number | null;
-  images: ImageType[];
+  selectedImage: string | null;
+  images: GalleryImage[];
   onClose: () => void;
   onPrev: () => void;
   onNext: () => void;
@@ -25,6 +20,7 @@ const GalleryLightbox: React.FC<GalleryLightboxProps> = ({
 }) => {
   const image = images.find((img) => img.id === selectedImage);
   if (!image) return null;
+  
   return (
     <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 animate-fade-in">
       <button
@@ -47,8 +43,8 @@ const GalleryLightbox: React.FC<GalleryLightboxProps> = ({
 
       <div className="max-w-5xl max-h-[80vh] overflow-hidden">
         <img
-          src={image.src}
-          alt={image.alt}
+          src={image.image_url}
+          alt={image.alt_text || ""}
           className="max-w-full max-h-[80vh] object-contain"
         />
       </div>

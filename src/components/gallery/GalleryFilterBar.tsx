@@ -15,6 +15,14 @@ const GalleryFilterBar: React.FC<GalleryFilterBarProps> = ({
   onFilter,
   t,
 }) => {
+  const getFilterLabel = (category: string): string => {
+    if (category === "all") return t.gallery.filters.all;
+    if (category === "exterior") return t.gallery.filters.exterior;
+    if (category === "rooms") return t.gallery.filters.rooms;
+    if (category === "amenities") return t.gallery.filters.amenities;
+    return category; // Return the category itself if no translation exists
+  };
+
   return (
     <div className="flex flex-wrap justify-center gap-2 mb-8 animate-fade-in">
       {filterOptions.map((category) => (
@@ -28,13 +36,7 @@ const GalleryFilterBar: React.FC<GalleryFilterBarProps> = ({
               : "bg-card hover:bg-muted"
           )}
         >
-          {category === "all"
-            ? t.gallery.filters.all
-            : category === "exterior"
-            ? t.gallery.filters.exterior
-            : category === "rooms"
-            ? t.gallery.filters.rooms
-            : t.gallery.filters.amenities}
+          {getFilterLabel(category)}
         </button>
       ))}
     </div>
