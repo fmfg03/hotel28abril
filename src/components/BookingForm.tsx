@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 export default function BookingForm() {
   const { t } = useLanguage();
@@ -26,17 +27,30 @@ export default function BookingForm() {
   const [adults, setAdults] = useState("2");
   const [children, setChildren] = useState("0");
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would send the booking data to a server
+    // Log the booking data
     console.log("Booking submitted:", { startDate, endDate, adults, children });
+    
+    // Show the confirmation state briefly
     setSubmitted(true);
     
-    // Reset form after 3 seconds
+    // Navigate to booking page after a short delay to show the confirmation
     setTimeout(() => {
       setSubmitted(false);
-    }, 3000);
+      
+      // Construct query parameters for the booking page
+      const params = new URLSearchParams();
+      if (startDate) params.append("startDate", startDate.toISOString());
+      if (endDate) params.append("endDate", endDate.toISOString());
+      params.append("adults", adults);
+      params.append("children", children);
+      
+      // Navigate to the booking page with the parameters
+      navigate(`/booking?${params.toString()}`);
+    }, 1000);
   };
 
   return (

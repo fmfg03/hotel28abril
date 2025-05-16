@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { addDays, differenceInDays, format } from "date-fns";
 import { ChevronRight } from "lucide-react";
@@ -8,6 +9,7 @@ import { useSuites } from "@/hooks/useSuites";
 import BookingStepRoom from "./BookingStepRoom";
 import BookingStepGuestForm from "./BookingStepGuestForm";
 import BookingStepReview from "./BookingStepReview";
+import { useLocation } from "react-router-dom";
 
 export default function BookingMain() {
   const [startDate, setStartDate] = useState<Date | undefined>(new Date());
@@ -33,12 +35,48 @@ export default function BookingMain() {
     specialRequests: ""
   });
   const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
+  
+  // Get location to parse URL parameters
+  const location = useLocation();
 
   const { data: suites, isLoading, error } = useSuites();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    
+    // Parse URL parameters
+    const params = new URLSearchParams(location.search);
+    
+    // Set dates from URL parameters if present
+    const startParam = params.get('startDate');
+    const endParam = params.get('endDate');
+    const adultsParam = params.get('adults');
+    const childrenParam = params.get('children');
+    
+    if (startParam) {
+      try {
+        setStartDate(new Date(startParam));
+      } catch (e) {
+        console.error("Invalid start date:", e);
+      }
+    }
+    
+    if (endParam) {
+      try {
+        setEndDate(new Date(endParam));
+      } catch (e) {
+        console.error("Invalid end date:", e);
+      }
+    }
+    
+    if (adultsParam) {
+      setAdults(adultsParam);
+    }
+    
+    if (childrenParam) {
+      setChildren(childrenParam);
+    }
+  }, [location.search]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
