@@ -5,7 +5,7 @@ import { SuiteProps } from "@/utils/calculateRoomSelection";
 import BookingConfirmation from "./BookingConfirmation";
 import BookingDetailsCard from "./BookingDetailsCard";
 import BookingPriceSummary from "./BookingPriceSummary";
-import { CreditCard } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 interface BookingReviewProps {
   selectedSuite: SuiteProps | null;
@@ -17,6 +17,8 @@ interface BookingReviewProps {
   isBookingConfirmed: boolean;
   onBack: () => void;
   onBookNow: () => void;
+  isProcessing?: boolean;
+  bookingReference?: string;
 }
 
 export default function BookingReview({
@@ -28,12 +30,12 @@ export default function BookingReview({
   formData,
   isBookingConfirmed,
   onBack,
-  onBookNow
+  onBookNow,
+  isProcessing = false,
+  bookingReference
 }: BookingReviewProps) {
-  const bookingReference = `MRS-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`;
-
   if (isBookingConfirmed) {
-    return <BookingConfirmation email={formData.email} reference={bookingReference} />;
+    return <BookingConfirmation email={formData.email} reference={bookingReference || `MRS-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`} />;
   }
 
   return (
@@ -69,14 +71,21 @@ export default function BookingReview({
       </div>
       
       <div className="flex justify-between">
-        <Button variant="outline" onClick={onBack}>Back</Button>
+        <Button variant="outline" onClick={onBack} disabled={isProcessing}>Back</Button>
         <button
-          className="btn-primary px-6 py-3 rounded-lg text-white font-bold bg-primary hover:bg-primary/90 transition-colors"
+          className="btn-primary px-6 py-3 rounded-lg text-white font-bold bg-primary hover:bg-primary/90 transition-colors relative"
           onClick={onBookNow}
-          disabled={!selectedSuite || !startDate || !endDate}
+          disabled={!selectedSuite || !startDate || !endDate || isProcessing}
           type="button"
         >
-          Book Now on Cloudbeds
+          {isProcessing ? (
+            <>
+              <Loader2 className="h-4 w-4 mr-2 animate-spin inline" />
+              Processing...
+            </>
+          ) : (
+            "Book Now on Cloudbeds"
+          )}
         </button>
       </div>
     </div>

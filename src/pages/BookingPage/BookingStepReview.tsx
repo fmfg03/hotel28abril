@@ -1,7 +1,9 @@
 
 import BookingReview from "@/components/BookingReview";
 import { SuiteProps } from "@/utils/calculateRoomSelection";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useBookings } from "@/hooks/useBookings";
+import { toast } from "sonner";
 
 interface BookingStepReviewProps {
   selectedSuite: SuiteProps | null;
@@ -30,6 +32,10 @@ const BookingStepReview = ({
   onBookNow,
   onReset
 }: BookingStepReviewProps) => {
+  const { saveBooking } = useBookings();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [bookingReference, setBookingReference] = useState<string>("");
+
   useEffect(() => {
     if (isBookingConfirmed) {
       const timer = setTimeout(() => {
@@ -38,6 +44,48 @@ const BookingStepReview = ({
       return () => clearTimeout(timer);
     }
   }, [isBookingConfirmed, onReset]);
+
+  const handleBookNow = async () => {
+    if (!selectedSuite || !startDate || !endDate) {
+      toast.error("Missing required booking information");
+      return;
+    }
+
+    setIsProcessing(true);
+
+    try {
+      // First save to our database
+      const bookingId = await saveBooking(
+        formData,
+        selectedSuite,
+        startDate,
+        endDate,
+        adults,
+        children
+      );
+
+      if (!bookingId) {
+        toast.error("Failed to save booking. Please try again.");
+        setIsProcessing(false);
+        return;
+      }
+
+      // Generate a booking reference
+      const reference = `MRS-${bookingId.substring(0, 4).toUpperCase()}`;
+      setBookingReference(reference);
+      
+      // Mark as confirmed and redirect to CloudBeds
+      setIsBookingConfirmed(true);
+      
+      // Proceed with CloudBeds redirection
+      onBookNow();
+    } catch (error) {
+      console.error("Error during booking process:", error);
+      toast.error("An error occurred during the booking process. Please try again.");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   return (
     <div className="animate-fade-in [animation-delay:300ms]">
@@ -50,10 +98,9 @@ const BookingStepReview = ({
         formData={formData}
         isBookingConfirmed={isBookingConfirmed}
         onBack={onBack}
-        onBookNow={() => {
-          setIsBookingConfirmed(true);
-          onBookNow();
-        }}
+        onBookNow={handleBookNow}
+        isProcessing={isProcessing}
+        bookingReference={bookingReference || undefined}
       />
     </div>
   );
