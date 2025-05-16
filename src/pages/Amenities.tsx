@@ -5,8 +5,8 @@ import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { 
   Waves, 
-  Spa, 
-  Yoga, 
+  Bath, // Replacing Spa with Bath
+  Dumbbell, // Replacing Yoga with Dumbbell
   Utensils, 
   Coffee, 
   Clock, 
@@ -17,7 +17,7 @@ import {
   Bed, 
   BookOpen, 
   Bell, 
-  Wheelchair
+  Accessibility // Replacing Wheelchair with Accessibility
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -33,11 +33,11 @@ export default function Amenities() {
   // Helper function to get the appropriate icon for each amenity
   const getIcon = (categoryName: string, index: number) => {
     const icons = {
-      wellness: [<Waves key={0} />, <Spa key={1} />, <Yoga key={2} />],
+      wellness: [<Waves key={0} />, <Bath key={1} />, <Dumbbell key={2} />],
       dining: [<Utensils key={0} />, <Coffee key={1} />, <Clock key={2} />, <MapPin key={3} />],
       mobility: [<Plane key={0} />, <Car key={1} />, <MapPin key={2} />],
       entertainment: [<Music key={0} />, <Waves key={1} />, <BookOpen key={2} />],
-      assistance: [<Bell key={0} />, <Wheelchair key={1} />]
+      assistance: [<Bell key={0} />, <Accessibility key={1} />]
     };
     
     return icons[categoryName as keyof typeof icons]?.[index] || <Coffee />;
