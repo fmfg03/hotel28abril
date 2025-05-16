@@ -190,12 +190,7 @@ export default function Amenities() {
             <section key={category} className={`py-16 ${isEven ? 'bg-card' : ''}`}>
               <div className="container">
                 <div className="text-center max-w-3xl mx-auto mb-12">
-                  <h2 className="text-3xl font-bold mb-4 flex items-center justify-center gap-2">
-                    {category === 'wellness' && <span className="text-primary">🧘‍♂️</span>}
-                    {category === 'dining' && <span className="text-primary">🍽️</span>}
-                    {category === 'mobility' && <span className="text-primary">🚗</span>}
-                    {category === 'entertainment' && <span className="text-primary">🎉</span>}
-                    {category === 'assistance' && <span className="text-primary">🛎️</span>}
+                  <h2 className="text-3xl font-bold mb-4">
                     {categoryData.title}
                   </h2>
                   <p className="text-muted-foreground">
@@ -227,8 +222,8 @@ export default function Amenities() {
         <section className="py-16">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl font-bold mb-4 flex items-center justify-center gap-2">
-                <span className="text-primary">📷</span> Photo Gallery
+              <h2 className="text-3xl font-bold mb-4">
+                Photo Gallery
               </h2>
               <p className="text-muted-foreground">
                 Explore our rooms, suites, and shared spaces through real images of Hotel 28.
