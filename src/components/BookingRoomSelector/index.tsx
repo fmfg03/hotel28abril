@@ -1,22 +1,11 @@
-
 import React, { useEffect } from "react";
 import { SuiteProps } from "@/utils/calculateRoomSelection";
 import BookingRoomCard from "./BookingRoomCard";
 import BookingSummaryPanel from "./BookingSummaryPanel";
+import { BookingRoomSelectorProps, RoomSelection } from "./types";
+import { isSmallSuite, sortSuites, calculateTotalCapacity } from "./utils";
 
-export interface RoomSelection {
-  [suiteId: string]: number;
-}
-
-interface BookingRoomSelectorProps {
-  apartments: SuiteProps[];
-  selection: RoomSelection;
-  setSelection: (s: RoomSelection) => void;
-  totalAdults: number;
-  maxAdults: number;
-  onChangeValid: (valid: boolean) => void;
-  childrenCount: number;
-}
+export type { RoomSelection } from "./types";
 
 export default function BookingRoomSelector({
   apartments,
@@ -27,24 +16,11 @@ export default function BookingRoomSelector({
   onChangeValid,
   childrenCount,
 }: BookingRoomSelectorProps) {
-  // Sort suites by capacity, then by price
-  const sorted = [...apartments].sort((a, b) => {
-    // First sort by capacity
-    if (a.capacity !== b.capacity) {
-      return a.capacity - b.capacity;
-    }
-    // If same capacity, sort by price
-    return a.price - b.price;
-  });
+  // Sort suites using the utility function
+  const sorted = sortSuites(apartments);
 
-  // Helper function to determine if a suite is suitable for smaller groups
-  const isSmallSuite = (suite: SuiteProps) => suite.capacity <= 2;
-
-  // Count total adults accommodated by selection
-  const totalCapacity = sorted.reduce(
-    (sum, apt) => sum + (selection[apt.id] || 0) * apt.capacity,
-    0
-  );
+  // Calculate total capacity using the utility function
+  const totalCapacity = calculateTotalCapacity(sorted, selection);
 
   useEffect(() => {
     // Valid if totalCapacity >= totalAdults, and all rules satisfied
