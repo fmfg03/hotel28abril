@@ -100,7 +100,7 @@ const BookingStepReview = ({
         onBack={onBack}
         onBookNow={handleBookNow}
         isProcessing={isProcessing}
-        bookingReference={bookingReference || undefined}
+        bookingReference={bookingReference}
       />
     </div>
   );

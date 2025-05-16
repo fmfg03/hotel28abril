@@ -81,10 +81,10 @@ export const useBookings = () => {
         special_requests: formData.specialRequests || "",
       };
 
-      // Save booking to Supabase
+      // Save booking to Supabase - use type assertion since DB types are not updated yet
       const { data: bookingResult, error: bookingError } = await supabase
-        .from("bookings")
-        .insert(bookingData)
+        .from('bookings' as any)
+        .insert(bookingData as any)
         .select("id")
         .single();
 
@@ -109,9 +109,9 @@ export const useBookings = () => {
           card_cvc: formData.cardCvc
         };
 
-        // Save payment details
+        // Save payment details - use type assertion since DB types are not updated yet
         const { error: paymentError } = await supabase
-          .from("payment_details")
+          .from('payment_details' as any)
           .insert({
             booking_id: paymentData.booking_id,
             card_name: paymentData.card_name,
@@ -121,7 +121,7 @@ export const useBookings = () => {
             card_number_encrypted: paymentData.card_number, 
             card_expiry_encrypted: paymentData.card_expiry,
             card_cvc_encrypted: paymentData.card_cvc
-          });
+          } as any);
 
         if (paymentError) {
           console.error("Error saving payment details:", paymentError);
