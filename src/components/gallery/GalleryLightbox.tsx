@@ -20,6 +20,14 @@ const GalleryLightbox: React.FC<GalleryLightboxProps> = ({
 }) => {
   const image = images.find((img) => img.id === selectedImage);
   if (!image) return null;
+
+  const getImageUrl = (url: string) => {
+    // If the URL starts with /lovable-uploads/, we need to use the full domain
+    if (url.startsWith('/lovable-uploads/')) {
+      return `${window.location.origin}${url}`;
+    }
+    return url;
+  };
   
   return (
     <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 animate-fade-in">
@@ -43,9 +51,12 @@ const GalleryLightbox: React.FC<GalleryLightboxProps> = ({
 
       <div className="max-w-5xl max-h-[80vh] overflow-hidden">
         <img
-          src={image.image_url}
+          src={getImageUrl(image.image_url)}
           alt={image.alt_text || ""}
           className="max-w-full max-h-[80vh] object-contain"
+          onError={(e) => {
+            console.error('Failed to load image in lightbox:', image.image_url);
+          }}
         />
       </div>
 
