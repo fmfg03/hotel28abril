@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { SuiteProps } from "@/utils/calculateRoomSelection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSuiteImages } from "@/hooks/useSuiteImages";
+import { getSuiteSlug } from "@/utils/suiteSlugUtils";
 import SuiteImageGallery from "./SuiteImageGallery";
 
 interface SuiteCardProps {
@@ -24,6 +25,8 @@ export default function SuiteCard({ suite }: SuiteCardProps) {
     language !== "en" && t.suiteDescriptions && t.suiteDescriptions[suite.id]?.description
       ? t.suiteDescriptions[suite.id].description
       : suite.description;
+
+  const suiteSlug = getSuiteSlug(suite.name);
 
   return (
     <div className="group bg-card rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 border border-border">
@@ -86,7 +89,7 @@ export default function SuiteCard({ suite }: SuiteCardProps) {
         </div>
         
         <Button asChild className="w-full btn-primary">
-          <Link to={`/suites/${suite.id}`}>
+          <Link to={`/suites/${suiteSlug}`}>
             {t.suites.filters.viewDetails}
           </Link>
         </Button>

@@ -26,7 +26,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/suites" element={<Suites />} />
-            <Route path="/suites/:id" element={<SuiteDetail />} />
+            <Route path="/suites/:slug" element={<SuiteDetail />} />
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/gallery-admin" element={<GalleryAdmin />} />
@@ -34,7 +34,7 @@ const App = () => (
             <Route path="/amenities" element={<Amenities />} />
             {/* Legacy routes for backward compatibility */}
             <Route path="/apartments" element={<Suites />} />
-            <Route path="/apartments/:id" element={<SuiteDetail />} />
+            <Route path="/apartments/:slug" element={<SuiteDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

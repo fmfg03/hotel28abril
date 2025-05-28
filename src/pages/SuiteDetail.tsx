@@ -11,23 +11,27 @@ import SuiteLoading from "@/components/suite/SuiteLoading";
 import SuiteNotFound from "@/components/suite/SuiteNotFound";
 import { useSuites } from "@/hooks/useSuites";
 import { useSuiteImages, SuiteImage } from "@/hooks/useSuiteImages";
+import { getSuiteNameFromSlug } from "@/utils/suiteSlugUtils";
 
 export default function SuiteDetail() {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const { t, language } = useLanguage();
   
   // Fetch all suites
   const { data: suites, isLoading } = useSuites();
   
+  // Get suite name from slug
+  const suiteName = slug ? getSuiteNameFromSlug(slug) : "";
+  
+  // Find the current suite by name
+  const suite = suites?.find(s => s.name === suiteName);
+  
   // Fetch images for this suite
-  const { data: images = [] } = useSuiteImages(id);
+  const { data: images = [] } = useSuiteImages(suite?.id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // Find the current suite from the fetched suites
-  const suite = suites?.find(s => s.id === id);
 
   // Translation logic
   const translatedName =
