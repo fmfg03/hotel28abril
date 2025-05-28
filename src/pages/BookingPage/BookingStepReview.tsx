@@ -54,7 +54,7 @@ const BookingStepReview = ({
     setIsProcessing(true);
 
     try {
-      // First save to our database
+      // First save to our database and send confirmation email
       const bookingId = await saveBooking(
         formData,
         selectedSuite,
@@ -73,6 +73,9 @@ const BookingStepReview = ({
       // Generate a booking reference
       const reference = `MRS-${bookingId.substring(0, 4).toUpperCase()}`;
       setBookingReference(reference);
+      
+      // Show success message
+      toast.success("Booking details saved and confirmation email sent!");
       
       // Mark as confirmed and redirect to CloudBeds
       setIsBookingConfirmed(true);

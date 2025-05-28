@@ -1,6 +1,6 @@
 
 import { supabase } from "@/integrations/supabase/client";
-import { differenceInDays } from "date-fns";
+import { differenceInDays, format } from "date-fns";
 import { SuiteProps } from "@/utils/calculateRoomSelection";
 
 export interface BookingData {
@@ -39,6 +39,44 @@ export interface PaymentDetailsData {
 }
 
 export const useBookings = () => {
+  // Function to send booking confirmation email
+  const sendBookingConfirmationEmail = async (
+    bookingData: BookingData,
+    bookingReference: string
+  ): Promise<boolean> => {
+    try {
+      const emailData = {
+        email: bookingData.email,
+        firstName: bookingData.first_name,
+        lastName: bookingData.last_name,
+        bookingReference,
+        suiteName: bookingData.suite_name,
+        checkInDate: format(bookingData.check_in_date, "yyyy-MM-dd"),
+        checkOutDate: format(bookingData.check_out_date, "yyyy-MM-dd"),
+        nights: bookingData.nights,
+        adults: bookingData.adults,
+        children: bookingData.children,
+        totalPrice: bookingData.total_price,
+        paymentMethod: bookingData.payment_method,
+      };
+
+      const { data, error } = await supabase.functions.invoke('send-booking-confirmation', {
+        body: emailData,
+      });
+
+      if (error) {
+        console.error("Error sending booking confirmation email:", error);
+        return false;
+      }
+
+      console.log("Booking confirmation email sent successfully:", data);
+      return true;
+    } catch (error) {
+      console.error("Error in sendBookingConfirmationEmail:", error);
+      return false;
+    }
+  };
+
   // Function to save booking data
   const saveBooking = async (
     formData: any,
@@ -102,6 +140,15 @@ export const useBookings = () => {
         return null;
       }
 
+      // Generate a booking reference
+      const reference = `MRS-${bookingId.substring(0, 4).toUpperCase()}`;
+
+      // Update the booking with the reference
+      await supabase
+        .from('bookings' as any)
+        .update({ booking_reference: reference } as any)
+        .eq('id', bookingId);
+
       // If using credit card, save payment details
       if (formData.paymentMethod === "credit-card" && formData.cardNumber) {
         // Extract last four digits for reference
@@ -134,6 +181,12 @@ export const useBookings = () => {
           console.error("Error saving payment details:", paymentError);
           // Don't return null here, as the booking was still created
         }
+      }
+
+      // Send booking confirmation email
+      const emailSent = await sendBookingConfirmationEmail(bookingData, reference);
+      if (!emailSent) {
+        console.warn("Booking saved but confirmation email failed to send");
       }
 
       return bookingId;
