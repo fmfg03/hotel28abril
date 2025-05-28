@@ -23,6 +23,7 @@ export function useRoomSelection(
   useEffect(() => {
     // Reset selection if adults count changes
     setSelection({});
+    setValid(false);
   }, [adults, suites]);
   
   // Filter suites based on adults (apply Smart/Flex/Signature logic)

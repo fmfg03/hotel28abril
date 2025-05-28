@@ -46,6 +46,7 @@ const BookingStepRoom = ({
     selection,
     setSelection,
     valid,
+    setValid,
     filtered,
     continueRef
   } = useRoomSelection(adults, suites, setSelectedSuite, children);
@@ -76,7 +77,7 @@ const BookingStepRoom = ({
             setSelection={setSelection}
             totalAdults={intAdults}
             maxAdults={maxAdults}
-            onChangeValid={valid => {}}
+            onChangeValid={setValid}
             childrenCount={parseInt(children, 10) || 0}
           />
         )}
