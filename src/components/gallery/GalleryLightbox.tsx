@@ -22,12 +22,28 @@ const GalleryLightbox: React.FC<GalleryLightboxProps> = ({
   if (!image) return null;
 
   const getImageUrl = (url: string) => {
+    console.log('Lightbox - Original URL:', url);
+    
     // If the URL starts with /lovable-uploads/, we need to use the full domain
     if (url.startsWith('/lovable-uploads/')) {
-      return `${window.location.origin}${url}`;
+      const fullUrl = `${window.location.origin}${url}`;
+      console.log('Lightbox - Converted URL:', fullUrl);
+      return fullUrl;
     }
-    return url;
+    
+    // If it's already a full URL, use it as is
+    if (url.startsWith('http')) {
+      console.log('Lightbox - Using full URL:', url);
+      return url;
+    }
+    
+    // Fallback: assume it needs the domain
+    const fallbackUrl = `${window.location.origin}${url.startsWith('/') ? url : '/' + url}`;
+    console.log('Lightbox - Fallback URL:', fallbackUrl);
+    return fallbackUrl;
   };
+  
+  const imageUrl = getImageUrl(image.image_url);
   
   return (
     <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 animate-fade-in">
@@ -51,11 +67,15 @@ const GalleryLightbox: React.FC<GalleryLightboxProps> = ({
 
       <div className="max-w-5xl max-h-[80vh] overflow-hidden">
         <img
-          src={getImageUrl(image.image_url)}
+          src={imageUrl}
           alt={image.alt_text || ""}
           className="max-w-full max-h-[80vh] object-contain"
+          onLoad={() => {
+            console.log('Lightbox image loaded successfully:', imageUrl);
+          }}
           onError={(e) => {
-            console.error('Failed to load image in lightbox:', image.image_url);
+            console.error('Failed to load image in lightbox:', imageUrl);
+            console.error('Original URL from database:', image.image_url);
           }}
         />
       </div>
@@ -69,6 +89,13 @@ const GalleryLightbox: React.FC<GalleryLightboxProps> = ({
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </button>
+      
+      {/* Debug info */}
+      <div className="absolute bottom-4 left-4 bg-black/70 text-white text-sm p-2 rounded">
+        <div>Image ID: {image.id}</div>
+        <div>Original URL: {image.image_url}</div>
+        <div>Processed URL: {imageUrl}</div>
+      </div>
     </div>
   );
 };
