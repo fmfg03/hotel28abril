@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Suites from "./pages/Suites";
 import BookingPage from "./pages/BookingPage";
 import Gallery from "./pages/Gallery";
+import GalleryAdmin from "./pages/GalleryAdmin";
 import Contact from "./pages/Contact";
 import Amenities from "./pages/Amenities";
 import SuiteDetail from "./pages/SuiteDetail";
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/suites/:id" element={<SuiteDetail />} />
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery-admin" element={<GalleryAdmin />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/amenities" element={<Amenities />} />
             {/* Legacy routes for backward compatibility */}
