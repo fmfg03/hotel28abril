@@ -70,6 +70,7 @@ export default function SuiteDetail() {
                   url: suite.image,
                   alt: translatedName || "image"
                 }}
+                className="rounded-lg shadow-lg max-h-[450px]"
               />
             </div>
             <SuiteInfo

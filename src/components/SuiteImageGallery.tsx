@@ -20,11 +20,15 @@ type SuiteImage = {
 interface SuiteImageGalleryProps {
   images: SuiteImage[];
   fallbackImage?: { url: string; alt: string };
+  className?: string;
+  showNavigation?: boolean;
 }
 
 export default function SuiteImageGallery({
   images,
   fallbackImage,
+  className,
+  showNavigation = true,
 }: SuiteImageGalleryProps) {
   const [loaded, setLoaded] = useState<{ [key: string]: boolean }>({});
 
@@ -34,7 +38,7 @@ export default function SuiteImageGallery({
         <img
           src={fallbackImage.url}
           alt={fallbackImage.alt}
-          className="w-full rounded-lg shadow-lg object-cover max-h-[450px] mb-4"
+          className={cn("w-full object-cover", className)}
           style={{ background: "#e5e7eb" }}
         />
       );
@@ -42,12 +46,25 @@ export default function SuiteImageGallery({
     return null;
   }
 
+  // If only one image, show it directly without carousel
+  if (images.length === 1) {
+    return (
+      <img
+        src={images[0].image_url}
+        alt={images[0].alt_text || "Suite image"}
+        className={cn("w-full object-cover", className)}
+        style={{ background: "#e5e7eb" }}
+        onLoad={() => setLoaded((prev) => ({ ...prev, [images[0].id]: true }))}
+      />
+    );
+  }
+
   return (
-    <Carousel className="relative">
+    <Carousel className={cn("relative w-full", className)}>
       <CarouselContent>
         {images.map((img, i) => (
           <CarouselItem key={img.id} className="p-0">
-            <div className="w-full aspect-[4/3] overflow-hidden rounded-lg relative">
+            <div className="w-full h-full overflow-hidden relative">
               <img
                 src={img.image_url}
                 alt={img.alt_text || "Suite image"}
@@ -55,20 +72,17 @@ export default function SuiteImageGallery({
                   "object-cover w-full h-full transition-opacity duration-500",
                   loaded[img.id] ? "opacity-100" : "opacity-0"
                 )}
-                style={{
-                  background: "#e5e7eb",
-                  maxHeight: 450,
-                }}
+                style={{ background: "#e5e7eb" }}
                 onLoad={() => setLoaded((prev) => ({ ...prev, [img.id]: true }))}
               />
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      {images.length > 1 && (
+      {showNavigation && images.length > 1 && (
         <>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="left-2" />
+          <CarouselNext className="right-2" />
         </>
       )}
     </Carousel>

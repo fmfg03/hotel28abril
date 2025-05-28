@@ -1,91 +1,95 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Users, Maximize, MapPin, Bath, Coffee, Wifi } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { SuiteProps } from "@/utils/calculateRoomSelection";
 
-export default function SuiteCard({ suite }: { suite: SuiteProps }) {
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { SuiteProps } from "@/utils/calculateRoomSelection";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useSuiteImages } from "@/hooks/useSuiteImages";
+import SuiteImageGallery from "./SuiteImageGallery";
+
+interface SuiteCardProps {
+  suite: SuiteProps;
+}
+
+export default function SuiteCard({ suite }: SuiteCardProps) {
   const { t, language } = useLanguage();
-  const [isHovered, setIsHovered] = useState(false);
-  
-  // Use translated name and description if available
-  const translatedName = language !== 'en' && t.suiteDescriptions && t.suiteDescriptions[suite.id]?.name 
-    ? t.suiteDescriptions[suite.id].name 
-    : suite.name;
-    
-  const translatedDescription = language !== 'en' && t.suiteDescriptions && t.suiteDescriptions[suite.id]?.description 
-    ? t.suiteDescriptions[suite.id].description 
-    : suite.description;
-  
+  const { data: images = [] } = useSuiteImages(suite.id);
+
+  // Translation logic
+  const translatedName =
+    language !== "en" && t.suiteDescriptions && t.suiteDescriptions[suite.id]?.name
+      ? t.suiteDescriptions[suite.id].name
+      : suite.name;
+
+  const translatedDescription =
+    language !== "en" && t.suiteDescriptions && t.suiteDescriptions[suite.id]?.description
+      ? t.suiteDescriptions[suite.id].description
+      : suite.description;
+
   return (
-    <div 
-      className="rounded-xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-xl bg-card group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="relative overflow-hidden h-64">
-        <img 
-          src={suite.image} 
-          alt={translatedName}
-          className={cn(
-            "w-full h-full object-cover transition-transform duration-700",
-            isHovered ? "scale-110" : "scale-100"
-          )}
+    <div className="group bg-card rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 border border-border">
+      <div className="relative h-64 overflow-hidden">
+        <SuiteImageGallery
+          images={images.length > 0 ? images : [
+            {
+              id: "main-img",
+              suite_id: suite.id,
+              image_url: suite.image,
+              alt_text: translatedName || "image",
+              order: 0
+            }
+          ]}
+          fallbackImage={{
+            url: suite.image,
+            alt: translatedName || "image"
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 flex items-end p-6">
-          <div>
-            <h3 className="text-white text-xl font-bold mb-1">{translatedName}</h3>
-            <div className="flex items-center text-white/80 text-sm mb-2">
-              <MapPin className="h-4 w-4 mr-1" />
-              <span>{suite.location}</span>
-            </div>
-            <div className="flex items-center space-x-3 text-white">
-              <div className="flex items-center">
-                <Users className="h-4 w-4 mr-1" />
-                <span>{suite.capacity} {t.suites && t.suites.filters ? t.suites.filters.guests : "Guests"}</span>
-              </div>
-              <div className="flex items-center">
-                <Maximize className="h-4 w-4 mr-1" />
-                <span>{suite.size} m²</span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       
-      <div className="p-6 space-y-4">
-        <p className="text-muted-foreground line-clamp-2">{translatedDescription}</p>
+      <div className="p-6">
+        <div className="flex justify-between items-start mb-3">
+          <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
+            {translatedName}
+          </h3>
+          <div className="text-right">
+            <div className="text-lg font-bold">${suite.price}</div>
+            <div className="text-sm text-muted-foreground">/ {t.booking?.summary?.night || 'night'}</div>
+          </div>
+        </div>
         
-        <div className="flex flex-wrap gap-2">
-          {suite.features.slice(0, 3).map((feature, index) => (
-            <div 
-              key={index} 
-              className="flex items-center text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full"
+        <p className="text-muted-foreground mb-4 line-clamp-2">
+          {translatedDescription}
+        </p>
+        
+        <div className="flex flex-wrap gap-2 mb-4">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-muted">
+            {suite.capacity} {t.suites.filters.guests}
+          </span>
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-muted">
+            {suite.size} m²
+          </span>
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-muted">
+            {suite.location}
+          </span>
+          {suite.features.slice(0, 2).map((feature, index) => (
+            <span
+              key={index}
+              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-muted"
             >
-              {feature === "Bathroom" && <Bath className="h-3.5 w-3.5 mr-1" />}
-              {feature === "Kitchen" && <Coffee className="h-3.5 w-3.5 mr-1" />}
-              {feature === "Wi-Fi" && <Wifi className="h-3.5 w-3.5 mr-1" />}
-              <span>{feature}</span>
-            </div>
+              {feature}
+            </span>
           ))}
-          {suite.features.length > 3 && (
-            <div className="text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full">
-              +{suite.features.length - 3} {t.suites && t.suites.filters ? t.suites.filters.more : "more"}
-            </div>
+          {suite.features.length > 2 && (
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-muted">
+              +{suite.features.length - 2} {t.suites.filters.more}
+            </span>
           )}
         </div>
         
-        <div className="flex items-end justify-between pt-2">
-          <div>
-            <span className="text-xl font-bold">${suite.price}</span>
-            <span className="text-muted-foreground text-sm"> / {t.booking && t.booking.summary ? t.booking.summary.night : "night"}</span>
-          </div>
-          <Button asChild className="btn-primary">
-            <Link to={`/suites/${suite.id}`}>{t.suites && t.suites.filters ? t.suites.filters.viewDetails : "View Details"}</Link>
-          </Button>
-        </div>
+        <Button asChild className="w-full btn-primary">
+          <Link to={`/suites/${suite.id}`}>
+            {t.suites.filters.viewDetails}
+          </Link>
+        </Button>
       </div>
     </div>
   );
