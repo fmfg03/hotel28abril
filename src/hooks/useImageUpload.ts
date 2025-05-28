@@ -14,7 +14,7 @@ export function useImageUpload() {
       const filePath = `${finalFileName}`;
 
       const { error: uploadError } = await supabase.storage
-        .from('gallery-images')
+        .from('hotel28gallery')
         .upload(filePath, file);
 
       if (uploadError) {
@@ -22,7 +22,7 @@ export function useImageUpload() {
       }
 
       const { data } = supabase.storage
-        .from('gallery-images')
+        .from('hotel28gallery')
         .getPublicUrl(filePath);
 
       return data.publicUrl;
@@ -41,7 +41,7 @@ export function useImageUpload() {
       const fileName = urlParts[urlParts.length - 1];
       
       const { error } = await supabase.storage
-        .from('gallery-images')
+        .from('hotel28gallery')
         .remove([fileName]);
 
       if (error) {

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useGalleryImages } from "@/hooks/useGalleryImages";
 import GalleryImageUpload from "@/components/gallery/GalleryImageUpload";
@@ -8,11 +7,13 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Trash2, Edit, Save, X } from "lucide-react";
+import { Trash2, Edit, Save, X, RefreshCw } from "lucide-react";
+import { migrateExistingImages } from "@/utils/galleryMigration";
 
 export default function GalleryAdmin() {
   const { images, isLoading, error } = useGalleryImages();
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [isMigrating, setIsMigrating] = useState(false);
   const [editForm, setEditForm] = useState({
     imageType: "",
     altText: ""
@@ -21,6 +22,20 @@ export default function GalleryAdmin() {
   const handleImageUploaded = () => {
     // Refresh the page to show new images
     window.location.reload();
+  };
+
+  const handleMigrateImages = async () => {
+    setIsMigrating(true);
+    try {
+      await migrateExistingImages();
+      toast.success("Images migrated successfully!");
+      window.location.reload();
+    } catch (error) {
+      console.error('Migration error:', error);
+      toast.error("Failed to migrate images");
+    } finally {
+      setIsMigrating(false);
+    }
   };
 
   const handleDeleteImage = async (imageId: string, imageUrl: string) => {
@@ -44,7 +59,7 @@ export default function GalleryAdmin() {
       const fileName = urlParts[urlParts.length - 1];
       
       await supabase.storage
-        .from('gallery-images')
+        .from('hotel28gallery')
         .remove([fileName]);
 
       toast.success("Image deleted successfully!");
@@ -99,6 +114,22 @@ export default function GalleryAdmin() {
     <div className="container mx-auto p-8">
       <h1 className="text-3xl font-bold mb-8">Gallery Administration</h1>
       
+      <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <h3 className="text-lg font-semibold mb-2">Migration Tool</h3>
+        <p className="text-sm text-gray-600 mb-4">
+          If you have uploaded images to the hotel28gallery bucket but they don't appear in the gallery, 
+          use this tool to migrate them to the gallery database.
+        </p>
+        <Button 
+          onClick={handleMigrateImages} 
+          disabled={isMigrating}
+          className="flex items-center gap-2"
+        >
+          <RefreshCw className={`h-4 w-4 ${isMigrating ? 'animate-spin' : ''}`} />
+          {isMigrating ? "Migrating..." : "Migrate Existing Images"}
+        </Button>
+      </div>
+      
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
           <GalleryImageUpload onImageUploaded={handleImageUploaded} />
@@ -116,6 +147,10 @@ export default function GalleryAdmin() {
                         src={image.image_url} 
                         alt={image.alt_text || ""} 
                         className="w-16 h-16 object-cover rounded"
+                        onError={(e) => {
+                          console.error('Failed to load image:', image.image_url);
+                          e.currentTarget.style.border = '2px solid red';
+                        }}
                       />
                       <div className="flex-1 space-y-2">
                         <div>
@@ -167,10 +202,15 @@ export default function GalleryAdmin() {
                       src={image.image_url} 
                       alt={image.alt_text || ""} 
                       className="w-16 h-16 object-cover rounded"
+                      onError={(e) => {
+                        console.error('Failed to load image:', image.image_url);
+                        e.currentTarget.style.border = '2px solid red';
+                      }}
                     />
                     <div className="flex-1">
                       <p className="font-medium">{image.image_type}</p>
                       <p className="text-sm text-gray-600">{image.alt_text || "No description"}</p>
+                      <p className="text-xs text-gray-400 truncate">{image.image_url}</p>
                     </div>
                     <div className="flex gap-2">
                       <Button
