@@ -35,7 +35,7 @@ const handler = async (req: Request): Promise<Response> => {
     const bookingData: BookingConfirmationRequest = await req.json();
 
     const emailResponse = await resend.emails.send({
-      from: "Morro Rock Suites <bookings@morrorock.com>",
+      from: "Hotel 28 Reservations <reservations@reservations.hotel28cancun.com>",
       to: [bookingData.email],
       subject: `Booking Confirmation - ${bookingData.bookingReference}`,
       html: `
@@ -44,7 +44,7 @@ const handler = async (req: Request): Promise<Response> => {
           
           <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h2 style="color: #333; margin-top: 0;">Hello ${bookingData.firstName}!</h2>
-            <p>Thank you for your booking. We're excited to host you at Morro Rock Suites!</p>
+            <p>Thank you for your booking. We're excited to host you at Hotel 28!</p>
             <p><strong>Booking Reference:</strong> ${bookingData.bookingReference}</p>
           </div>
 
@@ -89,8 +89,8 @@ const handler = async (req: Request): Promise<Response> => {
           </div>
 
           <div style="text-align: center; padding: 20px; color: #666; font-size: 14px;">
-            <p>Morro Rock Suites<br>
-            Your Home Away From Home</p>
+            <p>Hotel 28<br>
+            Your Home Away From Home in Cancun</p>
           </div>
         </div>
       `,
