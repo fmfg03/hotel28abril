@@ -9,6 +9,90 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      bookings: {
+        Row: {
+          address: string | null
+          adults: number
+          booking_reference: string | null
+          check_in_date: string
+          check_out_date: string
+          children: number
+          city: string | null
+          cleaning_fee: number
+          country: string | null
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          nights: number
+          payment_method: string
+          phone: string
+          service_fee: number
+          special_requests: string | null
+          suite_id: string
+          suite_name: string
+          suite_price: number
+          suite_total: number
+          total_price: number
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          adults: number
+          booking_reference?: string | null
+          check_in_date: string
+          check_out_date: string
+          children: number
+          city?: string | null
+          cleaning_fee?: number
+          country?: string | null
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          last_name: string
+          nights: number
+          payment_method: string
+          phone: string
+          service_fee?: number
+          special_requests?: string | null
+          suite_id: string
+          suite_name: string
+          suite_price: number
+          suite_total: number
+          total_price: number
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          adults?: number
+          booking_reference?: string | null
+          check_in_date?: string
+          check_out_date?: string
+          children?: number
+          city?: string | null
+          cleaning_fee?: number
+          country?: string | null
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          nights?: number
+          payment_method?: string
+          phone?: string
+          service_fee?: number
+          special_requests?: string | null
+          suite_id?: string
+          suite_name?: string
+          suite_price?: number
+          suite_total?: number
+          total_price?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       gallery_images: {
         Row: {
           alt_text: string | null
@@ -35,6 +119,47 @@ export type Database = {
           order_index?: number | null
         }
         Relationships: []
+      }
+      payment_details: {
+        Row: {
+          booking_id: string
+          card_cvc_encrypted: string | null
+          card_expiry_encrypted: string | null
+          card_last_four: string | null
+          card_name: string | null
+          card_number_encrypted: string | null
+          created_at: string
+          id: string
+        }
+        Insert: {
+          booking_id: string
+          card_cvc_encrypted?: string | null
+          card_expiry_encrypted?: string | null
+          card_last_four?: string | null
+          card_name?: string | null
+          card_number_encrypted?: string | null
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          booking_id?: string
+          card_cvc_encrypted?: string | null
+          card_expiry_encrypted?: string | null
+          card_last_four?: string | null
+          card_name?: string | null
+          card_number_encrypted?: string | null
+          created_at?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_details_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       suite_images: {
         Row: {
