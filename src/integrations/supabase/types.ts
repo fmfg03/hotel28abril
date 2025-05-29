@@ -168,6 +168,7 @@ export type Database = {
           id: string
           image_url: string
           order_index: number | null
+          suite_category: string | null
           suite_id: string
         }
         Insert: {
@@ -176,6 +177,7 @@ export type Database = {
           id?: string
           image_url: string
           order_index?: number | null
+          suite_category?: string | null
           suite_id: string
         }
         Update: {
@@ -184,6 +186,7 @@ export type Database = {
           id?: string
           image_url?: string
           order_index?: number | null
+          suite_category?: string | null
           suite_id?: string
         }
         Relationships: [

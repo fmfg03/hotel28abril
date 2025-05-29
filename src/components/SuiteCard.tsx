@@ -5,6 +5,7 @@ import { SuiteProps } from "@/utils/calculateRoomSelection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSuiteImages } from "@/hooks/useSuiteImages";
 import { getSuiteSlug } from "@/utils/suiteSlugUtils";
+import { getSuiteCategoryCode } from "@/utils/suiteCategories";
 import SuiteImageGallery from "./SuiteImageGallery";
 
 interface SuiteCardProps {
@@ -13,7 +14,8 @@ interface SuiteCardProps {
 
 export default function SuiteCard({ suite }: SuiteCardProps) {
   const { t, language } = useLanguage();
-  const { data: images = [] } = useSuiteImages(suite.id);
+  const categoryCode = getSuiteCategoryCode(suite.name);
+  const { data: images = [] } = useSuiteImages(suite.id, categoryCode);
 
   // Translation logic
   const translatedName =
@@ -38,7 +40,8 @@ export default function SuiteCard({ suite }: SuiteCardProps) {
               suite_id: suite.id,
               image_url: suite.image,
               alt_text: translatedName || "image",
-              order: 0
+              order: 0,
+              suite_category: categoryCode || "D"
             }
           ]}
           fallbackImage={{

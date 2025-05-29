@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { SuiteProps } from "@/utils/calculateRoomSelection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSuiteImages } from "@/hooks/useSuiteImages";
+import { getSuiteCategoryCode } from "@/utils/suiteCategories";
 import SuiteImageGallery from "./SuiteImageGallery";
 
 interface BookingSuiteListProps {
@@ -38,7 +39,8 @@ export default function BookingSuiteList({
       <h2 className="text-xl font-semibold mb-4">Select Your Accommodation</h2>
       <div className="space-y-6">
         {suites.map((suite) => {
-          const { data: images = [] } = useSuiteImages(suite.id);
+          const categoryCode = getSuiteCategoryCode(suite.name);
+          const { data: images = [] } = useSuiteImages(suite.id, categoryCode);
           
           return (
             <div
@@ -58,7 +60,8 @@ export default function BookingSuiteList({
                       suite_id: suite.id,
                       image_url: suite.image,
                       alt_text: getTranslatedName(suite),
-                      order: 0
+                      order: 0,
+                      suite_category: categoryCode || "D"
                     }
                   ]}
                   fallbackImage={{

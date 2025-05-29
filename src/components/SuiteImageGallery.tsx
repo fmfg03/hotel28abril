@@ -15,6 +15,7 @@ type SuiteImage = {
   image_url: string;
   alt_text: string | null;
   order: number | null;
+  suite_category?: string | null;
 };
 
 interface SuiteImageGalleryProps {

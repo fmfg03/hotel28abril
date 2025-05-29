@@ -12,6 +12,7 @@ import SuiteNotFound from "@/components/suite/SuiteNotFound";
 import { useSuites } from "@/hooks/useSuites";
 import { useSuiteImages, SuiteImage } from "@/hooks/useSuiteImages";
 import { getSuiteNameFromSlug } from "@/utils/suiteSlugUtils";
+import { getSuiteCategoryCode } from "@/utils/suiteCategories";
 
 export default function SuiteDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -26,8 +27,11 @@ export default function SuiteDetail() {
   // Find the current suite by name
   const suite = suites?.find(s => s.name === suiteName);
   
-  // Fetch images for this suite
-  const { data: images = [] } = useSuiteImages(suite?.id);
+  // Get the category code for this suite
+  const categoryCode = suite ? getSuiteCategoryCode(suite.name) : undefined;
+  
+  // Fetch images for this suite with category filtering
+  const { data: images = [] } = useSuiteImages(suite?.id, categoryCode);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -67,7 +71,8 @@ export default function SuiteDetail() {
                     suite_id: suite.id,
                     image_url: suite.image,
                     alt_text: translatedName || "image",
-                    order: 0
+                    order: 0,
+                    suite_category: categoryCode || "D"
                   }
                 ]}
                 fallbackImage={{
