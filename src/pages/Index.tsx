@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -15,12 +16,12 @@ import { SuiteProps } from "@/utils/calculateRoomSelection";
 // Sample suites data
 const featuredSuites: SuiteProps[] = [{
   id: "1",
-  name: "Deluxe Sea View Suite",
+  name: "Smart Suite",
   description: "Luxurious suite with panoramic sea views, modern amenities, and a private balcony.",
   price: 180,
   capacity: 2,
   size: 45,
-  image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
+  image: "https://murxvnwhxvtfkajcwenw.supabase.co/storage/v1/object/public/hotel28gallery//smartsuitebed.png",
   location: "Beachfront",
   features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Balcony"]
 }, {
