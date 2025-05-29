@@ -23,7 +23,7 @@ const CloudbedsBookingIframe: React.FC<CloudbedsBookingIframeProps> = ({
   currency = 'MXN',
   height = '650'
 }) => {
-  const baseUrl = 'https://us2.cloudbeds.com/es/reservation/Od3X7u';
+  const baseUrl = 'https://us2.cloudbeds.com/es/reservation/Od3X7u/';
   const params = new URLSearchParams({
     lang,
     start,
