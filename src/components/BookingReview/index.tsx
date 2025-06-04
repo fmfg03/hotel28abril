@@ -84,7 +84,7 @@ export default function BookingReview({
               Processing...
             </>
           ) : (
-            "Book Now on Cloudbeds"
+            "Confirm Booking"
           )}
         </button>
       </div>

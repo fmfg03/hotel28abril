@@ -54,7 +54,7 @@ const BookingStepReview = ({
     setIsProcessing(true);
 
     try {
-      // First save to our database and send confirmation email
+      // Save to our database and send confirmation email
       const bookingId = await saveBooking(
         formData,
         selectedSuite,
@@ -75,13 +75,10 @@ const BookingStepReview = ({
       setBookingReference(reference);
       
       // Show success message
-      toast.success("Booking details saved and confirmation email sent!");
+      toast.success("Booking confirmed! Confirmation email sent.");
       
-      // Mark as confirmed and redirect to CloudBeds
+      // Mark as confirmed - no CloudBeds redirection
       setIsBookingConfirmed(true);
-      
-      // Proceed with CloudBeds redirection
-      onBookNow();
     } catch (error) {
       console.error("Error during booking process:", error);
       toast.error("An error occurred during the booking process. Please try again.");
