@@ -9,6 +9,7 @@ const CleanupTool: React.FC = () => {
   const [isScanning, setIsScanning] = useState(false);
   const [isCleaning, setIsCleaning] = useState(false);
   const [isCheckingImages, setIsCheckingImages] = useState(false);
+  const [isDeletingBroken, setIsDeletingBroken] = useState(false);
   const [orphanedFiles, setOrphanedFiles] = useState<string[]>([]);
   const [brokenImages, setBrokenImages] = useState<string[]>([]);
 
@@ -116,6 +117,40 @@ const CleanupTool: React.FC = () => {
     }
   };
 
+  const deleteBrokenImages = async () => {
+    if (brokenImages.length === 0) {
+      toast.info("No broken images to delete");
+      return;
+    }
+
+    if (!confirm(`Are you sure you want to delete ${brokenImages.length} broken image records from the database? This action cannot be undone.`)) {
+      return;
+    }
+
+    setIsDeletingBroken(true);
+    try {
+      const { error } = await supabase
+        .from('gallery_images')
+        .delete()
+        .in('image_url', brokenImages);
+
+      if (error) {
+        throw error;
+      }
+
+      toast.success(`Successfully deleted ${brokenImages.length} broken image records`);
+      setBrokenImages([]);
+      
+      // Refresh the page to show updated image list
+      window.location.reload();
+    } catch (error) {
+      console.error('Error deleting broken images:', error);
+      toast.error("Failed to delete broken images");
+    } finally {
+      setIsDeletingBroken(false);
+    }
+  };
+
   const cleanupOrphanedFiles = async () => {
     if (orphanedFiles.length === 0) {
       toast.info("No orphaned files to clean up");
@@ -156,7 +191,7 @@ const CleanupTool: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         <Button 
           onClick={scanForOrphanedFiles} 
-          disabled={isScanning || isCleaning || isCheckingImages}
+          disabled={isScanning || isCleaning || isCheckingImages || isDeletingBroken}
           variant="outline"
           className="w-full"
         >
@@ -175,7 +210,7 @@ const CleanupTool: React.FC = () => {
 
         <Button 
           onClick={checkImageAccessibility} 
-          disabled={isScanning || isCleaning || isCheckingImages}
+          disabled={isScanning || isCleaning || isCheckingImages || isDeletingBroken}
           variant="outline"
           className="w-full"
         >
@@ -193,10 +228,31 @@ const CleanupTool: React.FC = () => {
         </Button>
       </div>
 
+      {brokenImages.length > 0 && (
+        <Button 
+          onClick={deleteBrokenImages} 
+          disabled={isScanning || isCleaning || isCheckingImages || isDeletingBroken}
+          variant="destructive"
+          className="w-full"
+        >
+          {isDeletingBroken ? (
+            <>
+              <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+              Deleting...
+            </>
+          ) : (
+            <>
+              <Trash2 className="h-4 w-4 mr-2" />
+              Delete {brokenImages.length} Broken Image Records
+            </>
+          )}
+        </Button>
+      )}
+
       {orphanedFiles.length > 0 && (
         <Button 
           onClick={cleanupOrphanedFiles} 
-          disabled={isScanning || isCleaning || isCheckingImages}
+          disabled={isScanning || isCleaning || isCheckingImages || isDeletingBroken}
           variant="destructive"
           className="w-full"
         >
