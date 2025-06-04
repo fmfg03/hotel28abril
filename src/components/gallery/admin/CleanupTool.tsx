@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Trash2, RefreshCw } from "lucide-react";
+import { Trash2, RefreshCw, AlertTriangle } from "lucide-react";
 
 const CleanupTool: React.FC = () => {
   const [isScanning, setIsScanning] = useState(false);
   const [isCleaning, setIsCleaning] = useState(false);
+  const [isCheckingImages, setIsCheckingImages] = useState(false);
   const [orphanedFiles, setOrphanedFiles] = useState<string[]>([]);
+  const [brokenImages, setBrokenImages] = useState<string[]>([]);
 
   const scanForOrphanedFiles = async () => {
     setIsScanning(true);
@@ -67,6 +69,53 @@ const CleanupTool: React.FC = () => {
     }
   };
 
+  const checkImageAccessibility = async () => {
+    setIsCheckingImages(true);
+    setBrokenImages([]);
+    
+    try {
+      const { data: dbImages, error: dbError } = await supabase
+        .from('gallery_images')
+        .select('image_url, id');
+
+      if (dbError) {
+        throw dbError;
+      }
+
+      if (!dbImages || dbImages.length === 0) {
+        toast.info("No images found in database");
+        return;
+      }
+
+      const broken: string[] = [];
+      
+      // Test each image URL
+      for (const image of dbImages) {
+        try {
+          const response = await fetch(image.image_url, { method: 'HEAD' });
+          if (!response.ok) {
+            broken.push(image.image_url);
+          }
+        } catch (error) {
+          broken.push(image.image_url);
+        }
+      }
+
+      setBrokenImages(broken);
+      
+      if (broken.length === 0) {
+        toast.success(`All ${dbImages.length} images are accessible!`);
+      } else {
+        toast.error(`Found ${broken.length} broken image URLs out of ${dbImages.length} total`);
+      }
+    } catch (error) {
+      console.error('Error checking image accessibility:', error);
+      toast.error("Failed to check image accessibility");
+    } finally {
+      setIsCheckingImages(false);
+    }
+  };
+
   const cleanupOrphanedFiles = async () => {
     if (orphanedFiles.length === 0) {
       toast.info("No orphaned files to clean up");
@@ -99,17 +148,17 @@ const CleanupTool: React.FC = () => {
 
   return (
     <div className="space-y-4 p-6 border rounded-lg bg-orange-50 border-orange-200">
-      <h3 className="text-lg font-semibold">Storage Cleanup Tool</h3>
+      <h3 className="text-lg font-semibold">Storage Cleanup & Diagnostics</h3>
       <p className="text-sm text-muted-foreground">
-        Scan for and remove images that exist in storage but aren't registered in the gallery database.
+        Scan for orphaned files and check image accessibility issues.
       </p>
       
-      <div className="flex gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         <Button 
           onClick={scanForOrphanedFiles} 
-          disabled={isScanning || isCleaning}
+          disabled={isScanning || isCleaning || isCheckingImages}
           variant="outline"
-          className="flex-1"
+          className="w-full"
         >
           {isScanning ? (
             <>
@@ -124,27 +173,46 @@ const CleanupTool: React.FC = () => {
           )}
         </Button>
 
-        {orphanedFiles.length > 0 && (
-          <Button 
-            onClick={cleanupOrphanedFiles} 
-            disabled={isScanning || isCleaning}
-            variant="destructive"
-            className="flex-1"
-          >
-            {isCleaning ? (
-              <>
-                <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                Deleting...
-              </>
-            ) : (
-              <>
-                <Trash2 className="h-4 w-4 mr-2" />
-                Delete {orphanedFiles.length} Orphaned Files
-              </>
-            )}
-          </Button>
-        )}
+        <Button 
+          onClick={checkImageAccessibility} 
+          disabled={isScanning || isCleaning || isCheckingImages}
+          variant="outline"
+          className="w-full"
+        >
+          {isCheckingImages ? (
+            <>
+              <AlertTriangle className="h-4 w-4 mr-2 animate-spin" />
+              Checking...
+            </>
+          ) : (
+            <>
+              <AlertTriangle className="h-4 w-4 mr-2" />
+              Check Image Access
+            </>
+          )}
+        </Button>
       </div>
+
+      {orphanedFiles.length > 0 && (
+        <Button 
+          onClick={cleanupOrphanedFiles} 
+          disabled={isScanning || isCleaning || isCheckingImages}
+          variant="destructive"
+          className="w-full"
+        >
+          {isCleaning ? (
+            <>
+              <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+              Deleting...
+            </>
+          ) : (
+            <>
+              <Trash2 className="h-4 w-4 mr-2" />
+              Delete {orphanedFiles.length} Orphaned Files
+            </>
+          )}
+        </Button>
+      )}
 
       {orphanedFiles.length > 0 && (
         <div className="mt-4">
@@ -153,6 +221,19 @@ const CleanupTool: React.FC = () => {
             {orphanedFiles.map((filename, index) => (
               <div key={index} className="text-xs text-gray-600 py-1">
                 {filename}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {brokenImages.length > 0 && (
+        <div className="mt-4">
+          <h4 className="font-medium mb-2 text-red-600">Broken Image URLs Found:</h4>
+          <div className="max-h-32 overflow-y-auto bg-white p-2 rounded border">
+            {brokenImages.map((url, index) => (
+              <div key={index} className="text-xs text-red-600 py-1 break-all">
+                {url}
               </div>
             ))}
           </div>
