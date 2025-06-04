@@ -1,3 +1,4 @@
+
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -55,13 +56,13 @@ export default function ContactInfo() {
       </div>
       <div className="aspect-video rounded-xl overflow-hidden">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.03606358136!2d14.165818971864153!3d40.85529294646443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133b0a3c328d896b%3A0x309e11f99628150!2sGulf%20of%20Naples!5e0!3m2!1sen!2sus!4v1628613152777!5m2!1sen!2sus" 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.4!2d-86.8354767!3d21.1623634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c2dcf6889a0e9%3A0xb6f784623a07733a!2sHotel%2028%20Canc%C3%BAn!5e0!3m2!1sen!2sus!4v1628613152777!5m2!1sen!2sus" 
           width="100%" 
           height="100%" 
           style={{ border: 0 }} 
           allowFullScreen 
           loading="lazy"
-          title="Location Map"
+          title="Hotel 28 Cancún Location Map"
         />
       </div>
     </div>
