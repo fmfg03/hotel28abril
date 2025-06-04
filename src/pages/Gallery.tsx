@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -89,6 +88,17 @@ export default function Gallery() {
               <p className="text-muted-foreground text-lg mb-6">
                 {t.gallery.subtitle}
               </p>
+              
+              {/* Admin Link - Only show in development or for admin users */}
+              {process.env.NODE_ENV === 'development' && (
+                <div className="mt-4">
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/gallery-admin">
+                      Gallery Admin
+                    </Link>
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
 
