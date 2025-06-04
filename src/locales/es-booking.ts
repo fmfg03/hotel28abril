@@ -1,9 +1,10 @@
+
 const es_booking = {
   title: "Reserva tu Estancia",
-  subtitle: "Completa tu reserva en unos sencillos pasos.",
+  subtitle: "Completa tu reservación en unos sencillos pasos.",
   steps: {
-    chooseRoom: "Elegir Habitación",
-    guestDetails: "Detalles del Huésped",
+    chooseRoom: "Elegir Suite",
+    guestDetails: "Datos del Huésped",
     confirmation: "Confirmación"
   },
   dates: {
@@ -39,15 +40,15 @@ const es_booking = {
   payment: {
     title: "Información de Pago",
     creditCard: "Tarjeta de Crédito",
-    payAtProperty: "Pagar en el Establecimiento",
+    payAtProperty: "Pagar en el Hotel",
     nameOnCard: "Nombre en la Tarjeta",
     cardNumber: "Número de Tarjeta",
     cardNumberPlaceholder: "0000 0000 0000 0000",
-    expiryDate: "Fecha de Caducidad",
+    expiryDate: "Fecha de Vencimiento",
     expiryDatePlaceholder: "MM/AA",
     cvc: "CVC",
     cvcPlaceholder: "123",
-    payAtPropertyInfo: "Se te pedirá que proporciones una tarjeta de crédito válida a tu llegada por motivos de seguridad, pero el pago se realizará durante tu estancia en el establecimiento."
+    payAtPropertyInfo: "Se requerirá proporcionar una tarjeta de crédito válida a tu llegada por motivos de seguridad, pero el pago se realizará durante tu estancia en el hotel."
   },
   summary: {
     title: "Resumen de la Reserva",
@@ -63,7 +64,7 @@ const es_booking = {
   confirmation: {
     title: "Revisar Detalles de la Reserva",
     accommodationDetails: "Detalles del Alojamiento",
-    guestDetails: "Detalles del Huésped",
+    guestDetails: "Datos del Huésped",
     name: "Nombre",
     email: "Correo Electrónico",
     phone: "Teléfono",
@@ -77,11 +78,11 @@ const es_booking = {
     termsAgree: "Acepto los",
     termsLink: "Términos y Condiciones",
     privacyLink: "Política de Privacidad",
-    cancellationInfo: "Entiendo que mi reserva está sujeta a la política de cancelación del establecimiento.",
+    cancellationInfo: "Entiendo que mi reserva está sujeta a la política de cancelación del hotel.",
     back: "Atrás",
     confirmBooking: "Confirmar Reserva",
     success: "¡Reserva Confirmada!",
-    emailSent: "Tu reserva ha sido confirmada con éxito. Se ha enviado un correo electrónico de confirmación a",
+    emailSent: "Tu reservación ha sido confirmada exitosamente. Se ha enviado un correo electrónico de confirmación a",
     bookingReference: "Referencia de Reserva",
     returnToHome: "Volver a la Página Principal"
   }
