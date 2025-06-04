@@ -2,31 +2,31 @@ const en_home = {
   amenities: {
     subtitle: "PREMIER AMENITIES",
     title: "Experience Our Services",
-    description: "Our hotel offers a range of premium amenities and services designed to enhance your stay and provide maximum comfort.",
+    description: "At Hotel 28, we combine essential comforts with curated experiences to help you get the most out of your time in Cancún.",
     features: {
-      beachfront: {
-        title: "Private Beach",
-        description: "Direct access to a private beach area with loungers and umbrellas."
-      },
-      pools: {
-        title: "Swimming Pools",
-        description: "Indoor and outdoor swimming pools with sun decks and pool bars."
-      },
-      restaurant: {
-        title: "Gourmet Restaurant",
-        description: "Fine dining restaurant offering local and international cuisines."
-      },
-      wifi: {
-        title: "High-Speed WiFi",
-        description: "Complimentary high-speed WiFi throughout the hotel premises."
+      pool: {
+        title: "Outdoor Swimming Pool",
+        description: "Refresh your day in our pool — perfect for sunbathing or cooling off."
       },
       bar: {
-        title: "Rooftop Bar",
-        description: "Stylish rooftop bar offering cocktails with panoramic ocean views."
+        title: "On-Site Bar",
+        description: "Enjoy drinks, cocktails, and snacks at our main bar located by the pool."
       },
-      location: {
-        title: "Prime Location",
-        description: "Centrally located with easy access to attractions and shopping."
+      transfers: {
+        title: "Airport Transfers",
+        description: "Private and reliable transportation to and from Cancún International Airport."
+      },
+      beachclub: {
+        title: "Beach Club Access",
+        description: "Exclusive access to a partnered Beach Club just minutes away with day pass options."
+      },
+      concierge: {
+        title: "24/7 Front Desk Support",
+        description: "We're here to assist you anytime, before and during your stay."
+      },
+      tours: {
+        title: "City Tours & Experiences",
+        description: "From Mayan ruins to cenotes and islands — we arrange excursions with certified tour operators."
       }
     }
   },

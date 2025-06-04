@@ -1,33 +1,32 @@
-
 const es_home = {
   amenities: {
     subtitle: "SERVICIOS PREMIUM",
     title: "Experimenta Nuestros Servicios",
-    description: "Nuestro hotel ofrece una gama de servicios y comodidades premium diseñados para mejorar tu estancia y proporcionar el máximo confort.",
+    description: "En Hotel 28, combinamos comodidades esenciales con experiencias curadas para ayudarte a aprovechar al máximo tu tiempo en Cancún.",
     features: {
-      beachfront: {
-        title: "Playa Privada",
-        description: "Acceso directo a un área de playa privada con tumbonas y sombrillas."
-      },
-      pools: {
-        title: "Piscinas",
-        description: "Piscinas interiores y exteriores con terrazas para tomar el sol y bares junto a la piscina."
-      },
-      restaurant: {
-        title: "Restaurante Gourmet",
-        description: "Restaurante de alta cocina que ofrece cocina local e internacional."
-      },
-      wifi: {
-        title: "WiFi de Alta Velocidad",
-        description: "WiFi gratuito de alta velocidad en todas las instalaciones del hotel."
+      pool: {
+        title: "Piscina al Aire Libre",
+        description: "Refréscate en nuestra piscina — perfecta para tomar el sol o refrescarte."
       },
       bar: {
-        title: "Bar en la Azotea",
-        description: "Elegante bar en la azotea que ofrece cócteles con vistas panorámicas al océano."
+        title: "Bar en el Hotel",
+        description: "Disfruta de bebidas, cócteles y snacks en nuestro bar principal ubicado junto a la piscina."
       },
-      location: {
-        title: "Ubicación Privilegiada",
-        description: "Ubicado en el centro con fácil acceso a atracciones y tiendas."
+      transfers: {
+        title: "Traslados al Aeropuerto",
+        description: "Transporte privado y confiable desde y hacia el Aeropuerto Internacional de Cancún."
+      },
+      beachclub: {
+        title: "Acceso a Beach Club",
+        description: "Acceso exclusivo a un Beach Club asociado a solo minutos de distancia con opciones de pase diario."
+      },
+      concierge: {
+        title: "Recepción 24/7",
+        description: "Estamos aquí para asistirte en cualquier momento, antes y durante tu estancia."
+      },
+      tours: {
+        title: "Tours y Experiencias",
+        description: "Desde ruinas mayas hasta cenotes e islas — organizamos excursiones con operadores turísticos certificados."
       }
     }
   },

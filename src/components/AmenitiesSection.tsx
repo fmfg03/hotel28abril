@@ -1,31 +1,16 @@
 
-import { Waves, LifeBuoy, Utensils, Wifi, Coffee, MapPin } from "lucide-react";
+import { Waves, Coffee, Plane, Umbrella, Bell, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function AmenitiesSection() {
   const { t } = useLanguage();
 
-  // Feature items
+  // Feature items - updated to match the real Hotel 28 amenities
   const features = [
     {
       icon: <Waves className="h-8 w-8 text-primary" />,
-      title: t.amenities.features.beachfront.title,
-      description: t.amenities.features.beachfront.description
-    },
-    {
-      icon: <LifeBuoy className="h-8 w-8 text-primary" />,
-      title: t.amenities.features.pools.title,
-      description: t.amenities.features.pools.description
-    },
-    {
-      icon: <Utensils className="h-8 w-8 text-primary" />,
-      title: t.amenities.features.restaurant.title,
-      description: t.amenities.features.restaurant.description
-    },
-    {
-      icon: <Wifi className="h-8 w-8 text-primary" />,
-      title: t.amenities.features.wifi.title,
-      description: t.amenities.features.wifi.description
+      title: t.amenities.features.pool.title,
+      description: t.amenities.features.pool.description
     },
     {
       icon: <Coffee className="h-8 w-8 text-primary" />,
@@ -33,9 +18,24 @@ export default function AmenitiesSection() {
       description: t.amenities.features.bar.description
     },
     {
+      icon: <Plane className="h-8 w-8 text-primary" />,
+      title: t.amenities.features.transfers.title,
+      description: t.amenities.features.transfers.description
+    },
+    {
+      icon: <Umbrella className="h-8 w-8 text-primary" />,
+      title: t.amenities.features.beachclub.title,
+      description: t.amenities.features.beachclub.description
+    },
+    {
+      icon: <Bell className="h-8 w-8 text-primary" />,
+      title: t.amenities.features.concierge.title,
+      description: t.amenities.features.concierge.description
+    },
+    {
       icon: <MapPin className="h-8 w-8 text-primary" />,
-      title: t.amenities.features.location.title,
-      description: t.amenities.features.location.description
+      title: t.amenities.features.tours.title,
+      description: t.amenities.features.tours.description
     }
   ];
 
