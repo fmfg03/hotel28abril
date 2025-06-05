@@ -35,6 +35,7 @@ export default function BookingMain() {
           isLoading={isLoading}
           error={error}
           onBookNow={onBookNow}
+          onReset={bookingState.resetBooking}
         />
       </section>
     </section>
